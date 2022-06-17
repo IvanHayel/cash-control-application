@@ -1,0 +1,35 @@
+$modalBorderColor: #81A4CD;
+
+.modal-main-box {
+  display: block;
+  position: absolute;
+  padding: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  border: 1px solid $modalBorderColor;
+  background-color: white;
+  box-shadow: 0 0 15px 1px $modalBorderColor;
+
+  .modal-form {
+    display: block;
+    margin-top: 10px;
+
+    .input-text-field {
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    .error-message {
+      color: red;
+      font-weight: bold;
+    }
+
+    .sign-button {
+      display: flex;
+      width: 30%;
+      margin: 30px auto;
+    }
+  }
+}
