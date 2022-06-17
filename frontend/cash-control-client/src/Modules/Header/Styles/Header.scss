@@ -1,0 +1,29 @@
+.header-bar {
+  .brand {
+    font: bold 1.5rem/1.5rem 'Roboto', sans-serif;
+    margin-right: .1rem;
+    color: inherit;
+    cursor: pointer;
+    caret-color: transparent;
+
+    &:hover {
+      text-shadow: 0 0 4px white;
+      transform: scale(1.05);
+      transition: 2s;
+    }
+  }
+
+  .side-bar-icon-button {
+    margin-right: 1rem;
+  }
+
+  .main-buttons {
+    flex-grow: 1;
+    margin-left: 20px;
+  }
+
+  .sign-group {
+    display: flex;
+    column-gap: 20px;
+  }
+}
