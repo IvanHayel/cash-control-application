@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CashControlApplication {
+public class CashControlServer {
   public static void main(String[] args) {
-    SpringApplication.run(CashControlApplication.class, args);
+    SpringApplication.run(CashControlServer.class, args);
   }
 }
