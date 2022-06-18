@@ -26,10 +26,20 @@ $modalBorderColor: #81A4CD;
       font-weight: bold;
     }
 
-    .sign-button {
+    .confirm-button {
       display: flex;
       width: 30%;
       margin: 30px auto;
+    }
+
+    .chip-value {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+
+    .action-button {
+      font-weight: 600;
     }
   }
 }

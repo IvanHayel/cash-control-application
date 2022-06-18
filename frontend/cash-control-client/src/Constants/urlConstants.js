@@ -13,9 +13,10 @@ export const TEST_API = {
   TEST_MODERATOR: '/test/moderator',
   TEST_ADMIN: '/test/admin',
   TEST_ROOT: '/test/root',
-}
+};
 
 export const USER_API = {
   GET_ALL: '/users',
-  DELETE: "/users/delete",
-}
+  DELETE: '/users/delete',
+  EDIT: '/users/update',
+};

@@ -1,4 +1,4 @@
-import './Styles/AuthenticationModal.scss';
+import './Styles/Modal.scss';
 import React, {useState} from 'react';
 import {useNavigate}     from 'react-router-dom';
 import {observer}        from 'mobx-react-lite';
@@ -125,7 +125,7 @@ export const SignInModal = observer(() => {
                     <Button
                         type="submit" variant="outlined" endIcon={<LoginIcon />}
                         disabled={isSubmitting} onClick={handleSubmit}
-                        className="sign-button"
+                        className="confirm-button"
                     >
                       SIGN IN
                     </Button>

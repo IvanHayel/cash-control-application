@@ -1,4 +1,4 @@
-import './Styles/AuthenticationModal.scss';
+import './Styles/Modal.scss';
 import React, {useState} from 'react';
 import {
   Box,
@@ -186,7 +186,7 @@ export const SignUpModal = observer(() => {
                         type="submit" variant="outlined"
                         endIcon={<HowToRegIcon />}
                         disabled={isSubmitting} onClick={handleSubmit}
-                        className="sign-button"
+                        className="confirm-button"
                     >
                       SIGN UP
                     </Button>

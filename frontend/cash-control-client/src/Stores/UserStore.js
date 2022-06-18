@@ -19,7 +19,7 @@ export default class UserStore {
             email: user.email,
             roles: user.roles.map(role => role.name.substring(5)).join(', '),
           }),
-      )
+      ),
     ];
   }
 

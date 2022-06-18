@@ -1,6 +1,7 @@
 package by.hayel.cash.control.server.service.impl;
 
 import by.hayel.cash.control.server.domain.user.User;
+import by.hayel.cash.control.server.exception.UserNotFoundException;
 import by.hayel.cash.control.server.repository.UserRepository;
 import by.hayel.cash.control.server.service.UserService;
 import lombok.AccessLevel;
@@ -19,6 +20,11 @@ public class ServerUserService implements UserService {
   @Override
   public Collection<User> getAllUsers() {
     return repository.findAll();
+  }
+
+  @Override
+  public User getUserById(Long id) {
+    return repository.findById(id).orElseThrow(UserNotFoundException::new);
   }
 
   @Override

@@ -1,4 +1,14 @@
-export const ROLE_USER = 'ROLE_USER';
-export const ROLE_MODERATOR = 'ROLE_MODERATOR';
-export const ROLE_ADMIN = 'ROLE_ADMIN';
-export const ROLE_ROOT = 'ROLE_ROOT';
+export const ROLE = {
+  PREFIX: 'ROLE_',
+  USER: 'ROLE_USER',
+  MODERATOR: 'ROLE_MODERATOR',
+  ADMIN: 'ROLE_ADMIN',
+  ROOT: 'ROLE_ROOT',
+};
+
+export const ROLE_ALIAS = {
+  USER: 'USER',
+  MODERATOR: 'MODERATOR',
+  ADMIN: 'ADMIN',
+  ROOT: 'ROOT',
+};

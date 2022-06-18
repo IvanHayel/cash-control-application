@@ -1,6 +1,6 @@
-import {makeAutoObservable}                    from 'mobx';
-import {makePersistable}                       from 'mobx-persist-store';
-import {ROLE_ADMIN, ROLE_MODERATOR, ROLE_ROOT} from '../Constants';
+import {makeAutoObservable} from 'mobx';
+import {makePersistable}    from 'mobx-persist-store';
+import {ROLE}               from '../Constants';
 
 export default class AuthenticationStore {
   status = null;
@@ -26,7 +26,7 @@ export default class AuthenticationStore {
           storage: localStorage,
         },
     ).catch(error =>
-            console.log('Unable to persist authentication store:', error),
+        console.log('Unable to persist authentication store:', error),
     );
   }
 
@@ -79,14 +79,14 @@ export default class AuthenticationStore {
   }
 
   isModerator() {
-    return this.user.roles.includes(ROLE_MODERATOR);
+    return this.user.roles.includes(ROLE.MODERATOR);
   }
 
   isAdmin() {
-    return this.user.roles.includes(ROLE_ADMIN);
+    return this.user.roles.includes(ROLE.ADMIN);
   }
 
   isRoot() {
-    return this.user.roles.includes(ROLE_ROOT);
+    return this.user.roles.includes(ROLE.ROOT);
   }
 }

@@ -1,8 +1,10 @@
 package by.hayel.cash.control.server.controller;
 
 import by.hayel.cash.control.server.domain.user.User;
+import by.hayel.cash.control.server.payload.request.UpdateUserRequest;
 import by.hayel.cash.control.server.payload.response.MessageResponse;
 import by.hayel.cash.control.server.payload.response.ServerResponse;
+import by.hayel.cash.control.server.service.RoleService;
 import by.hayel.cash.control.server.service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collection;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -20,6 +23,7 @@ import java.util.Collection;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserController {
   UserService userService;
+  RoleService roleService;
 
   @GetMapping
   @PreAuthorize("hasAnyRole('ADMIN', 'ROOT')")
@@ -32,5 +36,18 @@ public class UserController {
   public ResponseEntity<ServerResponse> deleteById(@PathVariable Long id) {
     userService.deleteById(id);
     return ResponseEntity.ok(new MessageResponse("User deleted successfully!"));
+  }
+
+  @PutMapping("/update/{id}")
+  @PreAuthorize("hasAnyRole('ADMIN', 'ROOT')")
+  public ResponseEntity<ServerResponse> updateUser(
+      @PathVariable Long id, @Valid @RequestBody UpdateUserRequest request) {
+    User updatedUser = userService.getUserById(id);
+    var roles = roleService.parseRoles(request.getRoles());
+    updatedUser.setUsername(request.getUsername());
+    updatedUser.setEmail(request.getEmail());
+    updatedUser.setRoles(roles);
+    userService.save(updatedUser);
+    return ResponseEntity.ok(new MessageResponse("User updated successfully!"));
   }
 }

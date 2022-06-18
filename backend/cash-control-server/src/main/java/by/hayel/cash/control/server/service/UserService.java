@@ -7,6 +7,8 @@ import java.util.Collection;
 public interface UserService {
   Collection<User> getAllUsers();
 
+  User getUserById(Long id);
+
   boolean isUsernameAlreadyExist(String username);
 
   boolean isEmailAlreadyExist(String email);
