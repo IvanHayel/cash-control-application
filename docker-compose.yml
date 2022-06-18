@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  app-server:
+    build:
+      context: backend/cash-control-server/
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/cash_control
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - backend
+      - frontend
+  app-client:
+    build:
+      context: frontend/cash-control-client/
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    restart: always
+    depends_on:
+      - app-server
+    networks:
+      - frontend
+  db:
+    image: postgres:14.2-alpine
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: postgres
+      POSTGRES_DB: cash_control
+    volumes:
+      - ./db-data:/var/lib/postgresql
+    networks:
+      - backend
+
+volumes:
+  db-data:
+    
+networks:
+  backend:
+  frontend:
