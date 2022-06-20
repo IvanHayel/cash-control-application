@@ -3,7 +3,7 @@ import {api}                   from '../Config';
 import {AUTH_API, HTTP_STATUS} from '../Constants';
 import stores                  from '../Stores';
 
-const {authenticationStore, userStore} = stores;
+const {authenticationStore, userStore, walletStore} = stores;
 
 const createErrorMessage = (data) =>
     (data.response && data.response.data && data.response.data.message) ||
@@ -86,6 +86,7 @@ export const signOut = async (message) => {
     );
     authenticationStore.clearStore();
     userStore.clearStore();
+    walletStore.clearStore();
     return response;
   } catch (error) {
     return error.response;
