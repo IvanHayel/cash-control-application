@@ -1,0 +1,38 @@
+$basic-color: #3498db;
+
+
+.wallet {
+  .wallet-image {
+    height: 160px;
+  }
+
+  .wallet-name {
+    color: $basic-color;
+  }
+
+  .wallet-info {
+    display: flex;
+    gap: 1rem;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.6);
+
+    .positive-balance {
+      color: lightgreen;
+    }
+
+    .negative-balance {
+      color: lightcoral;
+    }
+  }
+
+  .config-button {
+    margin: 10px 5px;
+    float: right;
+    color: $basic-color;
+  }
+
+  .remove-button {
+    margin: 10px 5px;
+    float: right;
+  }
+}

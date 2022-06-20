@@ -1,26 +1,24 @@
 import 'react-toastify/dist/ReactToastify.min.css';
-import {Route, Routes}                                        from 'react-router-dom';
+import {Route, Routes}                                 from 'react-router-dom';
+import {observer}                                      from 'mobx-react-lite';
+import {Container}                                     from '@mui/material';
+import {ToastContainer}                                from 'react-toastify';
 import {
-  observer,
-}                                                             from 'mobx-react-lite';
-import {
-  Container,
-}                                                             from '@mui/material';
-import {
-  ToastContainer,
-}                                                             from 'react-toastify';
-import {AdminBoard, Footer, Header, Home, Profile, Whoops404} from '../Modules';
-import {
-  ADMIN,
-  HOME,
-  PROFILE,
-}                                                             from '../Constants';
-import {
-  isAdmin,
-  isAuthenticated,
-  isModerator,
-  isRoot,
-}                                                             from '../Services';
+  About,
+  AdminBoard,
+  Expenses,
+  Footer,
+  Header,
+  Home,
+  Incomes,
+  Profile,
+  Reports,
+  Transfers,
+  Wallets,
+  Whoops404,
+}                                                      from '../Modules';
+import {isAdmin, isAuthenticated, isModerator, isRoot} from '../Services';
+import {ROUTE_URL}                                     from '../Constants';
 
 const App = observer(() => {
   const isCurrentUserAuthenticated = isAuthenticated();
@@ -31,12 +29,18 @@ const App = observer(() => {
       <Container maxWidth="lg">
         <Header />
         <Routes>
-          <Route exact path={HOME} element={<Home />} />
-          <Route exact path="*" element={<Whoops404 />} />
+          <Route exact path={ROUTE_URL.HOME} element={<Home />} />
+          <Route exact path={ROUTE_URL.ABOUT} element={<About />} />
           {
               isCurrentUserAuthenticated &&
               <>
-                <Route exact path={PROFILE} element={<Profile />} />
+                <Route exact path={ROUTE_URL.PROFILE} element={<Profile />} />
+                <Route exact path={ROUTE_URL.WALLETS} element={<Wallets />} />
+                <Route exact path={ROUTE_URL.INCOMES} element={<Incomes />} />
+                <Route exact path={ROUTE_URL.EXPENSES} element={<Expenses />} />
+                <Route exact path={ROUTE_URL.TRANSFERS}
+                       element={<Transfers />} />
+                <Route exact path={ROUTE_URL.REPORTS} element={<Reports />} />
               </>
           }
           {
@@ -48,9 +52,11 @@ const App = observer(() => {
           {
               (isCurrentUserAdmin || isCurrentUserRoot) &&
               <>
-                <Route exact path={ADMIN} element={<AdminBoard />} />
+                <Route exact path={ROUTE_URL.ADMIN.BOARD}
+                       element={<AdminBoard />} />
               </>
           }
+          <Route exact path="*" element={<Whoops404 />} />
         </Routes>
         <Footer />
         <ToastContainer

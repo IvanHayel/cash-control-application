@@ -1,0 +1,20 @@
+.wallets-container {
+  min-height: 80vh;
+
+  .wallets {
+    width: 100%;
+    background-color: whitesmoke;
+
+    .add-wallet-button {
+      height: 100%;
+      width: 100%;
+      min-height: 380px;
+      background-color: rgba(0, 0, 255, 0.1);
+
+      &:hover {
+        background-color: rgba(0, 0, 255, 0.25);
+        transition: background-color 500ms;
+      }
+    }
+  }
+}
