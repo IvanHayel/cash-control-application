@@ -17,6 +17,8 @@ import java.util.Set;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ServerRoleService implements RoleService {
+    private static final String ROLE_PREFIX = "ROLE_";
+
     RoleRepository repository;
 
     @Override
@@ -27,8 +29,9 @@ public class ServerRoleService implements RoleService {
 
     @Override
     public Role parseRole(String role) {
+        String modifiedRole = ROLE_PREFIX.concat(role.toUpperCase());
         try {
-            return getByName(ServerRole.valueOf(role.toUpperCase()));
+            return getByName(ServerRole.valueOf(modifiedRole));
         } catch (IllegalArgumentException e) {
             return getByName(ServerRole.ROLE_USER);
         }
