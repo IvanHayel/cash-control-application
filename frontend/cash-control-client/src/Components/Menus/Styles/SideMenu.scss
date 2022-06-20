@@ -1,0 +1,54 @@
+.side-bar-icon-button {
+  margin-right: 1rem;
+}
+
+.side-menu {
+  width: 250px;
+  height: 100%;
+
+  .incomes {
+    &:hover {
+      background-color: rgba(0, 255, 0, 0.1);
+    }
+  }
+
+  .expenses {
+    &:hover {
+      background-color: rgba(255, 0, 0, 0.1);
+    }
+  }
+
+  .menu-item {
+    padding: 0;
+
+    .head-menu-option {
+      font-size: 20px;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.4);
+    }
+
+    .side-menu-option {
+      font-size: 20px;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+}
+
+.side-menu-footer {
+  .menu-item {
+    padding: 0;
+
+    .about-icon {
+      font-size: large;
+      font-weight: 600;
+      color: gray;
+    }
+
+    .side-menu-option {
+      font-size: 20px;
+      font-weight: 700;
+      color: gray;
+    }
+  }
+}
