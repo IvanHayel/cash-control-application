@@ -27,26 +27,27 @@ import java.time.LocalDateTime;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Transaction {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
 
-  @NotBlank Double amount;
+    @NotBlank Double amount;
 
-  @NotBlank
-  @Enumerated(EnumType.STRING)
-  TransactionType type;
+    @NotBlank
+    @Enumerated(EnumType.STRING)
+    TransactionType type;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "wallet_id", referencedColumnName = "id")
-  Wallet wallet;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "wallet_id", referencedColumnName = "id")
+    Wallet wallet;
 
-  @NotBlank LocalDateTime timestamp;
+    @NotBlank
+    LocalDateTime timestamp;
 
-  LocalDateTime created;
+    LocalDateTime created;
 
-  @PrePersist
-  void onCreate() {
-    created = LocalDateTime.now();
-  }
+    @PrePersist
+    void onCreate() {
+        created = LocalDateTime.now();
+    }
 }
