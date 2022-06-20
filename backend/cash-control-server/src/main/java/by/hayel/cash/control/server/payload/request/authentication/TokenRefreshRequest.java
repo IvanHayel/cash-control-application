@@ -1,5 +1,6 @@
-package by.hayel.cash.control.server.payload.request;
+package by.hayel.cash.control.server.payload.request.authentication;
 
+import by.hayel.cash.control.server.payload.request.ClientRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

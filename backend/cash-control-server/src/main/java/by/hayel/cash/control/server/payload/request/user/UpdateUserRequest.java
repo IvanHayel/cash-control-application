@@ -1,5 +1,6 @@
-package by.hayel.cash.control.server.payload.request;
+package by.hayel.cash.control.server.payload.request.user;
 
+import by.hayel.cash.control.server.payload.request.ClientRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import java.util.Set;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UpdateUserRequest implements ClientRequest {
-    String username;
-    String email;
-    Set<String> roles;
+  String username;
+  String email;
+  Set<String> roles;
 }
