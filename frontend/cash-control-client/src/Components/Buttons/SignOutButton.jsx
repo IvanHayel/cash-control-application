@@ -3,7 +3,7 @@ import {observer}    from 'mobx-react';
 import {useNavigate} from 'react-router-dom';
 import {IconButton}  from '@mui/material';
 import LogoutIcon    from '@mui/icons-material/Logout';
-import {HOME}        from '../../Constants';
+import {ROUTE_URL}   from '../../Constants';
 import {signOut}     from '../../Services';
 
 export const SignOutButton = observer(() => {
@@ -11,7 +11,7 @@ export const SignOutButton = observer(() => {
 
   const handleSignOut = async () => {
     await signOut();
-    navigate(HOME);
+    navigate(ROUTE_URL.HOME);
   };
   return (
       <IconButton
