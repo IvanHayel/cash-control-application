@@ -1,5 +1,6 @@
 package by.hayel.cash.control.server.domain.wallet;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,38 +17,48 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "transactions")
+@Table(name = "expenses")
 @NoArgsConstructor
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Transaction {
+public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @NotBlank Double amount;
+    @NotNull Double amount;
 
-    @NotBlank
     @Enumerated(EnumType.STRING)
-    TransactionType type;
+    @NotNull
+    ExpenseType type;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "wallet_id", referencedColumnName = "id")
+    @JsonIgnore
     Wallet wallet;
 
-    @NotBlank
+    @NotNull
     LocalDateTime timestamp;
 
     LocalDateTime created;
 
+    LocalDateTime modified;
+
     @PrePersist
     void onCreate() {
         created = LocalDateTime.now();
+        modified = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    void onUpdate() {
+        modified = LocalDateTime.now();
     }
 }

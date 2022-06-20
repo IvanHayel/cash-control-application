@@ -17,10 +17,6 @@ import java.util.Set;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ServerRoleService implements RoleService {
-    private static final String ROLE_ROOT_ALIAS = "root";
-    private static final String ROLE_ADMIN_ALIAS = "admin";
-    private static final String ROLE_MODERATOR_ALIAS = "moderator";
-
     RoleRepository repository;
 
     @Override
@@ -31,12 +27,11 @@ public class ServerRoleService implements RoleService {
 
     @Override
     public Role parseRole(String role) {
-        return switch (role) {
-            case ROLE_ROOT_ALIAS -> getByName(ServerRole.ROLE_ROOT);
-            case ROLE_ADMIN_ALIAS -> getByName(ServerRole.ROLE_ADMIN);
-            case ROLE_MODERATOR_ALIAS -> getByName(ServerRole.ROLE_MODERATOR);
-            default -> getByName(ServerRole.ROLE_USER);
-        };
+        try {
+            return getByName(ServerRole.valueOf(role.toUpperCase()));
+        } catch (IllegalArgumentException e) {
+            return getByName(ServerRole.ROLE_USER);
+        }
     }
 
     @Override

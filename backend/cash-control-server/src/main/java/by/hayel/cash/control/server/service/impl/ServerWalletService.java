@@ -11,6 +11,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
@@ -18,36 +19,37 @@ import java.util.Collection;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ServerWalletService implements WalletService {
-    WalletRepository repository;
-    UserService userService;
+  WalletRepository repository;
+  UserService userService;
 
-    @Override
-    public Collection<Wallet> getWalletsByOwnerId(Long ownerId) {
-        User user = userService.getUserById(ownerId);
-        return repository.findAllByOwner(user);
-    }
+  @Override
+  @Transactional
+  public Collection<Wallet> getWalletsByOwnerId(Long ownerId) {
+    User user = userService.getUserById(ownerId);
+    return repository.findAllByOwner(user);
+  }
 
-    @Override
-    public Wallet getWalletById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new WalletNotFoundException(id));
-    }
+  @Override
+  public Wallet getWalletById(Long id) {
+    return repository.findById(id).orElseThrow(() -> new WalletNotFoundException(id));
+  }
 
-    @Override
-    public void deleteById(Long walletId) {
-        repository.deleteById(walletId);
-    }
+  @Override
+  public void deleteById(Long walletId) {
+    repository.deleteById(walletId);
+  }
 
-    @Override
-    public void save(Wallet wallet) {
-        repository.save(wallet);
-    }
+  @Override
+  public void save(Wallet wallet) {
+    repository.save(wallet);
+  }
 
-    @Override
-    public Currency parseCurrency(String currency) {
-        return switch (currency.toUpperCase()) {
-            case "USD" -> Currency.USD;
-            case "EUR" -> Currency.EUR;
-            default -> Currency.UNKNOWN;
-        };
+  @Override
+  public Currency parseCurrency(String currency) {
+    try {
+      return Currency.valueOf(currency.toUpperCase());
+    } catch (IllegalArgumentException e) {
+      return Currency.UNKNOWN;
     }
+  }
 }
