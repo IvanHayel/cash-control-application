@@ -30,7 +30,7 @@ export const Wallet = observer((props) => {
                 variant="h6"
             >
               <strong>Balance:</strong>
-              <div className={wallet.balance > 0 ?
+              <div className={wallet.balance >= 0 ?
                   'positive-balance' :
                   'negative-balance'}>
                 {`${wallet.balance} ${getCurrencySymbol(wallet.currency)}`}
