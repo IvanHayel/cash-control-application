@@ -1,0 +1,33 @@
+.about-container {
+  display: flex;
+  min-height: 80vh;
+  user-select: none;
+
+  .about-title {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 5vh 0;
+    text-align: center;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .about-text {
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+    justify-content: center;
+    margin: 0 auto;
+    text-align: justify;
+    letter-spacing: .2rem;
+    padding: 5vh 0;
+    color: rgba(0, 0, 0, 0.4);
+    strong {
+      color: rgba(0, 0, 0, 0.5);
+      font-weight: bold;
+      font-size: larger;
+      margin-bottom: 2vh;
+    }
+  }
+}
