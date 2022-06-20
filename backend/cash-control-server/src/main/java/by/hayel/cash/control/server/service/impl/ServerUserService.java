@@ -24,7 +24,7 @@ public class ServerUserService implements UserService {
 
   @Override
   public User getUserById(Long id) {
-    return repository.findById(id).orElseThrow(UserNotFoundException::new);
+    return repository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
   }
 
   @Override
