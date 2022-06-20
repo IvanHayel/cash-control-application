@@ -1,0 +1,26 @@
+.home {
+  height: 45vh;
+  user-select: none;
+  caret-color: transparent;
+
+  .home-greeting {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 35vh;
+    margin-bottom: 3vh;
+    font-weight: bold;
+    color: #3498db;
+    text-shadow: white 0 0 15px;
+    text-align: center;
+  }
+
+  .home-description {
+    display: flex;
+    width: 100%;
+    margin: 3vh 0;
+    justify-content: center;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.45);
+  }
+}

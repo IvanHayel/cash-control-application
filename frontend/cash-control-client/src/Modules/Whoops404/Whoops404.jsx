@@ -1,13 +1,13 @@
 import './Styles/Whoops404.scss';
 import React                       from 'react';
 import {Alert, AlertTitle, Button} from '@mui/material';
-import {HOME}                      from '../../Constants';
+import {ROUTE_URL}                 from '../../Constants';
 import {useNavigate}               from 'react-router-dom';
 
 export const Whoops404 = () => {
   const navigate = useNavigate();
   const handleHome = () => {
-    navigate(HOME);
+    navigate(ROUTE_URL.HOME);
   };
   return (
       <Alert
