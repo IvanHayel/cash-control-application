@@ -1,12 +1,12 @@
 import './Styles/AdminBoard.scss';
-import React, {useEffect, useState} from 'react';
-import {DataGrid, GridToolbar}      from '@mui/x-data-grid';
-import SecurityIcon                 from '@mui/icons-material/Security';
-import {Box, Button, Typography}    from '@mui/material';
-import {observer}                   from 'mobx-react-lite';
-import {deleteUser, getAllUsers}    from '../../Services';
-import {useStore}                   from '../../Hooks';
-import {EditUserModal}              from '../../Modals';
+import React, {useEffect, useState}      from 'react';
+import {DataGrid, GridToolbar}           from '@mui/x-data-grid';
+import SecurityIcon                      from '@mui/icons-material/Security';
+import {Box, Typography}                 from '@mui/material';
+import {observer}                        from 'mobx-react-lite';
+import {getAllUsers}                     from '../../Services';
+import {useStore}                        from '../../Hooks';
+import {DeleteUserDialog, EditUserModal} from '../../Components';
 
 export const AdminBoard = observer(() => {
   const [pageSize, setPageSize] = useState(5);
@@ -23,26 +23,10 @@ export const AdminBoard = observer(() => {
       headerName: 'Actions',
       flex: 1,
       renderCell: (data) => {
-        const handleDelete = (row, event) => {
-          event.stopPropagation();
-          deleteUser(row.id);
-        };
         return (
             <Box className="action-buttons">
-              <Button
-                  className="action-button"
-                  variant="outlined"
-                  size="small"
-                  color="error"
-                  disabled={
-                      data.row.roles.includes('ROOT') ||
-                      data.row.roles.includes('ADMIN')
-                  }
-                  onClick={event => handleDelete(data.row, event)}
-              >
-                Delete
-              </Button>
               <EditUserModal data={data.row} />
+              <DeleteUserDialog data={data.row} />
             </Box>
         );
       },
@@ -65,8 +49,6 @@ export const AdminBoard = observer(() => {
             rows={rows}
             columns={columns}
             pageSize={pageSize}
-            scrollbarSize={20}
-            scrollArea
             autoHeight
             onPageSizeChange={(size) => setPageSize(size)}
             rowsPerPageOptions={[1, 5, 10, 15, 30, 50, 100]}
