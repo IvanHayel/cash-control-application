@@ -44,8 +44,6 @@ public class ServerSecurityConfiguration {
         .authorizeRequests()
         .antMatchers("/api/auth/**")
         .permitAll()
-        .antMatchers("/api/test/**")
-        .permitAll()
         .anyRequest()
         .authenticated();
     http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
