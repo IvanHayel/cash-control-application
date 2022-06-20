@@ -1,7 +1,7 @@
 package by.hayel.cash.control.server.controller;
 
 import by.hayel.cash.control.server.domain.user.User;
-import by.hayel.cash.control.server.payload.request.UpdateUserRequest;
+import by.hayel.cash.control.server.payload.request.user.UpdateUserRequest;
 import by.hayel.cash.control.server.payload.response.MessageResponse;
 import by.hayel.cash.control.server.payload.response.ServerResponse;
 import by.hayel.cash.control.server.service.RoleService;
@@ -11,12 +11,19 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Collection;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin("http://localhost:3000")
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
