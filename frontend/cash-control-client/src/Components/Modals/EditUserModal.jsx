@@ -20,9 +20,8 @@ import {Form, Formik}         from 'formik';
 import {AccountCircle}        from '@mui/icons-material';
 import EditIcon               from '@mui/icons-material/Edit';
 import EmailIcon              from '@mui/icons-material/Email';
-import {Copyright}            from '../Components';
-import {ROLE, ROLE_ALIAS}     from '../Constants';
-import {editUser, parseRoles} from '../Services';
+import {ROLE, ROLE_ALIAS}     from '../../Constants';
+import {editUser, parseRoles} from '../../Services';
 
 const validationSchema = Yup.object({
   username: Yup
@@ -46,31 +45,32 @@ export const EditUserModal = observer((props) => {
     email: '',
     roles: [],
   });
+  const {data} = props;
   const handleModalOpen = (event) => {
     event.stopPropagation();
     setInitialValues({
-      username: props.data.username,
-      email: props.data.email,
-      roles: parseRoles(props.data.roles),
+      username: data.username,
+      email: data.email,
+      roles: parseRoles(data.roles),
     });
     setModalOpen(true);
   };
   const handleModalClose = () => setModalOpen(false);
   const handleConfirm = async (values) => {
-    editUser(props.data.id, values);
+    await editUser(data.id, values);
     handleModalClose();
   };
   return (
-      <Box className="edit-modal">
+      <Box>
         <Button
-            className="action-button"
+            className="modal-action-button"
             onClick={(event) => handleModalOpen(event)}
             size="small"
             variant="outlined"
             color="warning"
             disabled={
-                props.data.roles.includes('ADMIN') ||
-                props.data.roles.includes('ROOT')
+                data.roles.includes('ADMIN') ||
+                data.roles.includes('ROOT')
             }
         >
           EDIT
@@ -103,7 +103,7 @@ export const EditUserModal = observer((props) => {
                         variant="outlined"
                         onChange={handleChange('username')}
                         onBlur={handleBlur('username')}
-                        value={values.username} className="input-text-field"
+                        value={values.username} className="modal-input-field"
                         InputProps={{
                           startAdornment: (
                               <InputAdornment position="start">
@@ -117,7 +117,7 @@ export const EditUserModal = observer((props) => {
                         touched.username &&
                         <Typography
                             variant="caption"
-                            className="error-message"
+                            className="modal-error-message"
                         >
                           {errors.username.toString()}
                         </Typography>
@@ -127,7 +127,7 @@ export const EditUserModal = observer((props) => {
                         variant="outlined"
                         onChange={handleChange('email')}
                         onBlur={handleBlur('email')}
-                        value={values.email} className="input-text-field"
+                        value={values.email} className="modal-input-field"
                         InputProps={{
                           startAdornment: (
                               <InputAdornment position="start">
@@ -141,12 +141,12 @@ export const EditUserModal = observer((props) => {
                         touched.email &&
                         <Typography
                             variant="caption"
-                            className="error-message"
+                            className="modal-error-message"
                         >
                           {errors.email.toString()}
                         </Typography>
                     }
-                    <FormControl className="input-text-field">
+                    <FormControl className="modal-input-field">
                       <InputLabel id="roles-label">Roles</InputLabel>
                       <Select
                           labelId="roles-label"
@@ -180,7 +180,7 @@ export const EditUserModal = observer((props) => {
                         touched.roles &&
                         <Typography
                             variant="caption"
-                            className="error-message"
+                            className="modal-error-message"
                         >
                           {errors.roles.toString()}
                         </Typography>
@@ -190,14 +190,13 @@ export const EditUserModal = observer((props) => {
                         endIcon={<EditIcon />}
                         disabled={isSubmitting}
                         onClick={handleSubmit}
-                        className="confirm-button"
+                        className="modal-confirm-button"
                     >
                       CONFIRM
                     </Button>
                   </Form>
               )}
             </Formik>
-            <Copyright />
           </Box>
         </Modal>
       </Box>

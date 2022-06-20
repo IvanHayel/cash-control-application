@@ -16,8 +16,8 @@ import KeyIcon           from '@mui/icons-material/Key';
 import HowToRegIcon      from '@mui/icons-material/HowToReg';
 import EmailIcon         from '@mui/icons-material/Email';
 import CheckIcon         from '@mui/icons-material/Check';
-import {Copyright}       from '../Components';
-import {signUp}          from '../Services';
+import {Copyright}       from '../index';
+import {signUp}          from '../../Services';
 import {observer}        from 'mobx-react';
 
 const validationSchema = Yup.object({
@@ -43,7 +43,7 @@ export const SignUpModal = observer(() => {
   const [isModalOpen, setModalOpen] = useState(false);
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
-  const handleLogin = async (values) => {
+  const handleSignUp = async (values) => {
     await signUp(values);
     handleModalClose();
   };
@@ -75,7 +75,7 @@ export const SignUpModal = observer(() => {
                   email: '',
                   confirmPassword: '',
                 }}
-                onSubmit={handleLogin}
+                onSubmit={handleSignUp}
                 validationSchema={validationSchema}
             >
               {({
@@ -89,7 +89,7 @@ export const SignUpModal = observer(() => {
                         variant="outlined" required={true}
                         onChange={handleChange('username')}
                         onBlur={handleBlur('username')}
-                        value={values.username} className="input-text-field"
+                        value={values.username} className="modal-input-field"
                         InputProps={{
                           startAdornment: (
                               <InputAdornment position="start">
@@ -103,7 +103,7 @@ export const SignUpModal = observer(() => {
                         touched.username &&
                         <Typography
                             variant="caption"
-                            className="error-message"
+                            className="modal-error-message"
                         >
                           {errors.username.toString()}
                         </Typography>
@@ -113,7 +113,7 @@ export const SignUpModal = observer(() => {
                         variant="outlined" required={true}
                         onChange={handleChange('email')}
                         onBlur={handleBlur('email')}
-                        value={values.email} className="input-text-field"
+                        value={values.email} className="modal-input-field"
                         InputProps={{
                           startAdornment: (
                               <InputAdornment position="start">
@@ -127,7 +127,7 @@ export const SignUpModal = observer(() => {
                         touched.email &&
                         <Typography
                             variant="caption"
-                            className="error-message"
+                            className="modal-error-message"
                         >
                           {errors.email.toString()}
                         </Typography>
@@ -137,7 +137,7 @@ export const SignUpModal = observer(() => {
                         variant="outlined" required={true}
                         onChange={handleChange('password')}
                         onBlur={handleBlur('password')}
-                        value={values.password} className="input-text-field"
+                        value={values.password} className="modal-input-field"
                         InputProps={{
                           startAdornment: (
                               <InputAdornment position="start">
@@ -151,7 +151,7 @@ export const SignUpModal = observer(() => {
                         touched.password &&
                         <Typography
                             variant="caption"
-                            className="error-message"
+                            className="modal-error-message"
                         >
                           {errors.password.toString()}
                         </Typography>
@@ -163,7 +163,7 @@ export const SignUpModal = observer(() => {
                         onChange={handleChange('confirmPassword')}
                         onBlur={handleBlur('confirmPassword')}
                         value={values.confirmPassword}
-                        className="input-text-field"
+                        className="modal-input-field"
                         InputProps={{
                           startAdornment: (
                               <InputAdornment position="start">
@@ -177,7 +177,7 @@ export const SignUpModal = observer(() => {
                         touched.confirmPassword &&
                         <Typography
                             variant="caption"
-                            className="error-message"
+                            className="modal-error-message"
                         >
                           {errors.confirmPassword.toString()}
                         </Typography>
@@ -186,7 +186,7 @@ export const SignUpModal = observer(() => {
                         type="submit" variant="outlined"
                         endIcon={<HowToRegIcon />}
                         disabled={isSubmitting} onClick={handleSubmit}
-                        className="confirm-button"
+                        className="modal-confirm-button"
                     >
                       SIGN UP
                     </Button>

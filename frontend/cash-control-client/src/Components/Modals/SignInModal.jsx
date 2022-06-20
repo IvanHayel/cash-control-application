@@ -1,6 +1,5 @@
 import './Styles/Modal.scss';
 import React, {useState} from 'react';
-import {useNavigate}     from 'react-router-dom';
 import {observer}        from 'mobx-react-lite';
 import {Form, Formik}    from 'formik';
 import * as Yup          from 'yup';
@@ -16,9 +15,8 @@ import {
 import LoginIcon         from '@mui/icons-material/Login';
 import KeyIcon           from '@mui/icons-material/Key';
 import {AccountCircle}   from '@mui/icons-material';
-import {signIn}          from '../Services';
-import {PROFILE}         from '../Constants';
-import {Copyright}       from '../Components';
+import {signIn}          from '../../Services';
+import {Copyright}       from '../index';
 
 const validationSchema = Yup.object({
   username: Yup
@@ -34,14 +32,11 @@ const validationSchema = Yup.object({
 export const SignInModal = observer(() => {
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const navigate = useNavigate();
-
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
-  const handleLogin = async (values) => {
+  const handleSignIn = async (values) => {
     await signIn(values);
     handleModalClose();
-    navigate(PROFILE);
   };
   return (
       <>
@@ -66,7 +61,7 @@ export const SignInModal = observer(() => {
             </Typography>
             <Formik
                 initialValues={{username: '', password: ''}}
-                onSubmit={handleLogin} validationSchema={validationSchema}
+                onSubmit={handleSignIn} validationSchema={validationSchema}
             >
               {({
                   values, errors,
@@ -79,7 +74,7 @@ export const SignInModal = observer(() => {
                         variant="outlined" required={true}
                         onChange={handleChange('username')}
                         onBlur={handleBlur('username')}
-                        value={values.username} className="input-text-field"
+                        value={values.username} className="modal-input-field"
                         InputProps={{
                           startAdornment: (
                               <InputAdornment position="start">
@@ -93,7 +88,7 @@ export const SignInModal = observer(() => {
                         touched.username &&
                         <Typography
                             variant="caption"
-                            className="error-message"
+                            className="modal-error-message"
                         >
                           {errors.username.toString()}
                         </Typography>
@@ -103,7 +98,7 @@ export const SignInModal = observer(() => {
                         variant="outlined" required={true}
                         onChange={handleChange('password')}
                         onBlur={handleBlur('password')}
-                        value={values.password} className="input-text-field"
+                        value={values.password} className="modal-input-field"
                         InputProps={{
                           startAdornment: (
                               <InputAdornment position="start">
@@ -117,7 +112,7 @@ export const SignInModal = observer(() => {
                         touched.password &&
                         <Typography
                             variant="caption"
-                            className="error-message"
+                            className="modal-error-message"
                         >
                           {errors.password.toString()}
                         </Typography>
@@ -125,7 +120,7 @@ export const SignInModal = observer(() => {
                     <Button
                         type="submit" variant="outlined" endIcon={<LoginIcon />}
                         disabled={isSubmitting} onClick={handleSubmit}
-                        className="confirm-button"
+                        className="modal-confirm-button"
                     >
                       SIGN IN
                     </Button>

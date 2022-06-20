@@ -1,5 +1,9 @@
 $modalBorderColor: #81A4CD;
 
+#modal-modal-title {
+  color: rgba(0, 0, 0, 0.5);
+}
+
 .modal-main-box {
   display: block;
   position: absolute;
@@ -16,17 +20,17 @@ $modalBorderColor: #81A4CD;
     display: block;
     margin-top: 10px;
 
-    .input-text-field {
+    .modal-input-field {
       width: 100%;
       margin-top: 30px;
     }
 
-    .error-message {
+    .modal-error-message {
       color: red;
       font-weight: bold;
     }
 
-    .confirm-button {
+    .modal-confirm-button {
       display: flex;
       width: 30%;
       margin: 30px auto;
@@ -38,7 +42,7 @@ $modalBorderColor: #81A4CD;
       gap: .5rem;
     }
 
-    .action-button {
+    .modal-action-button {
       font-weight: 600;
     }
   }
