@@ -7,16 +7,15 @@ export const AUTH_API = {
   REFRESH_TOKEN: '/auth/refresh-token',
 };
 
-export const TEST_API = {
-  TEST_PUBLIC: '/test/all',
-  TEST_USER: '/test/user',
-  TEST_MODERATOR: '/test/moderator',
-  TEST_ADMIN: '/test/admin',
-  TEST_ROOT: '/test/root',
-};
-
 export const USER_API = {
-  GET_ALL: '/users',
+  USERS: '/users',
   DELETE: '/users/delete',
   EDIT: '/users/update',
+};
+
+export const WALLET_API = {
+  USER_WALLETS: '/wallets/user',
+  NEW: '/wallets/new',
+  DELETE: '/wallets/delete',
+  EDIT: '/wallets/update',
 };
