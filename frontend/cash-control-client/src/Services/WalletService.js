@@ -1,7 +1,10 @@
-import stores       from '../Stores';
-import {api}        from '../Config';
-import {WALLET_API} from '../Constants';
-import {toast}      from 'react-toastify';
+import {toast}            from 'react-toastify';
+import {api}              from '../Config';
+import {WALLET_API}       from '../Constants';
+import stores             from '../Stores';
+import {getUserExpenses}  from './ExpenseService';
+import {getUserIncomes}   from './IncomeService';
+import {getUserTransfers} from './TransferService';
 
 const {walletStore, authenticationStore} = stores;
 
@@ -56,6 +59,9 @@ export const deleteWallet = async (id) => {
           duration: 10000,
         });
     await getUserWallets();
+    await getUserIncomes();
+    await getUserExpenses();
+    await getUserTransfers();
     return response;
   } catch (error) {
     return error.response;

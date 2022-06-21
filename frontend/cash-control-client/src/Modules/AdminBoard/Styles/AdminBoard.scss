@@ -1,5 +1,10 @@
 .board {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  background-color: whitesmoke;
+  margin-top: 1vh;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
   .board-title {
     display: flex;

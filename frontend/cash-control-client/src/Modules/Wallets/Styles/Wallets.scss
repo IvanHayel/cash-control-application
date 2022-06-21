@@ -1,9 +1,11 @@
 .wallets-container {
-  min-height: 80vh;
+  display: flex;
+  width: 100%;
+  background-color: whitesmoke;
+  padding: 30px;
 
   .wallets {
     width: 100%;
-    background-color: whitesmoke;
 
     .add-wallet-button {
       height: 100%;

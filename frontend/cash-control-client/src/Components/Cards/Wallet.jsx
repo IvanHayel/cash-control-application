@@ -1,12 +1,12 @@
-import './Styles/Wallet.scss';
-import React                                            from 'react';
 import {Card, CardContent, CardMedia, Grid, Typography} from '@mui/material';
+import {observer}                                       from 'mobx-react-lite';
+import React                                            from 'react';
 import walletImg
                                                         from '../../Assets/Images/wallet.jpg';
 import {getCurrencySymbol}                              from '../../Services';
-import {observer}                                       from 'mobx-react-lite';
 import {DeleteWalletDialog}                             from '../Dialogs';
 import {EditWalletModal}                                from '../Modals';
+import './Styles/Wallet.scss';
 
 export const Wallet = observer((props) => {
   const {wallet} = props;

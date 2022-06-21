@@ -15,6 +15,10 @@ export default class WalletStore {
     return [...this.wallets];
   }
 
+  getWalletById(id) {
+    return this.wallets.find(wallet => wallet.id === id);
+  }
+
   clearStore() {
     this.wallets = [];
   }

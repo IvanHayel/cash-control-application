@@ -1,8 +1,8 @@
-import './Styles/Home.scss';
-import React                      from 'react';
-import {observer}                 from 'mobx-react';
 import {Box, Divider, Typography} from '@mui/material';
+import {observer}                 from 'mobx-react';
+import React                      from 'react';
 import {useStore}                 from '../../Hooks';
+import './Styles/Home.scss';
 
 export const Home = observer(() => {
   const authenticationStore = useStore('authenticationStore');

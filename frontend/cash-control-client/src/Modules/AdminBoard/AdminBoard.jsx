@@ -1,12 +1,12 @@
-import './Styles/AdminBoard.scss';
-import React, {useEffect, useState}      from 'react';
-import {DataGrid, GridToolbar}           from '@mui/x-data-grid';
 import SecurityIcon                      from '@mui/icons-material/Security';
 import {Box, Typography}                 from '@mui/material';
+import {DataGrid, GridToolbar}           from '@mui/x-data-grid';
 import {observer}                        from 'mobx-react-lite';
-import {getAllUsers}                     from '../../Services';
-import {useStore}                        from '../../Hooks';
+import React, {useEffect, useState}      from 'react';
 import {DeleteUserDialog, EditUserModal} from '../../Components';
+import {useStore}                        from '../../Hooks';
+import {getAllUsers}                     from '../../Services';
+import './Styles/AdminBoard.scss';
 
 export const AdminBoard = observer(() => {
   const [pageSize, setPageSize] = useState(5);

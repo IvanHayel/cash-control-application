@@ -1,7 +1,7 @@
-import {api}      from '../Config';
-import stores     from '../Stores';
-import {USER_API} from '../Constants';
 import {toast}    from 'react-toastify';
+import {api}      from '../Config';
+import {USER_API} from '../Constants';
+import stores     from '../Stores';
 
 const {userStore} = stores;
 

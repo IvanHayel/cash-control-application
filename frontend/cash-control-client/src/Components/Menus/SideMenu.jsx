@@ -1,16 +1,12 @@
-import './Styles/SideMenu.scss';
-import React, {useState} from 'react';
-import MenuOpenIcon      from '@mui/icons-material/MenuOpen';
-import AddCircleOutlineIcon
-                         from '@mui/icons-material/AddCircleOutline';
-import RemoveCircleOutlineIcon
-                         from '@mui/icons-material/RemoveCircleOutline';
 import AccountBalanceWalletOutlinedIcon
-                         from '@mui/icons-material/AccountBalanceWalletOutlined';
-import CompareArrowsIcon
-                         from '@mui/icons-material/CompareArrows';
-import EqualizerIcon     from '@mui/icons-material/Equalizer';
-import InfoOutlinedIcon  from '@mui/icons-material/InfoOutlined';
+                               from '@mui/icons-material/AccountBalanceWalletOutlined';
+import AddCircleOutlineIcon    from '@mui/icons-material/AddCircleOutline';
+import CompareArrowsIcon       from '@mui/icons-material/CompareArrows';
+import EqualizerIcon           from '@mui/icons-material/Equalizer';
+import InfoOutlinedIcon        from '@mui/icons-material/InfoOutlined';
+import MenuIcon                from '@mui/icons-material/Menu';
+import MenuOpenIcon            from '@mui/icons-material/MenuOpen';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import {
   Box,
   Divider,
@@ -21,11 +17,12 @@ import {
   ListItemButton,
   ListItemIcon,
   Typography,
-}                        from '@mui/material';
-import {observer}        from 'mobx-react-lite';
-import MenuIcon          from '@mui/icons-material/Menu';
-import {useNavigate}     from 'react-router-dom';
-import {ROUTE_URL}       from '../../Constants';
+}                              from '@mui/material';
+import {observer}              from 'mobx-react-lite';
+import React, {useState}       from 'react';
+import {useNavigate}           from 'react-router-dom';
+import {ROUTE_URL}             from '../../Constants';
+import './Styles/SideMenu.scss';
 
 export const SideMenu = observer(() => {
   const [isSideMenuOpen, setSideMenuOpen] = useState(false);
@@ -116,7 +113,7 @@ export const SideMenu = observer(() => {
                 </Typography>
               </ListItemButton>
             </ListItem>
-            <ListItem className="menu-item">
+            <ListItem className="menu-item transfers">
               <ListItemButton onClick={handleTransfersClick}>
                 <ListItemIcon>
                   <CompareArrowsIcon fontSize="large" color="primary" />

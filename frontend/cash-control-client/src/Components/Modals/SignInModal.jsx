@@ -1,8 +1,6 @@
-import './Styles/Modal.scss';
-import React, {useState} from 'react';
-import {observer}        from 'mobx-react-lite';
-import {Form, Formik}    from 'formik';
-import * as Yup          from 'yup';
+import {AccountCircle}   from '@mui/icons-material';
+import KeyIcon           from '@mui/icons-material/Key';
+import LoginIcon         from '@mui/icons-material/Login';
 import {
   Box,
   Button,
@@ -12,11 +10,13 @@ import {
   TextField,
   Typography,
 }                        from '@mui/material';
-import LoginIcon         from '@mui/icons-material/Login';
-import KeyIcon           from '@mui/icons-material/Key';
-import {AccountCircle}   from '@mui/icons-material';
+import {Form, Formik}    from 'formik';
+import {observer}        from 'mobx-react-lite';
+import React, {useState} from 'react';
+import * as Yup          from 'yup';
 import {signIn}          from '../../Services';
 import {Copyright}       from '../index';
+import './Styles/Modal.scss';
 
 const validationSchema = Yup.object({
   username: Yup

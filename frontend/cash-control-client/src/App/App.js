@@ -1,8 +1,9 @@
-import 'react-toastify/dist/ReactToastify.min.css';
-import {Route, Routes}                                 from 'react-router-dom';
-import {observer}                                      from 'mobx-react-lite';
 import {Container}                                     from '@mui/material';
+import {observer}                                      from 'mobx-react-lite';
+import {Route, Routes}                                 from 'react-router-dom';
 import {ToastContainer}                                from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+import {ROUTE_URL}                                     from '../Constants';
 import {
   About,
   AdminBoard,
@@ -18,7 +19,6 @@ import {
   Whoops404,
 }                                                      from '../Modules';
 import {isAdmin, isAuthenticated, isModerator, isRoot} from '../Services';
-import {ROUTE_URL}                                     from '../Constants';
 
 const App = observer(() => {
   const isCurrentUserAuthenticated = isAuthenticated();

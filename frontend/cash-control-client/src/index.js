@@ -1,10 +1,10 @@
+import {Provider}                from 'mobx-react';
 import React                     from 'react';
 import ReactDOM                  from 'react-dom/client';
-import './index.scss';
 import {BrowserRouter as Router} from 'react-router-dom';
-import {Provider}                from 'mobx-react';
-import stores                    from './Stores';
 import App                       from './App';
+import './index.scss';
+import stores                    from './Stores';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

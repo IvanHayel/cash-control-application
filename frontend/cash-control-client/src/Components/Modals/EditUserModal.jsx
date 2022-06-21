@@ -1,7 +1,6 @@
-import './Styles/Modal.scss';
-import React, {useState}      from 'react';
-import * as Yup               from 'yup';
-import {observer}             from 'mobx-react';
+import {AccountCircle}        from '@mui/icons-material';
+import EditIcon               from '@mui/icons-material/Edit';
+import EmailIcon              from '@mui/icons-material/Email';
 import {
   Box,
   Button,
@@ -17,11 +16,12 @@ import {
   Typography,
 }                             from '@mui/material';
 import {Form, Formik}         from 'formik';
-import {AccountCircle}        from '@mui/icons-material';
-import EditIcon               from '@mui/icons-material/Edit';
-import EmailIcon              from '@mui/icons-material/Email';
+import {observer}             from 'mobx-react';
+import React, {useState}      from 'react';
+import * as Yup               from 'yup';
 import {ROLE, ROLE_ALIAS}     from '../../Constants';
 import {editUser, parseRoles} from '../../Services';
+import './Styles/Modal.scss';
 
 const validationSchema = Yup.object({
   username: Yup
@@ -33,7 +33,7 @@ const validationSchema = Yup.object({
       .email('Invalid email!')
       .required('Email is required!'),
   roles: Yup
-      .array('Edit roles')
+      .array('Select roles')
       .of(Yup.string())
       .required('Exactly one role is required!'),
 });

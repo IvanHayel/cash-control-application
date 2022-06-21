@@ -1,8 +1,8 @@
-import './Styles/Whoops404.scss';
-import React                       from 'react';
 import {Alert, AlertTitle, Button} from '@mui/material';
-import {ROUTE_URL}                 from '../../Constants';
+import React                       from 'react';
 import {useNavigate}               from 'react-router-dom';
+import {ROUTE_URL}                 from '../../Constants';
+import './Styles/Whoops404.scss';
 
 export const Whoops404 = () => {
   const navigate = useNavigate();

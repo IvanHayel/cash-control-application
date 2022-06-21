@@ -1,5 +1,4 @@
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import BadgeOutlinedIcon        from '@mui/icons-material/BadgeOutlined';
 import CheckIcon                from '@mui/icons-material/Check';
 import SettingsIcon             from '@mui/icons-material/Settings';
 import {
@@ -15,46 +14,53 @@ import {
   TextField,
   Typography,
 }                               from '@mui/material';
+import {AdapterDateFns}         from '@mui/x-date-pickers/AdapterDateFns';
+import {DateTimePicker}         from '@mui/x-date-pickers/DateTimePicker';
+import {LocalizationProvider}   from '@mui/x-date-pickers/LocalizationProvider';
 import {Form, Formik}           from 'formik';
 import {observer}               from 'mobx-react';
 import React, {useState}        from 'react';
 import * as Yup                 from 'yup';
-import {CURRENCY}               from '../../Constants';
-import {editWallet}             from '../../Services';
+import {DATE_TIME_INPUT_FORMAT} from '../../Constants';
+import {useStore}               from '../../Hooks';
+import {editIncome}             from '../../Services';
 import './Styles/Modal.scss';
 
 const validationSchema = Yup.object({
-  name: Yup
-      .string('Enter wallet name')
-      .min(3, 'Name must be at least 3 characters!')
-      .required('Name is required!'),
-  balance: Yup
-      .number('Enter wallet balance')
-      .required('Balance is required!'),
-  currency: Yup
-      .string('Select wallet currency')
-      .required('Currency is required!'),
+  amount: Yup
+      .number('Enter income amount')
+      .min(0.01, 'Value must be greater or equal to 0.01!')
+      .required('Amount is required!'),
+  timestamp: Yup
+      .date('Enter income timestamp')
+      .required('Timestamp is required!'),
+  wallet: Yup
+      .string('Select wallet')
+      .required('Wallet is required!'),
 });
 
-export const EditWalletModal = observer((props) => {
+export const EditIncomeModal = observer((props) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const {wallet} = props;
+  const walletStore = useStore('walletStore');
+  const wallets = walletStore.getWallets();
+  const {data} = props;
   const initialValues = {
-    name: wallet.name,
-    currency: wallet.currency,
-    balance: wallet.balance,
+    amount: data.amount,
+    timestamp: new Date(data.timestamp),
+    wallet: data.walletTransportId,
   };
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
   const handleConfirm = async (values) => {
-    await editWallet(wallet.id, values);
+    values.timestamp = new Date(values.timestamp).toISOString();
+    await editIncome(data.id, values);
     handleModalClose();
   };
   return (
       <>
         <IconButton
             className="config-button"
-            size="large"
+            size="small"
             onClick={handleModalOpen}
         >
           <SettingsIcon fontSize="large" />
@@ -69,7 +75,7 @@ export const EditWalletModal = observer((props) => {
                         component="h2" textAlign="center"
                         fontWeight="bold"
             >
-              EDIT WALLET
+              EDIT INCOME
             </Typography>
             <Formik
                 initialValues={initialValues}
@@ -83,36 +89,12 @@ export const EditWalletModal = observer((props) => {
                 }) => (
                   <Form className="modal-form">
                     <TextField
-                        type="text" name="name" label="Name"
+                        type="number" name="amount" label="Income value"
                         variant="outlined" required={true}
-                        onChange={handleChange('name')}
-                        onBlur={handleBlur('name')}
-                        value={values.name} className="modal-input-field"
-                        InputProps={{
-                          startAdornment: (
-                              <InputAdornment position="start">
-                                <BadgeOutlinedIcon />
-                              </InputAdornment>
-                          ),
-                        }}
-                    />
-                    {
-                        errors.name &&
-                        touched.name &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
-                          {errors.name.toString()}
-                        </Typography>
-                    }
-                    <TextField
-                        type="number" name="balance" label="Start balance"
-                        variant="outlined" required={true}
-                        onChange={handleChange('balance')}
-                        onBlur={handleBlur('balance')}
-                        value={values.balance} className="modal-input-field"
-                        inputProps={{step: 0.01}}
+                        onChange={handleChange('amount')}
+                        onBlur={handleBlur('amount')}
+                        value={values.amount} className="modal-input-field"
+                        inputProps={{step: 0.01, min: 0}}
                         InputProps={{
                           startAdornment: (
                               <InputAdornment position="start">
@@ -122,41 +104,74 @@ export const EditWalletModal = observer((props) => {
                         }}
                     />
                     {
-                        errors.balance &&
-                        touched.balance &&
+                        errors.amount &&
+                        touched.amount &&
                         <Typography
                             variant="caption"
                             className="modal-error-message"
                         >
-                          {errors.balance.toString()}
+                          {errors.amount.toString()}
+                        </Typography>
+                    }
+                    <LocalizationProvider
+                        dateAdapter={AdapterDateFns}
+                    >
+                      <DateTimePicker
+                          value={values.timestamp}
+                          onBlur={handleBlur('timestamp')}
+                          inputFormat={DATE_TIME_INPUT_FORMAT}
+                          onChange={(date) =>
+                              date &&
+                              handleChange('timestamp')(date.toString())
+                          }
+                          renderInput={(params) =>
+                              <TextField
+                                  className="modal-input-field"
+                                  name="timestamp" label="Timestamp"
+                                  {...params}
+                              />}
+                      />
+                    </LocalizationProvider>
+                    {
+                        errors.timestamp &&
+                        touched.timestamp &&
+                        <Typography
+                            variant="caption"
+                            className="modal-error-message"
+                        >
+                          {errors.timestamp.toString()}
                         </Typography>
                     }
                     <FormControl className="modal-input-field">
-                      <InputLabel id="currency-label">Currency</InputLabel>
+                      <InputLabel id="wallet-label">Wallet</InputLabel>
                       <Select
-                          labelId="currency-label"
-                          label="Currency"
+                          labelId="wallet-label"
+                          label="Wallet"
                           required={true}
-                          value={values.currency}
-                          onBlur={handleBlur('currency')}
-                          onChange={handleChange('currency')}
+                          value={values.wallet}
+                          onBlur={handleBlur('wallet')}
+                          onChange={handleChange('wallet')}
                       >
-                        <MenuItem key={CURRENCY.USD} value={CURRENCY.USD}>
-                          {CURRENCY.USD}
-                        </MenuItem>
-                        <MenuItem key={CURRENCY.EUR} value={CURRENCY.EUR}>
-                          {CURRENCY.EUR}
-                        </MenuItem>
+                        {
+                          wallets.map((userWallet) => (
+                              <MenuItem
+                                  key={userWallet.id}
+                                  value={userWallet.id}
+                              >
+                                {userWallet.name}
+                              </MenuItem>
+                          ))
+                        }
                       </Select>
                     </FormControl>
                     {
-                        errors.currency &&
-                        touched.currency &&
+                        errors.wallet &&
+                        touched.wallet &&
                         <Typography
                             variant="caption"
                             className="modal-error-message"
                         >
-                          {errors.currency.toString()}
+                          {errors.wallet.toString()}
                         </Typography>
                     }
                     <Button

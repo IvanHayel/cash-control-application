@@ -1,5 +1,4 @@
-import './Styles/Dialog.scss';
-import React, {useState}       from 'react';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import {
   Box,
   Button,
@@ -11,8 +10,9 @@ import {
   IconButton,
 }                              from '@mui/material';
 import {observer}              from 'mobx-react-lite';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import React, {useState}       from 'react';
 import {deleteWallet}          from '../../Services';
+import './Styles/Dialog.scss';
 
 export const DeleteWalletDialog = observer((props) => {
   const [isDialogOpen, setDialogOpen] = useState(false);

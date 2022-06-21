@@ -1,0 +1,47 @@
+.expenses-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background-color: whitesmoke;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  .expenses-title {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #3498db;
+    user-select: none;
+    text-shadow: white 0 0 10px;
+  }
+
+  .create-expense-button {
+    width: 25%;
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 1px solid #ff0000;
+    color: red;
+    margin-bottom: 3vh;
+
+    &:hover {
+      background-color: rgba(255, 0, 0, 0.25);
+      border: 1px solid #ff0000;
+    }
+  }
+
+  .expense-actions {
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+  }
+
+  .expense-grid {
+    background-color: white;
+    padding: 5px;
+  }
+}

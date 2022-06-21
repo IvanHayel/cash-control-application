@@ -1,0 +1,47 @@
+.transfers-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background-color: whitesmoke;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  .transfers-title {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #3498db;
+    user-select: none;
+    text-shadow: white 0 0 10px;
+  }
+
+  .create-transfer-button {
+    width: 25%;
+    background-color: rgba(0, 0, 255, 0.1);
+    border: 1px solid #3498db;
+    color: blue;
+    margin-bottom: 3vh;
+
+    &:hover {
+      background-color: rgba(0, 0, 255, 0.25);
+      border: 1px solid blue;
+    }
+  }
+
+  .transfer-actions {
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+  }
+
+  .transfers-grid {
+    background-color: white;
+    padding: 5px;
+  }
+}

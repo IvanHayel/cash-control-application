@@ -1,5 +1,5 @@
-import './Styles/Header.scss';
-import React                  from 'react';
+import AccountCircleIcon      from '@mui/icons-material/AccountCircle';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import {
   AppBar,
   Box,
@@ -8,12 +8,10 @@ import {
   Typography,
 }                             from '@mui/material';
 import {observer}             from 'mobx-react';
+import React                  from 'react';
 import {
   useNavigate,
 }                             from 'react-router-dom';
-import {
-  ROUTE_URL,
-}                             from '../../Constants';
 import {
   SideMenu,
   SignInModal,
@@ -21,12 +19,14 @@ import {
   SignUpModal,
 }                             from '../../Components/';
 import {
+  ROUTE_URL,
+}                             from '../../Constants';
+import {
   isAdmin,
   isAuthenticated,
   isRoot,
 }                             from '../../Services';
-import AccountCircleIcon      from '@mui/icons-material/AccountCircle';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import './Styles/Header.scss';
 
 export const Header = observer(() => {
   const navigate = useNavigate();

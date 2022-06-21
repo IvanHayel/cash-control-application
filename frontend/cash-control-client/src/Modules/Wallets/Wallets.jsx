@@ -1,10 +1,10 @@
-import './Styles/Wallets.scss';
-import React, {useEffect}          from 'react';
-import {observer}                  from 'mobx-react-lite';
 import {Container, Grid}           from '@mui/material';
+import {observer}                  from 'mobx-react-lite';
+import React, {useEffect}          from 'react';
 import {CreateWalletModal, Wallet} from '../../Components';
-import {getUserWallets}            from '../../Services';
 import {useStore}                  from '../../Hooks';
+import {getUserWallets}            from '../../Services';
+import './Styles/Wallets.scss';
 
 export const Wallets = observer(() => {
   const walletStore = useStore('walletStore');
@@ -22,7 +22,7 @@ export const Wallets = observer(() => {
             marginY={1}
         >
           {
-            userWallets.map((wallet) => (
+            userWallets.reverse().map((wallet) => (
                 <Wallet key={wallet.id} wallet={wallet} />
             ))
           }

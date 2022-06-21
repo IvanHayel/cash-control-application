@@ -1,6 +1,6 @@
-import './Styles/About.scss';
-import React                            from 'react';
 import {Container, Divider, Typography} from '@mui/material';
+import React                            from 'react';
+import './Styles/About.scss';
 
 export const About = () => (
     <Container className="about-container">

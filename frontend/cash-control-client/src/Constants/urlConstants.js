@@ -19,3 +19,24 @@ export const WALLET_API = {
   DELETE: '/wallets/delete',
   EDIT: '/wallets/update',
 };
+
+export const INCOME_API = {
+  USER_INCOMES: '/incomes/user',
+  NEW: '/incomes/new',
+  DELETE: '/incomes/delete',
+  EDIT: '/incomes/update',
+};
+
+export const EXPENSE_API = {
+  USER_EXPENSES: '/expenses/user',
+  NEW: '/expenses/new',
+  DELETE: '/expenses/delete',
+  EDIT: '/expenses/update',
+}
+
+export const TRANSFER_API = {
+  USER_TRANSFERS: '/transfers/user',
+  NEW: '/transfers/new',
+  DELETE: '/transfers/delete',
+  EDIT: '/transfers/update',
+}
