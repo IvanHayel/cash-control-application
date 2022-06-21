@@ -12,6 +12,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
@@ -23,9 +24,11 @@ public class ServerIncomeService implements IncomeService {
 
   @Override
   @Transactional
-  public Collection<Income> getIncomesByWalletId(Long walletId) {
-    Wallet wallet = walletService.getWalletById(walletId);
-    return repository.findAllByWallet(wallet);
+  public Collection<Income> getIncomesByOwnerId(Long ownerId) {
+    Collection<Wallet> walletsByOwnerId = walletService.getWalletsByOwnerId(ownerId);
+    Collection<Income> incomes = new ArrayList<>();
+    walletsByOwnerId.forEach(wallet -> incomes.addAll(repository.findAllByWallet(wallet)));
+    return incomes;
   }
 
   @Override

@@ -1,5 +1,8 @@
 package by.hayel.cash.control.server.config;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
@@ -10,10 +13,31 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import java.util.Locale;
 
 @Configuration
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ServerWebConfiguration implements WebMvcConfigurer {
+  @Value("${cors.mapping}")
+  String corsMapping;
+
+  @Value("${cors.allowed-origins}")
+  String allowedOrigins;
+
+  @Value("${cors.allowed-methods}")
+  String allowedMethods;
+
+  @Value("${cors.allowed-headers}")
+  String allowedHeaders;
+
+  @Value("${cors.allow-credentials}")
+  boolean allowCredentials;
+
   @Override
   public void addCorsMappings(CorsRegistry registry) {
-    registry.addMapping("/**").allowedMethods("*").allowedHeaders("*").allowCredentials(true);
+    registry
+        .addMapping(corsMapping)
+        .allowedOrigins(allowedOrigins)
+        .allowedMethods(allowedMethods)
+        .allowedHeaders(allowedHeaders)
+        .allowCredentials(allowCredentials);
   }
 
   @Bean

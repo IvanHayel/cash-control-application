@@ -9,9 +9,9 @@ import by.hayel.cash.control.server.payload.request.authentication.SignInRequest
 import by.hayel.cash.control.server.payload.request.authentication.SignOutRequest;
 import by.hayel.cash.control.server.payload.request.authentication.SignUpRequest;
 import by.hayel.cash.control.server.payload.request.authentication.TokenRefreshRequest;
-import by.hayel.cash.control.server.payload.response.authentication.JwtResponse;
 import by.hayel.cash.control.server.payload.response.MessageResponse;
 import by.hayel.cash.control.server.payload.response.ServerResponse;
+import by.hayel.cash.control.server.payload.response.authentication.JwtResponse;
 import by.hayel.cash.control.server.payload.response.authentication.TokenRefreshResponse;
 import by.hayel.cash.control.server.service.JwtService;
 import by.hayel.cash.control.server.service.RefreshTokenService;
@@ -27,7 +27,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +35,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.Set;
 
-@CrossOrigin("http://localhost:3000")
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor

@@ -5,7 +5,7 @@ import by.hayel.cash.control.server.domain.wallet.Income;
 import java.util.Collection;
 
 public interface IncomeService {
-  Collection<Income> getIncomesByWalletId(Long walletId);
+  Collection<Income> getIncomesByOwnerId(Long ownerId);
 
   Income getIncomeById(Long id);
 

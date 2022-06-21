@@ -13,6 +13,8 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collection;
 
 @Service
@@ -51,5 +53,15 @@ public class ServerWalletService implements WalletService {
     } catch (IllegalArgumentException e) {
       return Currency.UNKNOWN;
     }
+  }
+
+  @Override
+  public Double calculateBalanceIncome(Double balance, Double income) {
+    return BigDecimal.valueOf(balance + income).setScale(2, RoundingMode.HALF_UP).doubleValue();
+  }
+
+  @Override
+  public Double calculateBalanceExpense(Double balance, Double expense) {
+    return BigDecimal.valueOf(balance - expense).setScale(2, RoundingMode.HALF_UP).doubleValue();
   }
 }

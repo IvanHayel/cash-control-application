@@ -17,35 +17,34 @@ import java.util.Set;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ServerRoleService implements RoleService {
-    private static final String ROLE_PREFIX = "ROLE_";
+  private static final String ROLE_PREFIX = "ROLE_";
 
-    RoleRepository repository;
+  RoleRepository repository;
 
-    @Override
-    public Role getByName(ServerRole name) {
-        return repository.findByName(name)
-                .orElseThrow(RoleNotFoundException::new);
+  @Override
+  public Role getByName(ServerRole name) {
+    return repository.findByName(name).orElseThrow(RoleNotFoundException::new);
+  }
+
+  @Override
+  public Role parseRole(String role) {
+    String modifiedRole = ROLE_PREFIX.concat(role.toUpperCase());
+    try {
+      return getByName(ServerRole.valueOf(modifiedRole));
+    } catch (IllegalArgumentException e) {
+      return getByName(ServerRole.ROLE_USER);
     }
+  }
 
-    @Override
-    public Role parseRole(String role) {
-        String modifiedRole = ROLE_PREFIX.concat(role.toUpperCase());
-        try {
-            return getByName(ServerRole.valueOf(modifiedRole));
-        } catch (IllegalArgumentException e) {
-            return getByName(ServerRole.ROLE_USER);
-        }
+  @Override
+  public Set<Role> parseRoles(Set<String> requestRoles) {
+    Set<Role> roleSet = new HashSet<>();
+    if (requestRoles == null) {
+      Role user = getByName(ServerRole.ROLE_USER);
+      roleSet.add(user);
+    } else {
+      requestRoles.forEach(role -> roleSet.add(parseRole(role)));
     }
-
-    @Override
-    public Set<Role> parseRoles(Set<String> requestRoles) {
-        Set<Role> roleSet = new HashSet<>();
-        if (requestRoles == null) {
-            Role user = getByName(ServerRole.ROLE_USER);
-            roleSet.add(user);
-        } else {
-            requestRoles.forEach(role -> roleSet.add(parseRole(role)));
-        }
-        return roleSet;
-    }
+    return roleSet;
+  }
 }

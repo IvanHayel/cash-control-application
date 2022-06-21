@@ -6,7 +6,7 @@ import by.hayel.cash.control.server.domain.wallet.ExpenseType;
 import java.util.Collection;
 
 public interface ExpenseService {
-  Collection<Expense> getExpensesByWalletId(Long walletId);
+  Collection<Expense> getExpensesByOwnerId(Long ownerId);
 
   Expense getExpenseById(Long id);
 

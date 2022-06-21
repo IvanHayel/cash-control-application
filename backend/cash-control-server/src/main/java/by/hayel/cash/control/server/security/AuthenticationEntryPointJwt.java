@@ -1,4 +1,4 @@
-package by.hayel.cash.control.server.security.jwt;
+package by.hayel.cash.control.server.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;

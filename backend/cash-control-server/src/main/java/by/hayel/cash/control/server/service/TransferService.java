@@ -5,7 +5,7 @@ import by.hayel.cash.control.server.domain.wallet.Transfer;
 import java.util.Collection;
 
 public interface TransferService {
-  Collection<Transfer> getTransfersByWalletId(Long walletId);
+  Collection<Transfer> getTransfersByOwnerId(Long ownerId);
 
   Transfer getTransferById(Long id);
 

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -29,36 +31,40 @@ import java.time.LocalDateTime;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Expense {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  Long id;
 
-    @NotNull Double amount;
+  @NotNull Double amount;
 
-    @Enumerated(EnumType.STRING)
-    @NotNull
-    ExpenseType type;
+  @Enumerated(EnumType.STRING)
+  @NotNull
+  ExpenseType type;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "wallet_id", referencedColumnName = "id")
-    @JsonIgnore
-    Wallet wallet;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JoinColumn(name = "wallet_id", referencedColumnName = "id")
+  @JsonIgnore
+  Wallet wallet;
 
-    @NotNull
-    LocalDateTime timestamp;
+  @NotNull LocalDateTime timestamp;
 
-    LocalDateTime created;
+  Long walletTransportId;
 
-    LocalDateTime modified;
+  LocalDateTime created;
 
-    @PrePersist
-    void onCreate() {
-        created = LocalDateTime.now();
-        modified = LocalDateTime.now();
-    }
+  LocalDateTime modified;
 
-    @PreUpdate
-    void onUpdate() {
-        modified = LocalDateTime.now();
-    }
+  @PrePersist
+  void onCreate() {
+    created = LocalDateTime.now();
+    modified = LocalDateTime.now();
+    walletTransportId = wallet.getId();
+  }
+
+  @PreUpdate
+  void onUpdate() {
+    modified = LocalDateTime.now();
+    walletTransportId = wallet.getId();
+  }
 }

@@ -12,6 +12,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
@@ -23,9 +24,11 @@ public class ServerTransferService implements TransferService {
 
   @Override
   @Transactional
-  public Collection<Transfer> getTransfersByWalletId(Long walletId) {
-    Wallet wallet = walletService.getWalletById(walletId);
-    return repository.findAllByWallet(wallet);
+  public Collection<Transfer> getTransfersByOwnerId(Long ownerId) {
+    Collection<Wallet> walletsByOwnerId = walletService.getWalletsByOwnerId(ownerId);
+    Collection<Transfer> transfers = new ArrayList<>();
+    walletsByOwnerId.forEach(wallet -> transfers.addAll(repository.findAllByWallet(wallet)));
+    return transfers;
   }
 
   @Override

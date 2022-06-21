@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +19,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
@@ -35,19 +36,22 @@ public class Transfer {
   @NotNull Double amount;
 
   @ManyToOne(fetch = FetchType.LAZY)
+  @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "wallet_id", referencedColumnName = "id")
   @JsonIgnore
   Wallet wallet;
 
   @ManyToOne(fetch = FetchType.LAZY)
+  @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn(name = "target_id", referencedColumnName = "id")
   @JsonIgnore
   Wallet target;
 
-  @Transient
-  @NotNull Long idTarget;
-
   @NotNull LocalDateTime timestamp;
+
+  Long walletTransportId;
+
+  Long targetTransportId;
 
   LocalDateTime created;
 
@@ -57,10 +61,14 @@ public class Transfer {
   void onCreate() {
     created = LocalDateTime.now();
     modified = LocalDateTime.now();
+    walletTransportId = wallet.getId();
+    targetTransportId = target.getId();
   }
 
   @PreUpdate
   void onUpdate() {
     modified = LocalDateTime.now();
+    walletTransportId = wallet.getId();
+    targetTransportId = target.getId();
   }
 }

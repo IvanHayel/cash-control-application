@@ -15,4 +15,8 @@ public interface WalletService {
   void save(Wallet wallet);
 
   Currency parseCurrency(String currency);
+
+  Double calculateBalanceIncome(Double balance, Double income);
+
+  Double calculateBalanceExpense(Double balance, Double expense);
 }

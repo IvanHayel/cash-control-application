@@ -13,6 +13,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
@@ -24,9 +25,11 @@ public class ServerExpenseService implements ExpenseService {
 
   @Override
   @Transactional
-  public Collection<Expense> getExpensesByWalletId(Long walletId) {
-    Wallet wallet = walletService.getWalletById(walletId);
-    return repository.findAllByWallet(wallet);
+  public Collection<Expense> getExpensesByOwnerId(Long ownerId) {
+    Collection<Wallet> walletsByOwnerId = walletService.getWalletsByOwnerId(ownerId);
+    Collection<Expense> expenses = new ArrayList<>();
+    walletsByOwnerId.forEach(wallet -> expenses.addAll(repository.findAllByWallet(wallet)));
+    return expenses;
   }
 
   @Override
