@@ -25,6 +25,9 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AuthenticationTokenFilter extends OncePerRequestFilter {
+  private static final String SIGN_IN = "/api/auth/sign-in";
+  private static final String SIGN_UP = "/api/auth/sign-up";
+
   private static final String AUTHENTICATE_ERROR_LOG = "Unable to authenticate user -> {}";
 
   JwtService jwtService;
@@ -37,6 +40,12 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
       @NonNull FilterChain filterChain)
       throws ServletException, IOException {
     try {
+      String requestUri = request.getRequestURI();
+      boolean isAuthenticationRequest = requestUri.equals(SIGN_IN) || requestUri.equals(SIGN_UP);
+      if (isAuthenticationRequest) {
+        filterChain.doFilter(request, response);
+        return;
+      }
       String token = jwtService.getTokenFromRequest(request);
       if (token != null && jwtService.isTokenValid(token)) {
         String username = jwtService.getUsernameFromToken(token);
