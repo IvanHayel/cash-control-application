@@ -1,7 +1,7 @@
-import {toast}      from 'react-toastify';
-import {api}        from '../Config';
+import {toast}        from 'react-toastify';
+import {api}          from '../Config';
 import {TRANSFER_API} from '../Constants';
-import stores       from '../Stores';
+import stores         from '../Stores';
 
 const {transferStore, authenticationStore} = stores;
 

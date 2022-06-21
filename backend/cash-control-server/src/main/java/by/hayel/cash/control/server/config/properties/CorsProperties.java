@@ -13,9 +13,9 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CorsProperties {
-    String mapping;
-    String allowedOrigins;
-    String allowedMethods;
-    String allowedHeaders;
-    boolean allowCredentials;
+  String mapping;
+  String allowedOrigins;
+  String allowedMethods;
+  String allowedHeaders;
+  boolean allowCredentials;
 }

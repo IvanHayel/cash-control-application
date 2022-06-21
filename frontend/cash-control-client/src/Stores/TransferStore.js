@@ -15,6 +15,10 @@ export default class TransferStore {
     return [...this.transfers];
   }
 
+  getTransfersCount() {
+    return this.transfers.length;
+  }
+
   clearStore() {
     this.transfers = [];
   }

@@ -159,7 +159,7 @@ export const CreateIncomeModal = observer(() => {
                                   key={userWallet.id}
                                   value={userWallet.id}
                               >
-                                {userWallet.name}
+                                {userWallet.name} ({userWallet.currency})
                               </MenuItem>
                           ))
                         }

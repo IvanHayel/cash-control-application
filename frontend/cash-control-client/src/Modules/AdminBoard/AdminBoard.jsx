@@ -34,7 +34,10 @@ export const AdminBoard = observer(() => {
   ];
 
   useEffect(() => {
-    getAllUsers();
+    const fetchData = async () => {
+      await getAllUsers();
+    };
+    fetchData().catch(console.error);
   }, []);
   return (
       <Box className="board">

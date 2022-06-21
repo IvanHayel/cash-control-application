@@ -1,0 +1,20 @@
+.reports-container {
+  text-align: center;
+  background-color: whitesmoke;
+  min-height: 80vh;
+  padding: 20px;
+
+  .reports-title-expenses {
+    color: lightcoral;
+    font-weight: bold;
+    text-shadow: darkred 0 0 2px;
+    user-select: none;
+  }
+
+  .expenses-report {
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+    color: rgba(0, 0, 0, 0.5);
+  }
+}

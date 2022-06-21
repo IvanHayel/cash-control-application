@@ -32,11 +32,11 @@ export const EXPENSE_API = {
   NEW: '/expenses/new',
   DELETE: '/expenses/delete',
   EDIT: '/expenses/update',
-}
+};
 
 export const TRANSFER_API = {
   USER_TRANSFERS: '/transfers/user',
   NEW: '/transfers/new',
   DELETE: '/transfers/delete',
   EDIT: '/transfers/update',
-}
+};

@@ -1,6 +1,6 @@
-import {AccountCircle}   from '@mui/icons-material';
-import KeyIcon           from '@mui/icons-material/Key';
-import LoginIcon         from '@mui/icons-material/Login';
+import {AccountCircle}           from '@mui/icons-material';
+import KeyIcon                   from '@mui/icons-material/Key';
+import LoginIcon                 from '@mui/icons-material/Login';
 import {
   Box,
   Button,
@@ -9,13 +9,13 @@ import {
   Modal,
   TextField,
   Typography,
-}                        from '@mui/material';
-import {Form, Formik}    from 'formik';
-import {observer}        from 'mobx-react-lite';
-import React, {useState} from 'react';
-import * as Yup          from 'yup';
-import {signIn}          from '../../Services';
-import {Copyright}       from '../index';
+}                                from '@mui/material';
+import {Form, Formik}            from 'formik';
+import {observer}                from 'mobx-react-lite';
+import React, {useState}         from 'react';
+import * as Yup                  from 'yup';
+import {isAuthenticated, signIn} from '../../Services';
+import {Copyright}               from '../index';
 import './Styles/Modal.scss';
 
 const validationSchema = Yup.object({
@@ -31,12 +31,11 @@ const validationSchema = Yup.object({
 
 export const SignInModal = observer(() => {
   const [isModalOpen, setModalOpen] = useState(false);
-
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
   const handleSignIn = async (values) => {
     await signIn(values);
-    handleModalClose();
+    isAuthenticated() && handleModalClose();
   };
   return (
       <>

@@ -10,7 +10,10 @@ export const Wallets = observer(() => {
   const walletStore = useStore('walletStore');
   const userWallets = walletStore.getWallets();
   useEffect(() => {
-    getUserWallets();
+    const fetchData = async () => {
+      await getUserWallets();
+    };
+    fetchData().catch(console.error);
   }, []);
   return (
       <Container className="wallets-container">

@@ -164,7 +164,7 @@ export const EditTransferModal = observer((props) => {
                                   key={userWallet.id}
                                   value={userWallet.id}
                               >
-                                {userWallet.name}
+                                {userWallet.name} ({userWallet.currency})
                               </MenuItem>
                           ))
                         }

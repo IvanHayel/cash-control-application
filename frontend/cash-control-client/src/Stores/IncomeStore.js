@@ -15,6 +15,10 @@ export default class IncomeStore {
     return [...this.incomes];
   }
 
+  getIncomesCount() {
+    return this.incomes.length;
+  }
+
   clearStore() {
     this.incomes = [];
   }
