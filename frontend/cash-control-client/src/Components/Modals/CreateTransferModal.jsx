@@ -192,7 +192,7 @@ export const CreateTransferModal = observer(() => {
                                   key={userWallet.id}
                                   value={userWallet.id}
                               >
-                                {userWallet.name}
+                                {userWallet.name} ({userWallet.currency})
                               </MenuItem>
                           ))
                         }
