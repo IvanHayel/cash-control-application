@@ -1,13 +1,16 @@
 .home {
-  height: 45vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   user-select: none;
   caret-color: transparent;
+  background-color: whitesmoke;
+  min-height: 80vh;
 
   .home-greeting {
     display: flex;
     width: 100%;
     justify-content: center;
-    margin-top: 35vh;
     margin-bottom: 3vh;
     font-weight: bold;
     color: #3498db;
