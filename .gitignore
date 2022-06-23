@@ -28,6 +28,7 @@ hs_err_pid*
 
 # Backend files
 HELP.md
+!maven-wrapper.jar
 target
 
 # Frontend files
