@@ -19,6 +19,7 @@
       <ul>
         <li><a href="#basic">Basic</a></li>
         <li><a href="#-docker">Docker</a></li>
+        <li><a href="#-root-credentials">Root credentials</a></li>
       </ul>
     </li>
     <li>
@@ -97,6 +98,8 @@ yarn run start
 
 #### Backend
 
+> Java version 17+ is required.
+
 1. Move to the `cash-control-server` folder and just run spring-boot application
 
 ```console
@@ -120,6 +123,11 @@ mvn clean package -DskipTests
 ```console
 docker-compose up
 ```
+
+<h3 align="center">🔑 Root credentials</h3>
+
+### Username: `root`
+### Password: `root3301`
 
 ---
 
