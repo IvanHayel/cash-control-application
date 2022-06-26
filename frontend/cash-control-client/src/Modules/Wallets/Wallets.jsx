@@ -1,9 +1,11 @@
-import {Container, Grid}           from '@mui/material';
-import {observer}                  from 'mobx-react-lite';
-import React, {useEffect}          from 'react';
-import {CreateWalletModal, Wallet} from '../../Components';
-import {useStore}                  from '../../Hooks';
-import {getUserWallets}            from '../../Services';
+import AddCircleOutlineOutlinedIcon
+                             from '@mui/icons-material/AddCircleOutlineOutlined';
+import {Container, Grid}     from '@mui/material';
+import {observer}            from 'mobx-react-lite';
+import React, {useEffect}    from 'react';
+import {Wallet, WalletModal} from '../../Components';
+import {useStore}            from '../../Hooks';
+import {getUserWallets}      from '../../Services';
 import './Styles/Wallets.scss';
 
 export const Wallets = observer(() => {
@@ -30,7 +32,11 @@ export const Wallets = observer(() => {
             ))
           }
           <Grid item xs={10} md={3}>
-            <CreateWalletModal />
+            <WalletModal
+                action="create"
+                buttonClassName="add-wallet-button"
+                buttonIcon={<AddCircleOutlineOutlinedIcon fontSize="large" />}
+            />
           </Grid>
         </Grid>
       </Container>

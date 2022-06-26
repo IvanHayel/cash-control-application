@@ -1,11 +1,13 @@
 import {AccountCircle}        from '@mui/icons-material';
 import EditIcon               from '@mui/icons-material/Edit';
 import EmailIcon              from '@mui/icons-material/Email';
+import SettingsIcon           from '@mui/icons-material/Settings';
 import {
   Box,
   Button,
   Chip,
   FormControl,
+  IconButton,
   InputAdornment,
   InputLabel,
   MenuItem,
@@ -25,34 +27,29 @@ import './Styles/Modal.scss';
 
 const validationSchema = Yup.object({
   username: Yup
-      .string('Edit username')
-      .min(3, 'Username must be at least 3 characters!')
-      .required('Username is required!'),
+  .string('Edit username')
+  .min(3, 'Username must be at least 3 characters!')
+  .required('Username is required!'),
   email: Yup
-      .string('Edit email')
-      .email('Invalid email!')
-      .required('Email is required!'),
+  .string('Edit email')
+  .email('Invalid email!')
+  .required('Email is required!'),
   roles: Yup
-      .array('Select roles')
-      .of(Yup.string())
-      .required('Exactly one role is required!'),
+  .array('Select roles')
+  .of(Yup.string())
+  .required('Exactly one role is required!'),
 });
 
 export const EditUserModal = observer((props) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [initialValues, setInitialValues] = useState({
-    username: '',
-    email: '',
-    roles: [],
-  });
   const {data} = props;
+  const initialValues = {
+    username: data.username,
+    email: data.email,
+    roles: parseRoles(data.roles),
+  };
   const handleModalOpen = (event) => {
     event.stopPropagation();
-    setInitialValues({
-      username: data.username,
-      email: data.email,
-      roles: parseRoles(data.roles),
-    });
     setModalOpen(true);
   };
   const handleModalClose = () => setModalOpen(false);
@@ -62,7 +59,7 @@ export const EditUserModal = observer((props) => {
   };
   return (
       <Box>
-        <Button
+        <IconButton
             className="modal-action-button"
             onClick={(event) => handleModalOpen(event)}
             size="small"
@@ -73,8 +70,8 @@ export const EditUserModal = observer((props) => {
                 data.roles.includes('ROOT')
             }
         >
-          EDIT
-        </Button>
+          <SettingsIcon fontSize="large" />
+        </IconButton>
         <Modal
             open={isModalOpen}
             onClose={handleModalClose}
@@ -93,10 +90,10 @@ export const EditUserModal = observer((props) => {
                 validationSchema={validationSchema}
             >
               {({
-                  values, errors,
-                  touched, handleChange,
-                  handleBlur, handleSubmit, isSubmitting,
-                }) => (
+                values, errors,
+                touched, handleChange,
+                handleBlur, handleSubmit, isSubmitting,
+              }) => (
                   <Form className="modal-form">
                     <TextField
                         type="username" name="username" label="Username"
@@ -187,6 +184,7 @@ export const EditUserModal = observer((props) => {
                     }
                     <Button
                         type="submit" variant="outlined"
+                        color="success"
                         endIcon={<EditIcon />}
                         disabled={isSubmitting}
                         onClick={handleSubmit}

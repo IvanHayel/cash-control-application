@@ -6,8 +6,7 @@ export const Copyright = () => (
       {'Copyright © '}
       <Link color="inherit" href="https://github.com/IvanHayel" target="_blank">
         Hayel I.D.
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
+      </Link>
+      {` ${new Date().getFullYear()}.`}
     </Typography>
 );

@@ -1,11 +1,25 @@
-import {Card, CardContent, CardMedia, Grid, Typography} from '@mui/material';
-import {observer}                                       from 'mobx-react-lite';
-import React                                            from 'react';
-import walletImg
-                                         from '../../Assets/Images/wallet.jpg';
-import {deleteWallet, getCurrencySymbol} from '../../Services';
-import {DeleteDialog}                    from '../Dialogs';
-import {EditWalletModal}                                from '../Modals';
+import SettingsIcon   from '@mui/icons-material/Settings';
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+}                     from '@mui/material';
+import {
+  observer,
+}                     from 'mobx-react-lite';
+import React          from 'react';
+import walletImg      from '../../Assets/Images/wallet.jpg';
+import {
+  deleteWallet,
+  getCurrencySymbol,
+}                     from '../../Services';
+import {DeleteDialog} from '../Dialogs';
+import {
+  WalletModal,
+}                     from '../Modals/WalletModal';
 import './Styles/Wallet.scss';
 
 export const Wallet = observer((props) => {
@@ -43,13 +57,19 @@ export const Wallet = observer((props) => {
             <Typography variant="caption" fontSize="small" fontWeight="bold">
               <i>{`Modified: ${new Date(wallet.modified).toLocaleString()}`}</i>
             </Typography>
-            <DeleteDialog
-                itemToDelete="wallet"
-                onConfirmDelete={() => deleteWallet(wallet.id)}
-                buttonClassName="remove-button"
-                buttonSize="large"
-            />
-            <EditWalletModal wallet={wallet} />
+            <Box className="wallet-buttons">
+              <WalletModal
+                  action="edit"
+                  wallet={wallet}
+                  buttonClassName="config-button"
+                  buttonIcon={<SettingsIcon fontSize="large" />}
+              />
+              <DeleteDialog
+                  itemToDelete="wallet"
+                  onConfirmDelete={() => deleteWallet(wallet.id)}
+                  buttonSize="large"
+              />
+            </Box>
           </CardContent>
         </Card>
       </Grid>

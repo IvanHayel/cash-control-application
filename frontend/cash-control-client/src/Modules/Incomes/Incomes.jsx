@@ -1,23 +1,13 @@
-import {Box, Container, Typography} from '@mui/material';
-import {
-  DataGrid,
-  GridToolbar,
-}                                   from '@mui/x-data-grid';
-import {
-  observer,
-}                                   from 'mobx-react-lite';
-import React, {useEffect, useState} from 'react';
-import {
-  CreateIncomeModal,
-  DeleteDialog,
-  EditIncomeModal,
-}                                   from '../../Components';
-import {useStore}                   from '../../Hooks';
-import {
-  deleteIncome,
-  getUserIncomes,
-  getUserWallets,
-}                                   from '../../Services';
+import ArrowUpwardIcon                                from '@mui/icons-material/ArrowUpward';
+import SettingsIcon
+                                                      from '@mui/icons-material/Settings';
+import {Box, Container, Typography}                   from '@mui/material';
+import {DataGrid, GridToolbar}                        from '@mui/x-data-grid';
+import {observer}                                     from 'mobx-react-lite';
+import React, {useEffect, useState}                   from 'react';
+import {DeleteDialog, IncomeModal}                    from '../../Components';
+import {useStore}                                     from '../../Hooks';
+import {deleteIncome, getUserIncomes, getUserWallets} from '../../Services';
 import './Styles/Incomes.scss';
 
 export const Incomes = observer(() => {
@@ -49,7 +39,11 @@ export const Incomes = observer(() => {
       field: 'action', headerName: 'Action', flex: 1, renderCell: (data) => {
         return (
             <Box className="income-actions">
-              <EditIncomeModal data={data.row} />
+              <IncomeModal
+                  data={data.row}
+                  action="edit"
+                  buttonIcon={<SettingsIcon fontSize="large" />}
+              />
               <DeleteDialog
                   itemToDelete="income"
                   onConfirmDelete={() => deleteIncome(data.row.id)}
@@ -64,7 +58,7 @@ export const Incomes = observer(() => {
       await getUserWallets();
       await getUserIncomes();
     };
-    fetchData().catch(console.error);
+    fetchData().catch(error => console.error(error));
   }, []);
   return (
       <Container className="incomes-box">
@@ -74,7 +68,12 @@ export const Incomes = observer(() => {
         >
           INCOMES
         </Typography>
-        <CreateIncomeModal />
+        <IncomeModal
+            action="create"
+            buttonClassName="create-income-button"
+            buttonSize="large"
+            buttonIcon={<ArrowUpwardIcon fontSize="large" />}
+        />
         <DataGrid
             className="incomes-grid"
             rows={rows}

@@ -1,12 +1,11 @@
 import LogoutIcon    from '@mui/icons-material/Logout';
 import {IconButton}  from '@mui/material';
-import {observer}    from 'mobx-react';
 import React         from 'react';
 import {useNavigate} from 'react-router-dom';
 import {ROUTE_URL}   from '../../Constants';
 import {signOut}     from '../../Services';
 
-export const SignOutButton = observer(() => {
+export const SignOutButton = () => {
   const navigate = useNavigate();
   const handleSignOut = async () => {
     await signOut();
@@ -22,4 +21,4 @@ export const SignOutButton = observer(() => {
         <LogoutIcon fontSize="large" />
       </IconButton>
   );
-});
+};

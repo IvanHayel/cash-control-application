@@ -25,14 +25,15 @@ $basic-color: #3498db;
     }
   }
 
-  .config-button {
-    margin: 10px 5px;
-    float: right;
-    color: $basic-color;
-  }
+  .wallet-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 
-  .remove-button {
-    margin: 10px 5px;
-    float: right;
+    .config-button {
+      color: $basic-color;
+      border: none;
+      border-radius: 50%;
+    }
   }
 }

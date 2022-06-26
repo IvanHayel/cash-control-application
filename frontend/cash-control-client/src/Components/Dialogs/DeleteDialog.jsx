@@ -32,20 +32,13 @@ export const DeleteDialog = (props) => {
   };
   return (
       <Box className="dialog-box">
-        <IconButton
-            className={`dialog-action-button ${buttonClassName}`}
-            color="error"
-            size={buttonSize || 'small'}
-            onClick={handleDeleteClick}
-            disabled={disableButton}
-        >
+        <IconButton className={`dialog-action-button ${buttonClassName}`}
+                    color="error" size={buttonSize ? buttonSize : 'small'}
+                    onClick={handleDeleteClick} disabled={disableButton}>
           <RemoveCircleOutlineIcon fontSize="large" />
         </IconButton>
-        <Dialog
-            className="dialog"
-            open={isDialogOpen}
-            onClose={handleDialogClose}
-        >
+        <Dialog className="dialog" open={isDialogOpen}
+                onClose={handleDialogClose}>
           <DialogTitle color="darkred">
             Are you sure you want to delete this {itemToDelete}?
           </DialogTitle>
@@ -57,20 +50,13 @@ export const DeleteDialog = (props) => {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button
-                className="dialog-action-button"
-                onClick={handleDialogClose}
-                autoFocus={true}
-                variant="outlined"
-            >
+            <Button className="dialog-action-button" onClick={handleDialogClose}
+                    autoFocus={true} variant="outlined">
               Cancel
             </Button>
-            <Button
-                className="dialog-action-button"
-                onClick={handleConfirmDelete}
-                color="error"
-                variant="outlined"
-            >
+            <Button className="dialog-action-button"
+                    onClick={handleConfirmDelete} color="error"
+                    variant="outlined">
               Confirm
             </Button>
           </DialogActions>

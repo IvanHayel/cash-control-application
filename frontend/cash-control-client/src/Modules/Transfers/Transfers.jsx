@@ -1,3 +1,5 @@
+import CompareArrowsIcon            from '@mui/icons-material/CompareArrows';
+import SettingsIcon                 from '@mui/icons-material/Settings';
 import {Box, Container, Typography} from '@mui/material';
 import {
   DataGrid,
@@ -8,13 +10,10 @@ import {
 }                                   from 'mobx-react-lite';
 import React, {useEffect, useState} from 'react';
 import {
-  CreateTransferModal,
   DeleteDialog,
-  EditTransferModal,
+  TransferModal,
 }                                   from '../../Components';
-import {
-  useStore,
-}                                   from '../../Hooks';
+import {useStore}                   from '../../Hooks';
 import {
   deleteTransfer,
   getUserTransfers,
@@ -53,7 +52,11 @@ export const Transfers = observer(() => {
       field: 'action', headerName: 'Action', flex: 1, renderCell: (data) => {
         return (
             <Box className="transfer-actions">
-              <EditTransferModal data={data.row} />
+              <TransferModal
+                  data={data.row}
+                  action="edit"
+                  buttonIcon={<SettingsIcon fontSize="large" />}
+              />
               <DeleteDialog
                   itemToDelete="transfer"
                   onConfirmDelete={() => deleteTransfer(data.row.id)}
@@ -78,7 +81,12 @@ export const Transfers = observer(() => {
         >
           TRANSFERS
         </Typography>
-        <CreateTransferModal />
+        <TransferModal
+            action="create"
+            buttonClassName="create-transfer-button"
+            buttonSize="large"
+            buttonIcon={<CompareArrowsIcon fontSize="large" />}
+        />
         <DataGrid
             className="transfers-grid"
             rows={rows}

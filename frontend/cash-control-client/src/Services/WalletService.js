@@ -1,3 +1,4 @@
+import {MenuItem}                                        from '@mui/material';
 import {toast}                                           from 'react-toastify';
 import {api}                                             from '../Config';
 import {BASIC_TOAST_OPTIONS, TOAST_MESSAGES, WALLET_API} from '../Constants';
@@ -107,3 +108,12 @@ export const getCurrencySymbol = (alias) => {
       return '';
   }
 };
+
+export const transformWalletToMenuItem = (userWallet) => (
+    <MenuItem
+        key={userWallet.id}
+        value={userWallet.id}
+    >
+      {userWallet.name} ({userWallet.currency})
+    </MenuItem>
+);

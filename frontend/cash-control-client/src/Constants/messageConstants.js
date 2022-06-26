@@ -19,8 +19,6 @@ export const TOAST_MESSAGES = {
   DELETE_TRANSFER_SUCCESS: 'Transfer deleted successfully!',
   DELETE_WALLET_SUCCESS: 'Wallet deleted successfully!',
   DELETE_USER_SUCCESS: 'User deleted successfully!',
-}
+};
 
-export const VALIDATION_MESSAGES = {
-
-}
+export const VALIDATION_MESSAGES = {};

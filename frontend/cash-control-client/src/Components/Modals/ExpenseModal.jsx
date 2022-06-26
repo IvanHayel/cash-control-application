@@ -1,6 +1,8 @@
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import CheckIcon                from '@mui/icons-material/Check';
-import SettingsIcon             from '@mui/icons-material/Settings';
+import AccountBalanceWalletIcon                    from '@mui/icons-material/AccountBalanceWallet';
+import ArrowDownwardIcon
+                                                   from '@mui/icons-material/ArrowDownward';
+import CheckIcon
+                                                   from '@mui/icons-material/Check';
 import {
   Box,
   Button,
@@ -13,89 +15,111 @@ import {
   Select,
   TextField,
   Typography,
-}                               from '@mui/material';
-import {AdapterDateFns}         from '@mui/x-date-pickers/AdapterDateFns';
-import {DateTimePicker}         from '@mui/x-date-pickers/DateTimePicker';
-import {LocalizationProvider}   from '@mui/x-date-pickers/LocalizationProvider';
-import {Form, Formik}           from 'formik';
-import {observer}               from 'mobx-react';
-import React, {useState}        from 'react';
-import * as Yup                 from 'yup';
-import {DATE_TIME_INPUT_FORMAT} from '../../Constants';
-import {useStore}               from '../../Hooks';
-import {editTransfer}           from '../../Services';
+}                                                  from '@mui/material';
+import {
+  AdapterDateFns,
+}                                                  from '@mui/x-date-pickers/AdapterDateFns';
+import {
+  DateTimePicker,
+}                                                  from '@mui/x-date-pickers/DateTimePicker';
+import {
+  LocalizationProvider,
+}                                                  from '@mui/x-date-pickers/LocalizationProvider';
+import {Form, Formik}                              from 'formik';
+import {observer}                                  from 'mobx-react';
+import React, {useState}                           from 'react';
+import * as Yup                                    from 'yup';
+import {DATE_TIME_INPUT_FORMAT, EXPENSE_TYPE_LIST} from '../../Constants';
+import {useStore}                                  from '../../Hooks';
+import {createExpense, editExpense}                from '../../Services';
 import './Styles/Modal.scss';
 
 const validationSchema = Yup.object({
   amount: Yup
-      .number('Enter transfer amount')
-      .min(0.01, 'Value must be greater or equal to 0.01!')
-      .required('Amount is required!'),
+  .number('Enter expense amount')
+  .min(0.01, 'Value must be greater or equal to 0.01!')
+  .required('Amount is required!'),
   timestamp: Yup
-      .date('Enter transfer timestamp')
-      .required('Timestamp is required!'),
+  .date('Enter expense timestamp')
+  .required('Timestamp is required!'),
+  type: Yup
+  .string('Enter expense type')
+  .required('Expense type is required!'),
   wallet: Yup
-      .string('Select wallet')
-      .required('Wallet is required!'),
-  target: Yup
-      .string('Select target wallet')
-      .oneOf([Yup.ref('wallet'), Yup.ref('target')],
-          'Please select different wallets!')
-      .required('Target wallet is required!'),
+  .string('Select wallet')
+  .required('Wallet is required!'),
 });
 
-export const EditTransferModal = observer((props) => {
+export const ExpenseModal = observer((props) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const walletStore = useStore('walletStore');
-  const wallets = walletStore.getWallets();
-  const {data} = props;
+  const wallets = useStore('walletStore').getWallets();
+  const {
+    data,
+    action,
+    buttonClassName,
+    buttonSize,
+    buttonIcon,
+  } = props;
   const initialValues = {
-    amount: data.amount,
-    timestamp: new Date(),
-    wallet: data.walletTransportId,
-    target: data.targetTransportId,
+    amount: data ? data.amount : 0.00,
+    timestamp: data ? new Date(data.timestamp) : new Date(),
+    type: data ? data.type : '',
+    wallet: data ? data.walletTransportId : '',
   };
-  const handleModalOpen = () => setModalOpen(true);
+  const handleModalOpen = (event) => {
+    event.stopPropagation();
+    setModalOpen(true);
+  };
   const handleModalClose = () => setModalOpen(false);
-  const handleCreate = async (values) => {
+  const handleConfirmAction = async (values) => {
     values.timestamp = new Date(values.timestamp).toISOString();
-    await editTransfer(data.id, values);
+    switch (action) {
+      case 'create':
+        await createExpense(values);
+        break;
+      case 'edit':
+        await editExpense(data.id, values);
+        break;
+      default:
+        break;
+    }
     handleModalClose();
   };
   return (
       <>
         <IconButton
-            className="config-button"
-            size="small"
+            className={buttonClassName}
+            size={buttonSize || 'small'}
             onClick={handleModalOpen}
+            variant="outlined"
         >
-          <SettingsIcon fontSize="large" />
+          {buttonIcon}
         </IconButton>
         <Modal
             open={isModalOpen}
             onClose={handleModalClose}
-            aria-labelledby="modal-modal-title"
+            aria-labelledby="modal-title"
         >
           <Box className="modal-main-box">
-            <Typography id="modal-modal-title" variant="h6"
+            <Typography id="modal-title" variant="h6"
                         component="h2" textAlign="center"
                         fontWeight="bold"
             >
-              EDIT TRANSFER
+              {action.toUpperCase()} EXPENSE
             </Typography>
             <Formik
                 initialValues={initialValues}
-                onSubmit={handleCreate}
+                onSubmit={handleConfirmAction}
                 validationSchema={validationSchema}
             >
               {({
-                  values, errors,
-                  touched, handleChange,
-                  handleBlur, handleSubmit, isSubmitting,
-                }) => (
+                values, errors,
+                touched, handleChange,
+                handleBlur, handleSubmit, isSubmitting,
+              }) => (
                   <Form className="modal-form">
                     <TextField
-                        type="number" name="amount" label="Transfer value"
+                        type="number" name="amount" label="Expense value"
                         variant="outlined" required={true}
                         onChange={handleChange('amount')}
                         onBlur={handleBlur('amount')}
@@ -149,6 +173,35 @@ export const EditTransferModal = observer((props) => {
                         </Typography>
                     }
                     <FormControl className="modal-input-field">
+                      <InputLabel id="type-label">Type</InputLabel>
+                      <Select
+                          labelId="type-label"
+                          label="Type"
+                          required={true}
+                          value={values.type}
+                          onBlur={handleBlur('type')}
+                          onChange={handleChange('type')}
+                      >
+                        {
+                          EXPENSE_TYPE_LIST.map((type) => (
+                              <MenuItem key={type} value={type}>
+                                {type}
+                              </MenuItem>
+                          ))
+                        }
+                      </Select>
+                    </FormControl>
+                    {
+                        errors.type &&
+                        touched.type &&
+                        <Typography
+                            variant="caption"
+                            className="modal-error-message"
+                        >
+                          {errors.type.toString()}
+                        </Typography>
+                    }
+                    <FormControl className="modal-input-field">
                       <InputLabel id="wallet-label">Wallet</InputLabel>
                       <Select
                           labelId="wallet-label"
@@ -180,41 +233,13 @@ export const EditTransferModal = observer((props) => {
                           {errors.wallet.toString()}
                         </Typography>
                     }
-                    <FormControl className="modal-input-field">
-                      <InputLabel id="target-label">Target</InputLabel>
-                      <Select
-                          labelId="target-label"
-                          label="Wallet"
-                          required={true}
-                          value={values.target}
-                          onBlur={handleBlur('target')}
-                          onChange={handleChange('target')}
-                      >
-                        {
-                          wallets.map((userWallet) => (
-                              <MenuItem
-                                  key={userWallet.id}
-                                  value={userWallet.id}
-                              >
-                                {userWallet.name} ({userWallet.currency})
-                              </MenuItem>
-                          ))
-                        }
-                      </Select>
-                    </FormControl>
-                    {
-                        errors.target &&
-                        touched.target &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
-                          {errors.target.toString()}
-                        </Typography>
-                    }
                     <Button
                         type="submit" variant="outlined"
-                        endIcon={<CheckIcon />}
+                        color="success"
+                        endIcon={action === 'create' ?
+                            <ArrowDownwardIcon color="error" /> :
+                            <CheckIcon color="success" />
+                        }
                         disabled={isSubmitting} onClick={handleSubmit}
                         className="modal-confirm-button"
                     >

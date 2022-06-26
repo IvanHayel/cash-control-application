@@ -56,7 +56,7 @@ export const Profile = observer(() => {
             </Typography>
             <Typography variant="h6" className="profile-text">
               Roles: {currentUser.roles.map(role => role.substring(5))
-                .join(', ')}
+            .join(', ')}
             </Typography>
             <Typography variant="h6" className="profile-text">
               Refresh
