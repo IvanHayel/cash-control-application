@@ -1,3 +1,4 @@
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import {
   Box,
   Button,
@@ -6,50 +7,52 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-}                        from '@mui/material';
-import {observer}        from 'mobx-react-lite';
-import React, {useState} from 'react';
-import {deleteUser}      from '../../Services';
+  IconButton,
+}                              from '@mui/material';
+import React, {useState}       from 'react';
 import './Styles/Dialog.scss';
 
-export const DeleteUserDialog = observer((props) => {
+export const DeleteDialog = (props) => {
   const [isDialogOpen, setDialogOpen] = useState(false);
-  const {data} = props;
+  const {
+    itemToDelete,
+    onConfirmDelete,
+    disableButton,
+    buttonClassName,
+    buttonSize,
+  } = props;
   const handleDeleteClick = (event) => {
     event.stopPropagation();
     setDialogOpen(true);
   };
   const handleDialogClose = () => setDialogOpen(false);
   const handleConfirmDelete = async () => {
-    await deleteUser(data.id);
+    await onConfirmDelete();
     handleDialogClose();
   };
   return (
       <Box className="dialog-box">
-        <Button
-            className="dialog-action-button"
-            variant="outlined"
-            size="small"
+        <IconButton
+            className={`dialog-action-button ${buttonClassName}`}
             color="error"
+            size={buttonSize || 'small'}
             onClick={handleDeleteClick}
-            disabled={
-                data.roles.includes('ADMIN') ||
-                data.roles.includes('ROOT')
-            }
+            disabled={disableButton}
         >
-          Delete
-        </Button>
+          <RemoveCircleOutlineIcon fontSize="large" />
+        </IconButton>
         <Dialog
             className="dialog"
             open={isDialogOpen}
             onClose={handleDialogClose}
         >
           <DialogTitle color="darkred">
-            Are you sure you want to delete this user?
+            Are you sure you want to delete this {itemToDelete}?
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              This action permanently deletes the user from the database.<br />
+              This action permanently deletes {itemToDelete} from the
+              database.<br />
               This action cannot be undone.
             </DialogContentText>
           </DialogContent>
@@ -57,7 +60,7 @@ export const DeleteUserDialog = observer((props) => {
             <Button
                 className="dialog-action-button"
                 onClick={handleDialogClose}
-                autoFocus
+                autoFocus={true}
                 variant="outlined"
             >
               Cancel
@@ -74,4 +77,4 @@ export const DeleteUserDialog = observer((props) => {
         </Dialog>
       </Box>
   );
-});
+};

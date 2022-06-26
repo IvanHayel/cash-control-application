@@ -6,19 +6,17 @@ import {
 import {
   observer,
 }                                   from 'mobx-react-lite';
-import React, {
-  useEffect,
-  useState,
-}                                   from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   CreateTransferModal,
-  DeleteTransferDialog,
+  DeleteDialog,
   EditTransferModal,
 }                                   from '../../Components';
 import {
   useStore,
 }                                   from '../../Hooks';
 import {
+  deleteTransfer,
   getUserTransfers,
   getUserWallets,
 }                                   from '../../Services';
@@ -56,7 +54,10 @@ export const Transfers = observer(() => {
         return (
             <Box className="transfer-actions">
               <EditTransferModal data={data.row} />
-              <DeleteTransferDialog data={data.row} />
+              <DeleteDialog
+                  itemToDelete="transfer"
+                  onConfirmDelete={() => deleteTransfer(data.row.id)}
+              />
             </Box>
         );
       },

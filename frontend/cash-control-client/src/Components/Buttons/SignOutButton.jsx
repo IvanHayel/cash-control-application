@@ -8,7 +8,6 @@ import {signOut}     from '../../Services';
 
 export const SignOutButton = observer(() => {
   const navigate = useNavigate();
-
   const handleSignOut = async () => {
     await signOut();
     navigate(ROUTE_URL.HOME);

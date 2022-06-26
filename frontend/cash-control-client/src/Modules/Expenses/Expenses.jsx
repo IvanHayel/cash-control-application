@@ -6,19 +6,15 @@ import {
 import {
   observer,
 }                                   from 'mobx-react-lite';
-import React, {
-  useEffect,
-  useState,
-}                                   from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   CreateExpenseModal,
-  DeleteExpenseDialog,
+  DeleteDialog,
   EditExpenseModal,
 }                                   from '../../Components';
+import {useStore}                   from '../../Hooks';
 import {
-  useStore,
-}                                   from '../../Hooks';
-import {
+  deleteExpense,
   getUserExpenses,
   getUserWallets,
 }                                   from '../../Services';
@@ -54,7 +50,10 @@ export const Expenses = observer(() => {
         return (
             <Box className="expense-actions">
               <EditExpenseModal data={data.row} />
-              <DeleteExpenseDialog data={data.row} />
+              <DeleteDialog
+                  itemToDelete="expense"
+                  onConfirmDelete={() => deleteExpense(data.row.id)}
+              />
             </Box>
         );
       },

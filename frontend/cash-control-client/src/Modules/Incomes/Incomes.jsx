@@ -9,13 +9,12 @@ import {
 import React, {useEffect, useState} from 'react';
 import {
   CreateIncomeModal,
-  DeleteIncomeDialog,
+  DeleteDialog,
   EditIncomeModal,
 }                                   from '../../Components';
+import {useStore}                   from '../../Hooks';
 import {
-  useStore,
-}                                   from '../../Hooks';
-import {
+  deleteIncome,
   getUserIncomes,
   getUserWallets,
 }                                   from '../../Services';
@@ -51,7 +50,10 @@ export const Incomes = observer(() => {
         return (
             <Box className="income-actions">
               <EditIncomeModal data={data.row} />
-              <DeleteIncomeDialog data={data.row} />
+              <DeleteDialog
+                  itemToDelete="income"
+                  onConfirmDelete={() => deleteIncome(data.row.id)}
+              />
             </Box>
         );
       },

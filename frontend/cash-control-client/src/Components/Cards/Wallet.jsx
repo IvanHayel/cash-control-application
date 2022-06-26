@@ -2,9 +2,9 @@ import {Card, CardContent, CardMedia, Grid, Typography} from '@mui/material';
 import {observer}                                       from 'mobx-react-lite';
 import React                                            from 'react';
 import walletImg
-                                                        from '../../Assets/Images/wallet.jpg';
-import {getCurrencySymbol}                              from '../../Services';
-import {DeleteWalletDialog}                             from '../Dialogs';
+                                         from '../../Assets/Images/wallet.jpg';
+import {deleteWallet, getCurrencySymbol} from '../../Services';
+import {DeleteDialog}                    from '../Dialogs';
 import {EditWalletModal}                                from '../Modals';
 import './Styles/Wallet.scss';
 
@@ -43,7 +43,12 @@ export const Wallet = observer((props) => {
             <Typography variant="caption" fontSize="small" fontWeight="bold">
               <i>{`Modified: ${new Date(wallet.modified).toLocaleString()}`}</i>
             </Typography>
-            <DeleteWalletDialog id={wallet.id} />
+            <DeleteDialog
+                itemToDelete="wallet"
+                onConfirmDelete={() => deleteWallet(wallet.id)}
+                buttonClassName="remove-button"
+                buttonSize="large"
+            />
             <EditWalletModal wallet={wallet} />
           </CardContent>
         </Card>

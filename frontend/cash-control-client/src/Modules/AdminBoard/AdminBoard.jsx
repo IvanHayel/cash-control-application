@@ -1,11 +1,11 @@
-import SecurityIcon                      from '@mui/icons-material/Security';
-import {Box, Typography}                 from '@mui/material';
-import {DataGrid, GridToolbar}           from '@mui/x-data-grid';
-import {observer}                        from 'mobx-react-lite';
-import React, {useEffect, useState}      from 'react';
-import {DeleteUserDialog, EditUserModal} from '../../Components';
-import {useStore}                        from '../../Hooks';
-import {getAllUsers}                     from '../../Services';
+import SecurityIcon                  from '@mui/icons-material/Security';
+import {Box, Typography}             from '@mui/material';
+import {DataGrid, GridToolbar}       from '@mui/x-data-grid';
+import {observer}                    from 'mobx-react-lite';
+import React, {useEffect, useState}  from 'react';
+import {DeleteDialog, EditUserModal} from '../../Components';
+import {useStore}                    from '../../Hooks';
+import {deleteUser, getAllUsers}     from '../../Services';
 import './Styles/AdminBoard.scss';
 
 export const AdminBoard = observer(() => {
@@ -26,7 +26,14 @@ export const AdminBoard = observer(() => {
         return (
             <Box className="action-buttons">
               <EditUserModal data={data.row} />
-              <DeleteUserDialog data={data.row} />
+              <DeleteDialog
+                  itemToDelete="user"
+                  onConfirmDelete={() => deleteUser(data.row.id)}
+                  disableButton={
+                      data.row.roles.includes('ADMIN') ||
+                      data.row.roles.includes('ROOT')
+                  }
+              />
             </Box>
         );
       },
