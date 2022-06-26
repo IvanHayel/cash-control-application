@@ -18,7 +18,7 @@ export const Whoops404 = () => {
           className="not-found-alert"
       >
         <AlertTitle><strong>We are sorry,</strong></AlertTitle>
-        the page you were looking for can't be found
+        the page you were looking for can&apos;t be found
       </Alert>
   );
 };
