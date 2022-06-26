@@ -36,14 +36,14 @@ public class UserController {
     return userService.getAllUsers();
   }
 
-  @DeleteMapping("/delete/{id}")
+  @DeleteMapping("/{id}")
   @PreAuthorize("hasAnyRole('ADMIN', 'ROOT')")
   public ResponseEntity<ServerResponse> deleteById(@PathVariable Long id) {
     userService.deleteById(id);
     return ResponseEntity.ok(new MessageResponse("User deleted successfully!"));
   }
 
-  @PutMapping("/update/{id}")
+  @PutMapping("/{id}")
   @PreAuthorize("hasAnyRole('ADMIN', 'ROOT')")
   public ResponseEntity<ServerResponse> updateUser(
       @PathVariable Long id, @Valid @RequestBody UpdateUserRequest request) {

@@ -1,15 +1,16 @@
-import {toast}       from 'react-toastify';
-import {api}         from '../Config';
-import {EXPENSE_API} from '../Constants';
-import stores        from '../Stores';
+import {toast}                                            from 'react-toastify';
+import {api}                                              from '../Config';
+import {BASIC_TOAST_OPTIONS, EXPENSE_API, TOAST_MESSAGES} from '../Constants';
+import stores                                             from '../Stores';
+import {createErrorMessage}                               from '../Utils';
 
 const {expenseStore, authenticationStore} = stores;
 
 export const getUserExpenses = async () => {
   const currentUser = authenticationStore.getCurrentUser();
   try {
-    const response =
-        await api.get(`${EXPENSE_API.USER_EXPENSES}/${currentUser.id}`);
+    const url = `${EXPENSE_API.USER_EXPENSES}/${currentUser.id}`;
+    const response = await api.get(url);
     expenseStore.setExpenses(response.data);
     return response;
   } catch (error) {
@@ -19,19 +20,42 @@ export const getUserExpenses = async () => {
 
 export const createExpense = async (income) => {
   try {
+    const url = `${EXPENSE_API.EXPENSES}`;
     const response = await toast.promise(
-        api.post(`${EXPENSE_API.NEW}`, income),
+        api.post(url, income),
         {
-          pending: 'Wait a couple of seconds...',
-          success: 'Expense created successfully!',
-          error: 'Error creating expense!',
+          pending: TOAST_MESSAGES.PENDING,
+          success: TOAST_MESSAGES.CREATE_EXPENSE_SUCCESS,
+          error: {
+            render({data}) {
+              return createErrorMessage(data);
+            },
+          },
         },
+        BASIC_TOAST_OPTIONS,
+    );
+    await getUserExpenses();
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+};
+
+export const editExpense = async (id, expense) => {
+  try {
+    const url = `${EXPENSE_API.EXPENSES}/${id}`;
+    const response = await toast.promise(
+        api.put(url, expense),
         {
-          autoClose: true,
-          closeButton: true,
-          closeOnClick: true,
-          duration: 10000,
+          pending: TOAST_MESSAGES.PENDING,
+          success: TOAST_MESSAGES.EDIT_EXPENSE_SUCCESS,
+          error: {
+            render({data}) {
+              return createErrorMessage(data);
+            },
+          },
         },
+        BASIC_TOAST_OPTIONS,
     );
     await getUserExpenses();
     return response;
@@ -42,41 +66,19 @@ export const createExpense = async (income) => {
 
 export const deleteExpense = async (id) => {
   try {
+    const url = `${EXPENSE_API.EXPENSES}/${id}`;
     const response = await toast.promise(
-        api.delete(`${EXPENSE_API.DELETE}/${id}`),
+        api.delete(url),
         {
-          pending: 'Wait a couple of seconds...',
-          success: 'Expense deleted successfully!',
-          error: 'Error deleting expense!',
+          pending: TOAST_MESSAGES.PENDING,
+          success: TOAST_MESSAGES.DELETE_EXPENSE_SUCCESS,
+          error: {
+            render({data}) {
+              return createErrorMessage(data);
+            },
+          },
         },
-        {
-          autoClose: true,
-          closeButton: true,
-          closeOnClick: true,
-          duration: 10000,
-        });
-    await getUserExpenses();
-    return response;
-  } catch (error) {
-    return error.response;
-  }
-};
-
-export const editExpense = async (id, expense) => {
-  try {
-    const response = await toast.promise(
-        api.put(`${EXPENSE_API.EDIT}/${id}`, expense),
-        {
-          pending: 'Wait a couple of seconds...',
-          success: 'Expense updated successfully!',
-          error: 'Error updating expense!',
-        },
-        {
-          autoClose: true,
-          closeButton: true,
-          closeOnClick: true,
-          duration: 10000,
-        },
+        BASIC_TOAST_OPTIONS,
     );
     await getUserExpenses();
     return response;

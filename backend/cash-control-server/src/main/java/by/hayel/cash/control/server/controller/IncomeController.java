@@ -38,7 +38,7 @@ public class IncomeController {
     return incomeService.getIncomesByOwnerId(userId);
   }
 
-  @PostMapping("/new")
+  @PostMapping
   public ResponseEntity<ServerResponse> createIncome(@Valid @RequestBody IncomeRequest request) {
     Wallet wallet = walletService.getWalletById(request.getWallet());
     LocalDateTime timestamp =
@@ -55,7 +55,7 @@ public class IncomeController {
     return ResponseEntity.ok(new MessageResponse("Income created successfully!"));
   }
 
-  @DeleteMapping("/delete/{id}")
+  @DeleteMapping("/{id}")
   public ResponseEntity<ServerResponse> deleteIncome(@PathVariable Long id) {
     Income incomeToDelete = incomeService.getIncomeById(id);
     Wallet wallet = walletService.getWalletById(incomeToDelete.getWalletTransportId());
@@ -67,7 +67,7 @@ public class IncomeController {
     return ResponseEntity.ok(new MessageResponse("Income deleted successfully!"));
   }
 
-  @PutMapping("/update/{id}")
+  @PutMapping("/{id}")
   public ResponseEntity<ServerResponse> updateIncome(
       @PathVariable Long id, @Valid @RequestBody IncomeRequest request) {
     Income incomeToUpdate = incomeService.getIncomeById(id);

@@ -6,9 +6,7 @@ import './Styles/Whoops404.scss';
 
 export const Whoops404 = () => {
   const navigate = useNavigate();
-  const handleHome = () => {
-    navigate(ROUTE_URL.HOME);
-  };
+  const handleHome = () => navigate(ROUTE_URL.HOME);
   return (
       <Alert
           severity="info"
@@ -17,7 +15,7 @@ export const Whoops404 = () => {
               GO HOME
             </Button>
           }
-          className="alert"
+          className="not-found-alert"
       >
         <AlertTitle><strong>We are sorry,</strong></AlertTitle>
         the page you were looking for can't be found

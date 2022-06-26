@@ -1,15 +1,16 @@
-import {toast}      from 'react-toastify';
-import {api}        from '../Config';
-import {INCOME_API} from '../Constants';
-import stores       from '../Stores';
+import {toast}                                           from 'react-toastify';
+import {api}                                             from '../Config';
+import {BASIC_TOAST_OPTIONS, INCOME_API, TOAST_MESSAGES} from '../Constants';
+import stores                                            from '../Stores';
+import {createErrorMessage}                              from '../Utils';
 
 const {incomeStore, authenticationStore} = stores;
 
 export const getUserIncomes = async () => {
   const currentUser = authenticationStore.getCurrentUser();
   try {
-    const response =
-        await api.get(`${INCOME_API.USER_INCOMES}/${currentUser.id}`);
+    const url = `${INCOME_API.USER_INCOMES}/${currentUser.id}`;
+    const response = await api.get(url);
     incomeStore.setIncomes(response.data);
     return response;
   } catch (error) {
@@ -19,19 +20,42 @@ export const getUserIncomes = async () => {
 
 export const createIncome = async (income) => {
   try {
+    const url = `${INCOME_API.INCOMES}`;
     const response = await toast.promise(
-        api.post(`${INCOME_API.NEW}`, income),
+        api.post(url, income),
         {
-          pending: 'Wait a couple of seconds...',
-          success: 'Income created successfully!',
-          error: 'Error creating income!',
+          pending: TOAST_MESSAGES.PENDING,
+          success: TOAST_MESSAGES.CREATE_INCOME_SUCCESS,
+          error: {
+            render({data}) {
+              return createErrorMessage(data);
+            },
+          },
         },
+        BASIC_TOAST_OPTIONS,
+    );
+    await getUserIncomes();
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+};
+
+export const editIncome = async (id, income) => {
+  try {
+    const url = `${INCOME_API.INCOMES}/${id}`;
+    const response = await toast.promise(
+        api.put(url, income),
         {
-          autoClose: true,
-          closeButton: true,
-          closeOnClick: true,
-          duration: 10000,
+          pending: TOAST_MESSAGES.PENDING,
+          success: TOAST_MESSAGES.EDIT_INCOME_SUCCESS,
+          error: {
+            render({data}) {
+              return createErrorMessage(data);
+            },
+          },
         },
+        BASIC_TOAST_OPTIONS,
     );
     await getUserIncomes();
     return response;
@@ -42,41 +66,19 @@ export const createIncome = async (income) => {
 
 export const deleteIncome = async (id) => {
   try {
+    const url = `${INCOME_API.INCOMES}/${id}`;
     const response = await toast.promise(
-        api.delete(`${INCOME_API.DELETE}/${id}`),
+        api.delete(url),
         {
-          pending: 'Wait a couple of seconds...',
-          success: 'Income deleted successfully!',
-          error: 'Error deleting income!',
+          pending: TOAST_MESSAGES.PENDING,
+          success: TOAST_MESSAGES.DELETE_INCOME_SUCCESS,
+          error: {
+            render({data}) {
+              return createErrorMessage(data);
+            },
+          },
         },
-        {
-          autoClose: true,
-          closeButton: true,
-          closeOnClick: true,
-          duration: 10000,
-        });
-    await getUserIncomes();
-    return response;
-  } catch (error) {
-    return error.response;
-  }
-};
-
-export const editIncome = async (id, income) => {
-  try {
-    const response = await toast.promise(
-        api.put(`${INCOME_API.EDIT}/${id}`, income),
-        {
-          pending: 'Wait a couple of seconds...',
-          success: 'Income updated successfully!',
-          error: 'Error updating income!',
-        },
-        {
-          autoClose: true,
-          closeButton: true,
-          closeOnClick: true,
-          duration: 10000,
-        },
+        BASIC_TOAST_OPTIONS,
     );
     await getUserIncomes();
     return response;

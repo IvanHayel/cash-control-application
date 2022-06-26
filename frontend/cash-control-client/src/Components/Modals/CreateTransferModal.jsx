@@ -58,6 +58,14 @@ export const CreateTransferModal = observer(() => {
     await createTransfer(values);
     handleModalClose();
   };
+  const transformWallet = (userWallet) => (
+      <MenuItem
+          key={userWallet.id}
+          value={userWallet.id}
+      >
+        {userWallet.name} ({userWallet.currency})
+      </MenuItem>
+  );
   return (
       <>
         <Button
@@ -155,14 +163,7 @@ export const CreateTransferModal = observer(() => {
                           onChange={handleChange('wallet')}
                       >
                         {
-                          wallets.map((userWallet) => (
-                              <MenuItem
-                                  key={userWallet.id}
-                                  value={userWallet.id}
-                              >
-                                {userWallet.name} ({userWallet.currency})
-                              </MenuItem>
-                          ))
+                          wallets.map(transformWallet)
                         }
                       </Select>
                     </FormControl>
@@ -187,14 +188,7 @@ export const CreateTransferModal = observer(() => {
                           onChange={handleChange('target')}
                       >
                         {
-                          wallets.map((userWallet) => (
-                              <MenuItem
-                                  key={userWallet.id}
-                                  value={userWallet.id}
-                              >
-                                {userWallet.name} ({userWallet.currency})
-                              </MenuItem>
-                          ))
+                          wallets.map(transformWallet)
                         }
                       </Select>
                     </FormControl>

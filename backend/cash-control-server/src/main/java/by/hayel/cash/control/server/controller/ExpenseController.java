@@ -39,7 +39,7 @@ public class ExpenseController {
     return expenseService.getExpensesByOwnerId(userId);
   }
 
-  @PostMapping("/new")
+  @PostMapping
   public ResponseEntity<ServerResponse> createExpense(@Valid @RequestBody ExpenseRequest request) {
     Wallet wallet = walletService.getWalletById(request.getWallet());
     LocalDateTime timestamp =
@@ -58,7 +58,7 @@ public class ExpenseController {
     return ResponseEntity.ok(new MessageResponse("Expense created successfully!"));
   }
 
-  @DeleteMapping("/delete/{id}")
+  @DeleteMapping("/{id}")
   public ResponseEntity<ServerResponse> deleteExpense(@PathVariable Long id) {
     Expense expenseToDelete = expenseService.getExpenseById(id);
     Wallet wallet = walletService.getWalletById(expenseToDelete.getWalletTransportId());
@@ -70,7 +70,7 @@ public class ExpenseController {
     return ResponseEntity.ok(new MessageResponse("Expense deleted successfully!"));
   }
 
-  @PutMapping("/update/{id}")
+  @PutMapping("/{id}")
   public ResponseEntity<ServerResponse> updateIncome(
       @PathVariable Long id, @Valid @RequestBody ExpenseRequest request) {
     Expense expenseToUpdate = expenseService.getExpenseById(id);

@@ -1,18 +1,23 @@
-import {toast}            from 'react-toastify';
-import {api}              from '../Config';
-import {WALLET_API}       from '../Constants';
-import stores             from '../Stores';
-import {getUserExpenses}  from './ExpenseService';
-import {getUserIncomes}   from './IncomeService';
-import {getUserTransfers} from './TransferService';
+import {toast}                                           from 'react-toastify';
+import {api}                                             from '../Config';
+import {BASIC_TOAST_OPTIONS, TOAST_MESSAGES, WALLET_API} from '../Constants';
+import stores                                            from '../Stores';
+import {createErrorMessage}                              from '../Utils';
+import {
+  getUserExpenses,
+}                                                        from './ExpenseService';
+import {getUserIncomes}                                  from './IncomeService';
+import {
+  getUserTransfers,
+}                                                        from './TransferService';
 
 const {walletStore, authenticationStore} = stores;
 
 export const getUserWallets = async () => {
   const currentUser = authenticationStore.getCurrentUser();
   try {
-    const response =
-        await api.get(`${WALLET_API.USER_WALLETS}/${currentUser.id}`);
+    const url = `${WALLET_API.USER_WALLETS}/${currentUser.id}`;
+    const response = await api.get(url);
     walletStore.setWallets(response.data);
     return response;
   } catch (error) {
@@ -22,19 +27,42 @@ export const getUserWallets = async () => {
 
 export const createWallet = async (wallet) => {
   try {
+    const url = `${WALLET_API.WALLETS}`;
     const response = await toast.promise(
-        api.post(`${WALLET_API.NEW}`, wallet),
+        api.post(url, wallet),
         {
-          pending: 'Wait a couple of seconds...',
-          success: 'Wallet created successfully!',
-          error: 'Error creating wallet!',
+          pending: TOAST_MESSAGES.PENDING,
+          success: TOAST_MESSAGES.CREATE_WALLET_SUCCESS,
+          error: {
+            render({data}) {
+              return createErrorMessage(data);
+            },
+          },
         },
+        BASIC_TOAST_OPTIONS,
+    );
+    await getUserWallets();
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+};
+
+export const editWallet = async (id, wallet) => {
+  try {
+    const url = `${WALLET_API.WALLETS}/${id}`;
+    const response = await toast.promise(
+        api.put(url, wallet),
         {
-          autoClose: true,
-          closeButton: true,
-          closeOnClick: true,
-          duration: 10000,
+          pending: TOAST_MESSAGES.PENDING,
+          success: TOAST_MESSAGES.EDIT_WALLET_SUCCESS,
+          error: {
+            render({data}) {
+              return createErrorMessage(data);
+            },
+          },
         },
+        BASIC_TOAST_OPTIONS,
     );
     await getUserWallets();
     return response;
@@ -45,46 +73,24 @@ export const createWallet = async (wallet) => {
 
 export const deleteWallet = async (id) => {
   try {
+    const url = `${WALLET_API.WALLETS}/${id}`;
     const response = await toast.promise(
-        api.delete(`${WALLET_API.DELETE}/${id}`),
+        api.delete(url),
         {
-          pending: 'Wait a couple of seconds...',
-          success: 'Wallet deleted successfully!',
-          error: 'Error deleting wallet!',
+          pending: TOAST_MESSAGES.PENDING,
+          success: TOAST_MESSAGES.DELETE_WALLET_SUCCESS,
+          error: {
+            render({data}) {
+              return createErrorMessage(data);
+            },
+          },
         },
-        {
-          autoClose: true,
-          closeButton: true,
-          closeOnClick: true,
-          duration: 10000,
-        });
+        BASIC_TOAST_OPTIONS,
+    );
     await getUserWallets();
     await getUserIncomes();
     await getUserExpenses();
     await getUserTransfers();
-    return response;
-  } catch (error) {
-    return error.response;
-  }
-};
-
-export const editWallet = async (id, wallet) => {
-  try {
-    const response = await toast.promise(
-        api.put(`${WALLET_API.EDIT}/${id}`, wallet),
-        {
-          pending: 'Wait a couple of seconds...',
-          success: 'Wallet updated successfully!',
-          error: 'Error updating wallet!',
-        },
-        {
-          autoClose: true,
-          closeButton: true,
-          closeOnClick: true,
-          duration: 10000,
-        },
-    );
-    await getUserWallets();
     return response;
   } catch (error) {
     return error.response;

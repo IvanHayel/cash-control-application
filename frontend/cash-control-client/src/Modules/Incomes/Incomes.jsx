@@ -25,7 +25,8 @@ export const Incomes = observer(() => {
   const [pageSize, setPageSize] = useState(5);
   const incomeStore = useStore('incomeStore');
   const walletStore = useStore('walletStore');
-  const rows = incomeStore.getIncomes().map((income) => {
+  const incomes = incomeStore.getIncomes() ? incomeStore.getIncomes() : [];
+  const rows = incomes.map((income) => {
     const wallet = walletStore.getWalletById(income.walletTransportId);
     return {
       ...income,

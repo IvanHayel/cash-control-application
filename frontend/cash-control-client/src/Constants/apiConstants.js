@@ -9,34 +9,24 @@ export const AUTH_API = {
 
 export const USER_API = {
   USERS: '/users',
-  DELETE: '/users/delete',
-  EDIT: '/users/update',
 };
 
 export const WALLET_API = {
   USER_WALLETS: '/wallets/user',
-  NEW: '/wallets/new',
-  DELETE: '/wallets/delete',
-  EDIT: '/wallets/update',
+  WALLETS: '/wallets',
 };
 
 export const INCOME_API = {
   USER_INCOMES: '/incomes/user',
-  NEW: '/incomes/new',
-  DELETE: '/incomes/delete',
-  EDIT: '/incomes/update',
+  INCOMES: '/incomes',
 };
 
 export const EXPENSE_API = {
   USER_EXPENSES: '/expenses/user',
-  NEW: '/expenses/new',
-  DELETE: '/expenses/delete',
-  EDIT: '/expenses/update',
+  EXPENSES: '/expenses',
 };
 
 export const TRANSFER_API = {
   USER_TRANSFERS: '/transfers/user',
-  NEW: '/transfers/new',
-  DELETE: '/transfers/delete',
-  EDIT: '/transfers/update',
+  TRANSFERS: '/transfers',
 };

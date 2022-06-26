@@ -39,7 +39,7 @@ public class WalletController {
     return walletService.getWalletsByOwnerId(userId);
   }
 
-  @PostMapping("/new")
+  @PostMapping
   public ResponseEntity<ServerResponse> createWallet(@Valid @RequestBody WalletRequest request) {
     var authentication = SecurityContextHolder.getContext().getAuthentication();
     UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
@@ -54,13 +54,13 @@ public class WalletController {
     return ResponseEntity.ok(new MessageResponse("Wallet created successfully!"));
   }
 
-  @DeleteMapping("/delete/{id}")
+  @DeleteMapping("/{id}")
   public ResponseEntity<ServerResponse> deleteWallet(@PathVariable Long id) {
     walletService.deleteById(id);
     return ResponseEntity.ok(new MessageResponse("Wallet deleted successfully!"));
   }
 
-  @PutMapping("/update/{id}")
+  @PutMapping("/{id}")
   public ResponseEntity<ServerResponse> updateWallet(
       @PathVariable Long id, @Valid @RequestBody WalletRequest request) {
     Wallet walletToUpdate = walletService.getWalletById(id);

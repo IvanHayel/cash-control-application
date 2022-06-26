@@ -13,7 +13,7 @@ export const Wallets = observer(() => {
     const fetchData = async () => {
       await getUserWallets();
     };
-    fetchData().catch(console.error);
+    fetchData().catch((error) => console.error(error));
   }, []);
   return (
       <Container className="wallets-container">

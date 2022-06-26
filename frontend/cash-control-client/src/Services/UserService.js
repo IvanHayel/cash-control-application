@@ -1,7 +1,8 @@
-import {toast}    from 'react-toastify';
-import {api}      from '../Config';
-import {USER_API} from '../Constants';
-import stores     from '../Stores';
+import {toast}                                         from 'react-toastify';
+import {api}                                           from '../Config';
+import {BASIC_TOAST_OPTIONS, TOAST_MESSAGES, USER_API} from '../Constants';
+import stores                                          from '../Stores';
+import {createErrorMessage}                            from '../Utils';
 
 const {userStore} = stores;
 
@@ -15,21 +16,21 @@ export const getAllUsers = async () => {
   }
 };
 
-export const deleteUser = async (id) => {
+export const editUser = async (id, user) => {
   try {
+    const url = `${USER_API.USERS}/${id}`;
     const response = await toast.promise(
-        api.delete(`${USER_API.DELETE}/${id}`),
+        api.put(url, user),
         {
-          pending: 'Wait a couple of seconds...',
-          success: 'User deleted successfully!',
-          error: 'Error deleting user!',
+          pending: TOAST_MESSAGES.PENDING,
+          success: TOAST_MESSAGES.EDIT_USER_SUCCESS,
+          error: {
+            render({data}) {
+              return createErrorMessage(data);
+            },
+          },
         },
-        {
-          autoClose: true,
-          closeButton: true,
-          closeOnClick: true,
-          duration: 10000,
-        },
+        BASIC_TOAST_OPTIONS,
     );
     await getAllUsers();
     return response;
@@ -38,21 +39,21 @@ export const deleteUser = async (id) => {
   }
 };
 
-export const editUser = async (id, user) => {
+export const deleteUser = async (id) => {
   try {
+    const url = `${USER_API.USERS}/${id}`;
     const response = await toast.promise(
-        api.put(`${USER_API.EDIT}/${id}`, user),
+        api.delete(url),
         {
-          pending: 'Wait a couple of seconds...',
-          success: 'User updated successfully!',
-          error: 'Error updating user!',
+          pending: TOAST_MESSAGES.PENDING,
+          success: TOAST_MESSAGES.DELETE_USER_SUCCESS,
+          error: {
+            render({data}) {
+              return createErrorMessage(data);
+            },
+          },
         },
-        {
-          autoClose: true,
-          closeButton: true,
-          closeOnClick: true,
-          duration: 10000,
-        },
+        BASIC_TOAST_OPTIONS,
     );
     await getAllUsers();
     return response;

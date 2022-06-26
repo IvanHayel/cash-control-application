@@ -38,7 +38,7 @@ public class TransferController {
     return transferService.getTransfersByOwnerId(userId);
   }
 
-  @PostMapping("/new")
+  @PostMapping
   public ResponseEntity<ServerResponse> createTransfer(
       @Valid @RequestBody TransferRequest request) {
     LocalDateTime timestamp =
@@ -62,7 +62,7 @@ public class TransferController {
     return ResponseEntity.ok(new MessageResponse("Transfer created successfully!"));
   }
 
-  @DeleteMapping("/delete/{id}")
+  @DeleteMapping("/{id}")
   public ResponseEntity<ServerResponse> deleteTransfer(@PathVariable Long id) {
     Transfer transferToDelete = transferService.getTransferById(id);
     Wallet wallet = walletService.getWalletById(transferToDelete.getWalletTransportId());
@@ -79,7 +79,7 @@ public class TransferController {
     return ResponseEntity.ok(new MessageResponse("Transfer deleted successfully!"));
   }
 
-  @PutMapping("/update/{id}")
+  @PutMapping("/{id}")
   public ResponseEntity<ServerResponse> updateTransfer(
       @PathVariable Long id, @Valid @RequestBody TransferRequest request) {
     Transfer transferToUpdate = transferService.getTransferById(id);
