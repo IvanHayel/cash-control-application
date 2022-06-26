@@ -11,10 +11,10 @@
       height: 100%;
       width: 100%;
       min-height: 380px;
-      background-color: rgba(0, 0, 255, 0.1);
+      background-color: rgb(0 0 255 / 10%);
 
       &:hover {
-        background-color: rgba(0, 0, 255, 0.25);
+        background-color: rgb(0 0 255 / 25%);
         transition: background-color 500ms;
       }
     }

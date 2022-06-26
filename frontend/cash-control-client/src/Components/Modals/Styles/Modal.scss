@@ -1,7 +1,7 @@
-$modalBorderColor: #81A4CD;
+$modal-border-color: #81a4cd;
 
 #modal-modal-title {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgb(0 0 0 / 50%);
 }
 
 .modal-main-box {
@@ -12,9 +12,9 @@ $modalBorderColor: #81A4CD;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
-  border: 1px solid $modalBorderColor;
+  border: 1px solid $modal-border-color;
   background-color: white;
-  box-shadow: 0 0 15px 1px $modalBorderColor;
+  box-shadow: 0 0 15px 1px $modal-border-color;
 
   .modal-form {
     display: block;
@@ -39,7 +39,7 @@ $modalBorderColor: #81A4CD;
     .chip-value {
       display: flex;
       flex-wrap: wrap;
-      gap: .5rem;
+      gap: 0.5rem;
     }
 
     .modal-action-button {

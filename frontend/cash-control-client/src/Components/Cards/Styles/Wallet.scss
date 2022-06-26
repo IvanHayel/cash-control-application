@@ -1,6 +1,5 @@
 $basic-color: #3498db;
 
-
 .wallet {
   .wallet-image {
     height: 160px;
@@ -14,7 +13,7 @@ $basic-color: #3498db;
     display: flex;
     gap: 1rem;
     font-weight: 700;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgb(0 0 0 / 60%);
 
     .positive-balance {
       color: lightgreen;

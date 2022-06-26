@@ -16,7 +16,7 @@
 
   .profile-subtitle {
     margin: 2vh 0;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgb(0 0 0 / 50%);
     font-weight: bold;
   }
 
@@ -24,6 +24,6 @@
     display: flex;
     flex-wrap: wrap;
     font-weight: 600;
-    color: rgba(0, 0, 0, 0.4);
+    color: rgb(0 0 0 / 40%);
   }
 }

@@ -8,19 +8,19 @@
 
   .incomes {
     &:hover {
-      background-color: rgba(0, 255, 0, 0.1);
+      background-color: rgb(0 255 0 / 10%);
     }
   }
 
   .expenses {
     &:hover {
-      background-color: rgba(255, 0, 0, 0.1);
+      background-color: rgb(255 0 0 / 10%);
     }
   }
 
   .transfers {
     &:hover {
-      background-color: rgba(0, 0, 255, 0.1);
+      background-color: rgb(0 0 255 / 10%);
     }
   }
 
@@ -30,13 +30,13 @@
     .head-menu-option {
       font-size: 20px;
       font-weight: 700;
-      color: rgba(0, 0, 0, 0.4);
+      color: rgb(0 0 0 / 40%);
     }
 
     .side-menu-option {
       font-size: 20px;
       font-weight: 700;
-      color: rgba(0, 0, 0, 0.6);
+      color: rgb(0 0 0 / 60%);
     }
   }
 }
