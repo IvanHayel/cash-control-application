@@ -19,7 +19,7 @@ import {
 import {DeleteDialog} from '../Dialogs';
 import {
   WalletModal,
-}                     from '../Modals/WalletModal';
+}                     from '../Modals';
 import './Styles/Wallet.scss';
 
 export const Wallet = observer((props) => {

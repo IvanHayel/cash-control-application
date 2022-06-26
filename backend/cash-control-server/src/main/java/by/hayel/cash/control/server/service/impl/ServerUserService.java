@@ -4,12 +4,11 @@ import by.hayel.cash.control.server.domain.user.User;
 import by.hayel.cash.control.server.exception.UserNotFoundException;
 import by.hayel.cash.control.server.repository.UserRepository;
 import by.hayel.cash.control.server.service.UserService;
+import java.util.Collection;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
 
 @Service
 @RequiredArgsConstructor

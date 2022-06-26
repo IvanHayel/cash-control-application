@@ -6,14 +6,13 @@ import by.hayel.cash.control.server.exception.TransferNotFoundException;
 import by.hayel.cash.control.server.repository.TransferRepository;
 import by.hayel.cash.control.server.service.TransferService;
 import by.hayel.cash.control.server.service.WalletService;
+import java.util.ArrayList;
+import java.util.Collection;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 @Service
 @RequiredArgsConstructor

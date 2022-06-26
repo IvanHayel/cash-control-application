@@ -17,6 +17,8 @@ import by.hayel.cash.control.server.service.JwtService;
 import by.hayel.cash.control.server.service.RefreshTokenService;
 import by.hayel.cash.control.server.service.RoleService;
 import by.hayel.cash.control.server.service.UserService;
+import java.util.Set;
+import javax.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -31,9 +33,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api/auth")

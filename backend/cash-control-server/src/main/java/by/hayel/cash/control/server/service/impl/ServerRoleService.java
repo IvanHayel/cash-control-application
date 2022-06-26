@@ -5,13 +5,12 @@ import by.hayel.cash.control.server.domain.user.ServerRole;
 import by.hayel.cash.control.server.exception.RoleNotFoundException;
 import by.hayel.cash.control.server.repository.RoleRepository;
 import by.hayel.cash.control.server.service.RoleService;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor

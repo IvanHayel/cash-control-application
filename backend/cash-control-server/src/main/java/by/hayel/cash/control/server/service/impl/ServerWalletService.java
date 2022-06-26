@@ -7,15 +7,14 @@ import by.hayel.cash.control.server.exception.WalletNotFoundException;
 import by.hayel.cash.control.server.repository.WalletRepository;
 import by.hayel.cash.control.server.service.UserService;
 import by.hayel.cash.control.server.service.WalletService;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Collection;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Collection;
 
 @Service
 @RequiredArgsConstructor

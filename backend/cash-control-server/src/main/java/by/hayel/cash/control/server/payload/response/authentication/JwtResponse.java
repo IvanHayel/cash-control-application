@@ -1,12 +1,11 @@
 package by.hayel.cash.control.server.payload.response.authentication;
 
 import by.hayel.cash.control.server.payload.response.ServerResponse;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-
-import java.util.List;
 
 @Getter
 @Setter

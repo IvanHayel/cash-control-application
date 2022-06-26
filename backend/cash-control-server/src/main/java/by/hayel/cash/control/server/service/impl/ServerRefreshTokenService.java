@@ -7,16 +7,15 @@ import by.hayel.cash.control.server.exception.UserNotFoundException;
 import by.hayel.cash.control.server.repository.RefreshTokenRepository;
 import by.hayel.cash.control.server.repository.UserRepository;
 import by.hayel.cash.control.server.service.RefreshTokenService;
+import java.time.Instant;
+import java.util.Optional;
+import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Instant;
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -61,9 +60,9 @@ public class ServerRefreshTokenService implements RefreshTokenService {
 
   @Override
   @Transactional
-  public int deleteByUserId(Long userId) {
+  public void deleteByUserId(Long userId) {
     User user =
         userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
-    return refreshTokenRepository.deleteByUser(user);
+    refreshTokenRepository.deleteByUser(user);
   }
 }

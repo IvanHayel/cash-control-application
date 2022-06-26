@@ -1,7 +1,6 @@
 package by.hayel.cash.control.server.validation.validator;
 
 import by.hayel.cash.control.server.validation.IsoZonedDateTime;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 

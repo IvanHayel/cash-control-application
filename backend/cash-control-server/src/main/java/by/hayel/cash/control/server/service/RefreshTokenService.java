@@ -1,7 +1,6 @@
 package by.hayel.cash.control.server.service;
 
 import by.hayel.cash.control.server.domain.jwt.RefreshToken;
-
 import java.util.Optional;
 
 public interface RefreshTokenService {
@@ -11,5 +10,5 @@ public interface RefreshTokenService {
 
   RefreshToken verifyExpiration(RefreshToken token);
 
-  int deleteByUserId(Long userId);
+  void deleteByUserId(Long userId);
 }

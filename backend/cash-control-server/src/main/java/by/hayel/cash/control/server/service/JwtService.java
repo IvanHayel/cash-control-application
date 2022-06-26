@@ -1,8 +1,7 @@
 package by.hayel.cash.control.server.service;
 
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.security.core.userdetails.UserDetails;
 
 public interface JwtService {
   String generateToken(UserDetails userDetails);

@@ -1,5 +1,6 @@
 package by.hayel.cash.control.server.config;
 
+import java.util.Locale;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,8 +10,6 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
-
-import java.util.Locale;
 
 @Configuration
 @FieldDefaults(level = AccessLevel.PRIVATE)

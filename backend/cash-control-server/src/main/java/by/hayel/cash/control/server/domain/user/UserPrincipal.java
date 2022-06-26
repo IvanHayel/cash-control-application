@@ -1,6 +1,8 @@
 package by.hayel.cash.control.server.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serial;
+import java.util.Collection;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -9,9 +11,6 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.io.Serial;
-import java.util.Collection;
 
 @AllArgsConstructor
 @Getter
