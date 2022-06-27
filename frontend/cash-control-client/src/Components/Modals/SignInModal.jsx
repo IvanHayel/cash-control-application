@@ -41,87 +41,108 @@ export const SignInModal = observer(() => {
             onClick={handleModalOpen}
             size="medium"
             color="inherit"
-        > <LoginIcon fontSize="large" /> </IconButton> <Modal
-          open={isModalOpen}
-          onClose={handleModalClose}
-          aria-labelledby="modal-modal-title"
-      > <Box className="modal-main-box"> <Typography
-          id="modal-modal-title"
-          variant="h6"
-          component="h2"
-          textAlign="center"
-          fontWeight="bold"
-      > SIGN IN </Typography> <Formik
-          initialValues={{username: '', password: ''}}
-          onSubmit={handleSignIn}
-          validationSchema={validationSchema}
-      >
-        {({
-          values, errors,
-          touched, handleChange,
-          handleBlur, handleSubmit, isSubmitting,
-        }) => (
-            <Form className="modal-form"> <TextField
-                type="username"
-                name="username"
-                label="Username"
-                variant="outlined"
-                required={true}
-                onChange={handleChange('username')}
-                onBlur={handleBlur('username')}
-                value={values.username}
-                className="modal-input-field"
-                InputProps={{
-                  startAdornment: (
-                      <InputAdornment position="start"> <AccountCircle />
-                      </InputAdornment>
-                  ),
-                }}
-            /> {
-                errors.username &&
-                touched.username &&
-                <Typography
-                    variant="caption"
-                    className="modal-error-message"
-                >
-                  {errors.username.toString()}
-                </Typography>
-            } <TextField
-                type="password"
-                name="password"
-                label="Password"
-                variant="outlined"
-                required={true}
-                onChange={handleChange('password')}
-                onBlur={handleBlur('password')}
-                value={values.password}
-                className="modal-input-field"
-                InputProps={{
-                  startAdornment: (
-                      <InputAdornment position="start"> <KeyIcon />
-                      </InputAdornment>
-                  ),
-                }}
-            /> {
-                errors.password &&
-                touched.password &&
-                <Typography
-                    variant="caption"
-                    className="modal-error-message"
-                >
-                  {errors.password.toString()}
-                </Typography>
-            } <Button
-                type="submit"
-                variant="outlined"
-                color="success"
-                endIcon={<LoginIcon />}
-                disabled={isSubmitting}
-                onClick={handleSubmit}
-                className="modal-confirm-button"
-            > SIGN IN </Button> </Form>
-        )}
-      </Formik> <Copyright /> </Box> </Modal>
+        >
+          <LoginIcon fontSize="large" />
+        </IconButton>
+        <Modal
+            open={isModalOpen}
+            onClose={handleModalClose}
+            aria-labelledby="modal-modal-title"
+        >
+          <Box className="modal-main-box">
+            <Typography
+                id="modal-modal-title"
+                variant="h6"
+                component="h2"
+                textAlign="center"
+                fontWeight="bold"
+            >
+              SIGN IN
+            </Typography>
+            <Formik
+                initialValues={{username: '', password: ''}}
+                onSubmit={handleSignIn}
+                validationSchema={validationSchema}
+            >
+              {({
+                values, errors,
+                touched, handleChange,
+                handleBlur, handleSubmit, isSubmitting,
+              }) => (
+                  <Form className="modal-form">
+                    <TextField
+                        type="username"
+                        name="username"
+                        label="Username"
+                        variant="outlined"
+                        required={true}
+                        onChange={handleChange('username')}
+                        onBlur={handleBlur('username')}
+                        value={values.username}
+                        className="modal-input-field"
+                        InputProps={{
+                          startAdornment: (
+                              <InputAdornment position="start">
+                                <AccountCircle />
+                              </InputAdornment>
+                          ),
+                        }}
+                    />
+                    {
+                        errors.username &&
+                        touched.username &&
+                        <Typography
+                            variant="caption"
+                            className="modal-error-message"
+                        >
+                          {errors.username.toString()}
+                        </Typography>
+                    }
+                    <TextField
+                        type="password"
+                        name="password"
+                        label="Password"
+                        variant="outlined"
+                        required={true}
+                        onChange={handleChange('password')}
+                        onBlur={handleBlur('password')}
+                        value={values.password}
+                        className="modal-input-field"
+                        InputProps={{
+                          startAdornment: (
+                              <InputAdornment position="start">
+                                <KeyIcon />
+                              </InputAdornment>
+                          ),
+                        }}
+                    />
+                    {
+                        errors.password &&
+                        touched.password &&
+                        <Typography
+                            variant="caption"
+                            className="modal-error-message"
+                        >
+                          {errors.password.toString()}
+                        </Typography>
+                    }
+                    <Button
+                        type="submit"
+                        variant="outlined"
+                        color="success"
+                        endIcon={<LoginIcon />}
+                        disabled={isSubmitting}
+                        onClick={handleSubmit}
+                        className="modal-confirm-button"
+                    >
+                      SIGN IN
+                    </Button>
+                  </Form>
+              )}
+            </Formik>
+            <Copyright />
+          </Box>
+        </Modal>
       </>
   );
 });
