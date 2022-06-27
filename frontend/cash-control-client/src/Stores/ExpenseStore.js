@@ -1,4 +1,4 @@
-import {makeAutoObservable} from 'mobx';
+import {makeAutoObservable} from "mobx";
 
 export default class ExpenseStore {
   expenses = [];
@@ -20,21 +20,32 @@ export default class ExpenseStore {
   }
 
   getExpensesReport() {
-    if (!this.expenses.length) return [];
+    if (!this.expenses.length) {
+      return [];
+    }
     return this.expenses.reduce((acc, expense) => {
       const {type, amount, walletTransportId} = expense;
-      if (!acc.length) acc = [
-        {
-          type,
-          walletTransportId,
-          [walletTransportId]: amount,
-        }];
-      else {
-        if (acc.filter(item => item.type === type && item.walletTransportId ===
-            walletTransportId).length) {
-          acc.forEach(item => {
-            if (item.type === type && item.walletTransportId ===
-                walletTransportId) {
+      if (!acc.length) {
+        acc = [
+          {
+            type,
+            walletTransportId,
+            [walletTransportId]: amount,
+          },
+        ];
+      } else {
+        if (
+            acc.filter(
+                (item) =>
+                    item.type === type && item.walletTransportId
+                    === walletTransportId
+            ).length
+        ) {
+          acc.forEach((item) => {
+            if (
+                item.type === type &&
+                item.walletTransportId === walletTransportId
+            ) {
               item[walletTransportId] += amount;
             }
           });

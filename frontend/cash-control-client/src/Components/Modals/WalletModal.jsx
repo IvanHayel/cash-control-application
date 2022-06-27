@@ -1,8 +1,8 @@
-import AccountBalanceWalletIcon   from '@mui/icons-material/AccountBalanceWallet';
+import AccountBalanceWalletIcon   from "@mui/icons-material/AccountBalanceWallet";
 import AddCircleOutlineOutlinedIcon
-                                  from '@mui/icons-material/AddCircleOutlineOutlined';
-import BadgeOutlinedIcon          from '@mui/icons-material/BadgeOutlined';
-import CheckIcon                  from '@mui/icons-material/Check';
+                                  from "@mui/icons-material/AddCircleOutlineOutlined";
+import BadgeOutlinedIcon          from "@mui/icons-material/BadgeOutlined";
+import CheckIcon                  from "@mui/icons-material/Check";
 import {
   Box,
   Button,
@@ -14,43 +14,40 @@ import {
   Select,
   TextField,
   Typography,
-}                                 from '@mui/material';
-import {Form, Formik}             from 'formik';
-import React, {useState}          from 'react';
-import * as Yup                   from 'yup';
-import {CURRENCY}                 from '../../Constants';
-import {createWallet, editWallet} from '../../Services';
-import './Styles/Modal.scss';
+}                                 from "@mui/material";
+import {Form, Formik}             from "formik";
+import React, {useState}          from "react";
+import * as Yup                   from "yup";
+import {CURRENCY}                 from "../../Constants";
+import {createWallet, editWallet} from "../../Services";
+import "./Styles/Modal.scss";
 
 const validationSchema = Yup.object({
-  name: Yup.string('Enter wallet name').min(3,
-      'Name must be at least 3 characters!').required('Name is required!'),
-  balance: Yup.number('Enter wallet balance').required('Balance is required!'),
-  currency: Yup.string('Select wallet currency').required(
-      'Currency is required!'),
+  name: Yup.string("Enter wallet name")
+  .min(3, "Name must be at least 3 characters!")
+  .required("Name is required!"),
+  balance: Yup.number("Enter wallet balance").required("Balance is required!"),
+  currency: Yup.string("Select wallet currency").required(
+      "Currency is required!"
+  ),
 });
 
 export const WalletModal = (props) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const {
-    wallet,
-    action,
-    buttonClassName,
-    buttonIcon,
-  } = props;
+  const {wallet, action, buttonClassName, buttonIcon} = props;
   const initialValues = {
-    name: wallet ? wallet.name : '',
-    currency: wallet ? wallet.currency : '',
-    balance: wallet ? wallet.balance : 0.00,
+    name: wallet ? wallet.name : "",
+    currency: wallet ? wallet.currency : "",
+    balance: wallet ? wallet.balance : 0.0,
   };
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
   const handleCreate = async (values) => {
     switch (action) {
-      case 'create':
+      case "create":
         await createWallet(values);
         break;
-      case 'edit':
+      case "edit":
         await editWallet(wallet.id, values);
         break;
       default:
@@ -88,9 +85,13 @@ export const WalletModal = (props) => {
                 validationSchema={validationSchema}
             >
               {({
-                values, errors,
-                touched, handleChange,
-                handleBlur, handleSubmit, isSubmitting,
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
               }) => (
                   <Form className="modal-form">
                     <TextField
@@ -99,8 +100,8 @@ export const WalletModal = (props) => {
                         label="Name"
                         variant="outlined"
                         required={true}
-                        onChange={handleChange('name')}
-                        onBlur={handleBlur('name')}
+                        onChange={handleChange("name")}
+                        onBlur={handleBlur("name")}
                         value={values.name}
                         className="modal-input-field"
                         InputProps={{
@@ -111,24 +112,20 @@ export const WalletModal = (props) => {
                           ),
                         }}
                     />
-                    {
-                        errors.name &&
-                        touched.name &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
+                    {errors.name && touched.name && (
+                        <Typography variant="caption"
+                                    className="modal-error-message">
                           {errors.name.toString()}
                         </Typography>
-                    }
+                    )}
                     <TextField
                         type="number"
                         name="balance"
                         label="Start balance"
                         variant="outlined"
                         required={true}
-                        onChange={handleChange('balance')}
-                        onBlur={handleBlur('balance')}
+                        onChange={handleChange("balance")}
+                        onBlur={handleBlur("balance")}
                         value={values.balance}
                         className="modal-input-field"
                         inputProps={{step: 0.01}}
@@ -140,16 +137,12 @@ export const WalletModal = (props) => {
                           ),
                         }}
                     />
-                    {
-                        errors.balance &&
-                        touched.balance &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
+                    {errors.balance && touched.balance && (
+                        <Typography variant="caption"
+                                    className="modal-error-message">
                           {errors.balance.toString()}
                         </Typography>
-                    }
+                    )}
                     <FormControl className="modal-input-field">
                       <InputLabel id="currency-label">Currency</InputLabel>
                       <Select
@@ -157,40 +150,33 @@ export const WalletModal = (props) => {
                           label="Currency"
                           required={true}
                           value={values.currency}
-                          onBlur={handleBlur('currency')}
-                          onChange={handleChange('currency')}
+                          onBlur={handleBlur("currency")}
+                          onChange={handleChange("currency")}
                       >
-                        <MenuItem
-                            key={CURRENCY.USD}
-                            value={CURRENCY.USD}
-                        >
+                        <MenuItem key={CURRENCY.USD} value={CURRENCY.USD}>
                           {CURRENCY.USD}
                         </MenuItem>
-                        <MenuItem
-                            key={CURRENCY.EUR}
-                            value={CURRENCY.EUR}
-                        >
+                        <MenuItem key={CURRENCY.EUR} value={CURRENCY.EUR}>
                           {CURRENCY.EUR}
                         </MenuItem>
                       </Select>
                     </FormControl>
-                    {
-                        errors.currency &&
-                        touched.currency &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
+                    {errors.currency && touched.currency && (
+                        <Typography variant="caption"
+                                    className="modal-error-message">
                           {errors.currency.toString()}
                         </Typography>
-                    }
+                    )}
                     <Button
                         type="submit"
                         variant="outlined"
                         color="success"
-                        endIcon={action === 'create' ?
-                            <AddCircleOutlineOutlinedIcon color="primary" /> :
-                            <CheckIcon color="success" />
+                        endIcon={
+                          action === "create" ? (
+                              <AddCircleOutlineOutlinedIcon color="primary" />
+                          ) : (
+                              <CheckIcon color="success" />
+                          )
                         }
                         disabled={isSubmitting}
                         onClick={handleSubmit}

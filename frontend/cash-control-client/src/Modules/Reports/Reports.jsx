@@ -1,19 +1,19 @@
-import {Box, Container, Typography}                          from '@mui/material';
+import {Box, Container, Typography}                          from "@mui/material";
 import {
-  observer,
-}                                                            from 'mobx-react-lite';
-import React, {useEffect}                                    from 'react';
-import {Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis} from 'recharts';
-import {useStore}                                            from '../../Hooks';
+  observer
+}                                                            from "mobx-react-lite";
+import React, {useEffect}                                    from "react";
+import {Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis} from "recharts";
+import {useStore}                                            from "../../Hooks";
 import {
   getUserExpenses,
-  getUserWallets,
-}                                                            from '../../Services';
-import './Styles/Reports.scss';
+  getUserWallets
+}                                                            from "../../Services";
+import "./Styles/Reports.scss";
 
 export const Reports = observer(() => {
-  const walletStore = useStore('walletStore');
-  const expenseStore = useStore('expenseStore');
+  const walletStore = useStore("walletStore");
+  const expenseStore = useStore("expenseStore");
   const wallets = walletStore.getWallets();
   const expensesReport = expenseStore.getExpensesReport();
   useEffect(() => {
@@ -34,16 +34,17 @@ export const Reports = observer(() => {
             <XAxis dataKey="type" />
             <YAxis />
             <Tooltip />
-            {
-              wallets.map((wallet) => {
-                    return <Bar key={wallet.id}
-                                name={`Amount from ${wallet.name}`}
-                                dataKey={wallet.id}
-                                fill="lightcoral"
-                                opacity={0.6} />;
-                  },
-              )
-            }
+            {wallets.map((wallet) => {
+              return (
+                  <Bar
+                      key={wallet.id}
+                      name={`Amount from ${wallet.name}`}
+                      dataKey={wallet.id}
+                      fill="lightcoral"
+                      opacity={0.6}
+                  />
+              );
+            })}
           </BarChart>
         </Box>
       </Container>

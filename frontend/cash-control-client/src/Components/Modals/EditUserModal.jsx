@@ -1,7 +1,7 @@
-import {AccountCircle}        from '@mui/icons-material';
-import EditIcon               from '@mui/icons-material/Edit';
-import EmailIcon              from '@mui/icons-material/Email';
-import SettingsIcon           from '@mui/icons-material/Settings';
+import {AccountCircle}        from "@mui/icons-material";
+import EditIcon               from "@mui/icons-material/Edit";
+import EmailIcon              from "@mui/icons-material/Email";
+import SettingsIcon           from "@mui/icons-material/Settings";
 import {
   Box,
   Button,
@@ -16,28 +16,25 @@ import {
   Select,
   TextField,
   Typography,
-}                             from '@mui/material';
-import {Form, Formik}         from 'formik';
-import {observer}             from 'mobx-react';
-import React, {useState}      from 'react';
-import * as Yup               from 'yup';
-import {ROLE, ROLE_ALIAS}     from '../../Constants';
-import {editUser, parseRoles} from '../../Services';
-import './Styles/Modal.scss';
+}                             from "@mui/material";
+import {Form, Formik}         from "formik";
+import {observer}             from "mobx-react";
+import React, {useState}      from "react";
+import * as Yup               from "yup";
+import {ROLE, ROLE_ALIAS}     from "../../Constants";
+import {editUser, parseRoles} from "../../Services";
+import "./Styles/Modal.scss";
 
 const validationSchema = Yup.object({
-  username: Yup
-  .string('Edit username')
-  .min(3, 'Username must be at least 3 characters!')
-  .required('Username is required!'),
-  email: Yup
-  .string('Edit email')
-  .email('Invalid email!')
-  .required('Email is required!'),
-  roles: Yup
-  .array('Select roles')
+  username: Yup.string("Edit username")
+  .min(3, "Username must be at least 3 characters!")
+  .required("Username is required!"),
+  email: Yup.string("Edit email")
+  .email("Invalid email!")
+  .required("Email is required!"),
+  roles: Yup.array("Select roles")
   .of(Yup.string())
-  .required('Exactly one role is required!'),
+  .required("Exactly one role is required!"),
 });
 
 export const EditUserModal = observer((props) => {
@@ -65,10 +62,8 @@ export const EditUserModal = observer((props) => {
             size="small"
             variant="outlined"
             color="warning"
-            disabled={
-                data.roles.includes('ADMIN') ||
-                data.roles.includes('ROOT')
-            }
+            disabled={data.roles.includes("ADMIN") || data.roles.includes(
+                "ROOT")}
         >
           <SettingsIcon fontSize="large" />
         </IconButton>
@@ -78,9 +73,12 @@ export const EditUserModal = observer((props) => {
             aria-labelledby="modal-modal-title"
         >
           <Box className="modal-main-box">
-            <Typography id="modal-modal-title" variant="h6"
-                        component="h2" textAlign="center"
-                        fontWeight="bold"
+            <Typography
+                id="modal-modal-title"
+                variant="h6"
+                component="h2"
+                textAlign="center"
+                fontWeight="bold"
             >
               EDIT USER
             </Typography>
@@ -90,17 +88,24 @@ export const EditUserModal = observer((props) => {
                 validationSchema={validationSchema}
             >
               {({
-                values, errors,
-                touched, handleChange,
-                handleBlur, handleSubmit, isSubmitting,
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
               }) => (
                   <Form className="modal-form">
                     <TextField
-                        type="username" name="username" label="Username"
+                        type="username"
+                        name="username"
+                        label="Username"
                         variant="outlined"
-                        onChange={handleChange('username')}
-                        onBlur={handleBlur('username')}
-                        value={values.username} className="modal-input-field"
+                        onChange={handleChange("username")}
+                        onBlur={handleBlur("username")}
+                        value={values.username}
+                        className="modal-input-field"
                         InputProps={{
                           startAdornment: (
                               <InputAdornment position="start">
@@ -109,22 +114,21 @@ export const EditUserModal = observer((props) => {
                           ),
                         }}
                     />
-                    {
-                        errors.username &&
-                        touched.username &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
+                    {errors.username && touched.username && (
+                        <Typography variant="caption"
+                                    className="modal-error-message">
                           {errors.username.toString()}
                         </Typography>
-                    }
+                    )}
                     <TextField
-                        type="email" name="email" label="Email"
+                        type="email"
+                        name="email"
+                        label="Email"
                         variant="outlined"
-                        onChange={handleChange('email')}
-                        onBlur={handleBlur('email')}
-                        value={values.email} className="modal-input-field"
+                        onChange={handleChange("email")}
+                        onBlur={handleBlur("email")}
+                        value={values.email}
+                        className="modal-input-field"
                         InputProps={{
                           startAdornment: (
                               <InputAdornment position="start">
@@ -133,31 +137,25 @@ export const EditUserModal = observer((props) => {
                           ),
                         }}
                     />
-                    {
-                        errors.email &&
-                        touched.email &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
+                    {errors.email && touched.email && (
+                        <Typography variant="caption"
+                                    className="modal-error-message">
                           {errors.email.toString()}
                         </Typography>
-                    }
+                    )}
                     <FormControl className="modal-input-field">
                       <InputLabel id="roles-label">Roles</InputLabel>
                       <Select
                           labelId="roles-label"
                           multiple
                           value={values.roles}
-                          onChange={handleChange('roles')}
+                          onChange={handleChange("roles")}
                           input={<OutlinedInput label="Chip" />}
                           renderValue={(selected) => (
                               <Box className="chip-value">
-                                {
-                                  selected.map((value) => (
-                                      <Chip key={value} label={value} />
-                                  ))
-                                }
+                                {selected.map((value) => (
+                                    <Chip key={value} label={value} />
+                                ))}
                               </Box>
                           )}
                       >
@@ -172,18 +170,15 @@ export const EditUserModal = observer((props) => {
                         </MenuItem>
                       </Select>
                     </FormControl>
-                    {
-                        errors.roles &&
-                        touched.roles &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
+                    {errors.roles && touched.roles && (
+                        <Typography variant="caption"
+                                    className="modal-error-message">
                           {errors.roles.toString()}
                         </Typography>
-                    }
+                    )}
                     <Button
-                        type="submit" variant="outlined"
+                        type="submit"
+                        variant="outlined"
                         color="success"
                         endIcon={<EditIcon />}
                         disabled={isSubmitting}

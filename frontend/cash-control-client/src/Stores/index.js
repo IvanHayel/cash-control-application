@@ -1,8 +1,8 @@
-import {configure} from 'mobx';
-import RootStore   from './RootStore';
+import {configure} from "mobx";
+import RootStore   from "./RootStore";
 
 configure({
-  enforceActions: 'never',
+  enforceActions: "never",
 });
 
 const rootStore = new RootStore();

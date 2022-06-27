@@ -1,17 +1,17 @@
-import {toast} from 'react-toastify';
+import {toast} from "react-toastify";
 import {
-  api,
-}              from '../Config';
+  api
+}              from "../Config";
 import {
   AUTH_API,
   BASIC_TOAST_OPTIONS,
   HTTP_STATUS,
   TOAST_MESSAGES,
-}              from '../Constants';
-import stores  from '../Stores';
+}              from "../Constants";
+import stores  from "../Stores";
 import {
-  createErrorMessage,
-}              from '../Utils';
+  createErrorMessage
+}              from "../Utils";
 
 const {authenticationStore, rootStore} = stores;
 
@@ -28,7 +28,7 @@ export const signUp = async (body) => {
             },
           },
         },
-        BASIC_TOAST_OPTIONS,
+        BASIC_TOAST_OPTIONS
     );
   } catch (error) {
     return error.response;
@@ -48,7 +48,7 @@ export const signIn = async (body) => {
             },
           },
         },
-        BASIC_TOAST_OPTIONS,
+        BASIC_TOAST_OPTIONS
     );
     authenticationStore.authenticate(response.data);
     return response;
@@ -72,7 +72,7 @@ export const signOut = async (message) => {
             },
           },
         },
-        BASIC_TOAST_OPTIONS,
+        BASIC_TOAST_OPTIONS
     );
     rootStore.clearStores();
     return response;
@@ -90,7 +90,7 @@ export const refreshToken = async () => {
           pending: TOAST_MESSAGES.PENDING,
           success: TOAST_MESSAGES.TOKEN_REFRESH_SUCCESS,
         },
-        BASIC_TOAST_OPTIONS,
+        BASIC_TOAST_OPTIONS
     );
     authenticationStore.refreshTokens(response.data);
     return response;

@@ -1,4 +1,4 @@
-import {makeAutoObservable} from 'mobx';
+import {makeAutoObservable} from "mobx";
 
 export default class UserStore {
   users = [];
@@ -13,13 +13,12 @@ export default class UserStore {
 
   getUsers() {
     return [
-      ...this.users.map(user => ({
-            id: user.id,
-            username: user.username,
-            email: user.email,
-            roles: user.roles.map(role => role.name.substring(5)).join(', '),
-          }),
-      ),
+      ...this.users.map((user) => ({
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        roles: user.roles.map((role) => role.name.substring(5)).join(", "),
+      })),
     ];
   }
 

@@ -1,16 +1,16 @@
-import {MenuItem}                                        from '@mui/material';
-import {toast}                                           from 'react-toastify';
-import {api}                                             from '../Config';
-import {BASIC_TOAST_OPTIONS, TOAST_MESSAGES, WALLET_API} from '../Constants';
-import stores                                            from '../Stores';
-import {createErrorMessage}                              from '../Utils';
+import {MenuItem}                                        from "@mui/material";
+import {toast}                                           from "react-toastify";
+import {api}                                             from "../Config";
+import {BASIC_TOAST_OPTIONS, TOAST_MESSAGES, WALLET_API} from "../Constants";
+import stores                                            from "../Stores";
+import {createErrorMessage}                              from "../Utils";
 import {
-  getUserExpenses,
-}                                                        from './ExpenseService';
-import {getUserIncomes}                                  from './IncomeService';
+  getUserExpenses
+}                                                        from "./ExpenseService";
+import {getUserIncomes}                                  from "./IncomeService";
 import {
-  getUserTransfers,
-}                                                        from './TransferService';
+  getUserTransfers
+}                                                        from "./TransferService";
 
 const {walletStore, authenticationStore} = stores;
 
@@ -40,7 +40,7 @@ export const createWallet = async (wallet) => {
             },
           },
         },
-        BASIC_TOAST_OPTIONS,
+        BASIC_TOAST_OPTIONS
     );
     await getUserWallets();
     return response;
@@ -63,7 +63,7 @@ export const editWallet = async (id, wallet) => {
             },
           },
         },
-        BASIC_TOAST_OPTIONS,
+        BASIC_TOAST_OPTIONS
     );
     await getUserWallets();
     return response;
@@ -86,7 +86,7 @@ export const deleteWallet = async (id) => {
             },
           },
         },
-        BASIC_TOAST_OPTIONS,
+        BASIC_TOAST_OPTIONS
     );
     await getUserWallets();
     await getUserIncomes();
@@ -100,20 +100,17 @@ export const deleteWallet = async (id) => {
 
 export const getCurrencySymbol = (alias) => {
   switch (alias.toLowerCase().trim()) {
-    case 'usd':
-      return '$';
-    case 'eur':
-      return '€';
+    case "usd":
+      return "$";
+    case "eur":
+      return "€";
     default:
-      return '';
+      return "";
   }
 };
 
 export const transformWalletToMenuItem = (userWallet) => (
-    <MenuItem
-        key={userWallet.id}
-        value={userWallet.id}
-    >
+    <MenuItem key={userWallet.id} value={userWallet.id}>
       {userWallet.name} ({userWallet.currency})
     </MenuItem>
 );

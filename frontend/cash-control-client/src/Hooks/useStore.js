@@ -1,5 +1,5 @@
-import React  from 'react';
-import stores from '../Stores';
+import React  from "react";
+import stores from "../Stores";
 
 const storesContext = React.createContext(stores);
 

@@ -1,4 +1,4 @@
 export const CURRENCY = {
-  USD: 'USD',
-  EUR: 'EUR',
+  USD: "USD",
+  EUR: "EUR",
 };

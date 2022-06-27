@@ -1,8 +1,8 @@
-import {Alert, AlertTitle, Button} from '@mui/material';
-import React                       from 'react';
-import {useNavigate}               from 'react-router-dom';
-import {ROUTE_URL}                 from '../../Constants';
-import './Styles/Whoops404.scss';
+import {Alert, AlertTitle, Button} from "@mui/material";
+import React                       from "react";
+import {useNavigate}               from "react-router-dom";
+import {ROUTE_URL}                 from "../../Constants";
+import "./Styles/Whoops404.scss";
 
 export const Whoops404 = () => {
   const navigate = useNavigate();
@@ -17,7 +17,9 @@ export const Whoops404 = () => {
           }
           className="not-found-alert"
       >
-        <AlertTitle><strong>We are sorry,</strong></AlertTitle>
+        <AlertTitle>
+          <strong>We are sorry,</strong>
+        </AlertTitle>
         the page you were looking for can&apos;t be found
       </Alert>
   );

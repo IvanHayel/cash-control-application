@@ -1,4 +1,4 @@
-import {makeAutoObservable} from 'mobx';
+import {makeAutoObservable} from "mobx";
 
 export default class WalletStore {
   wallets = [];
@@ -16,7 +16,7 @@ export default class WalletStore {
   }
 
   getWalletById(id) {
-    return this.wallets.find(wallet => wallet.id === id);
+    return this.wallets.find((wallet) => wallet.id === id);
   }
 
   getWalletsCount() {

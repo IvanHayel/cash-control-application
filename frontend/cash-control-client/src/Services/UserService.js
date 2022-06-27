@@ -1,8 +1,8 @@
-import {toast}                                         from 'react-toastify';
-import {api}                                           from '../Config';
-import {BASIC_TOAST_OPTIONS, TOAST_MESSAGES, USER_API} from '../Constants';
-import stores                                          from '../Stores';
-import {createErrorMessage}                            from '../Utils';
+import {toast}                                         from "react-toastify";
+import {api}                                           from "../Config";
+import {BASIC_TOAST_OPTIONS, TOAST_MESSAGES, USER_API} from "../Constants";
+import stores                                          from "../Stores";
+import {createErrorMessage}                            from "../Utils";
 
 const {userStore} = stores;
 
@@ -30,7 +30,7 @@ export const editUser = async (id, user) => {
             },
           },
         },
-        BASIC_TOAST_OPTIONS,
+        BASIC_TOAST_OPTIONS
     );
     await getAllUsers();
     return response;
@@ -53,7 +53,7 @@ export const deleteUser = async (id) => {
             },
           },
         },
-        BASIC_TOAST_OPTIONS,
+        BASIC_TOAST_OPTIONS
     );
     await getAllUsers();
     return response;
@@ -63,5 +63,5 @@ export const deleteUser = async (id) => {
 };
 
 export const parseRoles = (roles) => {
-  return [...roles.split(',').map(role => role.trim().toLowerCase())];
+  return [...roles.split(",").map((role) => role.trim().toLowerCase())];
 };

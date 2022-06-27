@@ -1,9 +1,9 @@
-import AuthenticationStore from './AuthenticationStore';
-import ExpenseStore        from './ExpenseStore';
-import IncomeStore         from './IncomeStore';
-import TransferStore       from './TransferStore';
-import UserStore           from './UserStore';
-import WalletStore         from './WalletStore';
+import AuthenticationStore from "./AuthenticationStore";
+import ExpenseStore        from "./ExpenseStore";
+import IncomeStore         from "./IncomeStore";
+import TransferStore       from "./TransferStore";
+import UserStore           from "./UserStore";
+import WalletStore         from "./WalletStore";
 
 export const createErrorMessage = (data) =>
     (data.response && data.response.data && data.response.data.message) ||

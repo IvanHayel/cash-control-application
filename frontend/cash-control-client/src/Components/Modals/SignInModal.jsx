@@ -1,6 +1,6 @@
-import {AccountCircle}           from '@mui/icons-material';
-import KeyIcon                   from '@mui/icons-material/Key';
-import LoginIcon                 from '@mui/icons-material/Login';
+import {AccountCircle}           from "@mui/icons-material";
+import KeyIcon                   from "@mui/icons-material/Key";
+import LoginIcon                 from "@mui/icons-material/Login";
 import {
   Box,
   Button,
@@ -9,22 +9,22 @@ import {
   Modal,
   TextField,
   Typography,
-}                                from '@mui/material';
-import {Form, Formik}            from 'formik';
-import {observer}                from 'mobx-react-lite';
-import React, {useState}         from 'react';
-import * as Yup                  from 'yup';
-import {isAuthenticated, signIn} from '../../Services';
-import {Copyright}               from '../index';
-import './Styles/Modal.scss';
+}                                from "@mui/material";
+import {Form, Formik}            from "formik";
+import {observer}                from "mobx-react-lite";
+import React, {useState}         from "react";
+import * as Yup                  from "yup";
+import {isAuthenticated, signIn} from "../../Services";
+import {Copyright}               from "../index";
+import "./Styles/Modal.scss";
 
 const validationSchema = Yup.object({
-  username: Yup.string('Enter your username').min(3,
-      'Username must be at least 3 characters!').required(
-      'Username is required!'),
-  password: Yup.string('Enter your password').min(6,
-      'Password must be at least 6 characters!').required(
-      'Password is required!'),
+  username: Yup.string("Enter your username")
+  .min(3, "Username must be at least 3 characters!")
+  .required("Username is required!"),
+  password: Yup.string("Enter your password")
+  .min(6, "Password must be at least 6 characters!")
+  .required("Password is required!"),
 });
 
 export const SignInModal = observer(() => {
@@ -37,11 +37,7 @@ export const SignInModal = observer(() => {
   };
   return (
       <>
-        <IconButton
-            onClick={handleModalOpen}
-            size="medium"
-            color="inherit"
-        >
+        <IconButton onClick={handleModalOpen} size="medium" color="inherit">
           <LoginIcon fontSize="large" />
         </IconButton>
         <Modal
@@ -60,14 +56,18 @@ export const SignInModal = observer(() => {
               SIGN IN
             </Typography>
             <Formik
-                initialValues={{username: '', password: ''}}
+                initialValues={{username: "", password: ""}}
                 onSubmit={handleSignIn}
                 validationSchema={validationSchema}
             >
               {({
-                values, errors,
-                touched, handleChange,
-                handleBlur, handleSubmit, isSubmitting,
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
               }) => (
                   <Form className="modal-form">
                     <TextField
@@ -76,8 +76,8 @@ export const SignInModal = observer(() => {
                         label="Username"
                         variant="outlined"
                         required={true}
-                        onChange={handleChange('username')}
-                        onBlur={handleBlur('username')}
+                        onChange={handleChange("username")}
+                        onBlur={handleBlur("username")}
                         value={values.username}
                         className="modal-input-field"
                         InputProps={{
@@ -88,24 +88,20 @@ export const SignInModal = observer(() => {
                           ),
                         }}
                     />
-                    {
-                        errors.username &&
-                        touched.username &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
+                    {errors.username && touched.username && (
+                        <Typography variant="caption"
+                                    className="modal-error-message">
                           {errors.username.toString()}
                         </Typography>
-                    }
+                    )}
                     <TextField
                         type="password"
                         name="password"
                         label="Password"
                         variant="outlined"
                         required={true}
-                        onChange={handleChange('password')}
-                        onBlur={handleBlur('password')}
+                        onChange={handleChange("password")}
+                        onBlur={handleBlur("password")}
                         value={values.password}
                         className="modal-input-field"
                         InputProps={{
@@ -116,16 +112,12 @@ export const SignInModal = observer(() => {
                           ),
                         }}
                     />
-                    {
-                        errors.password &&
-                        touched.password &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
+                    {errors.password && touched.password && (
+                        <Typography variant="caption"
+                                    className="modal-error-message">
                           {errors.password.toString()}
                         </Typography>
-                    }
+                    )}
                     <Button
                         type="submit"
                         variant="outlined"

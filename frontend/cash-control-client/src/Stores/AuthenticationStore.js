@@ -1,6 +1,6 @@
-import {makeAutoObservable} from 'mobx';
-import {makePersistable}    from 'mobx-persist-store';
-import {ROLE}               from '../Constants';
+import {makeAutoObservable} from "mobx";
+import {makePersistable}    from "mobx-persist-store";
+import {ROLE}               from "../Constants";
 
 export default class AuthenticationStore {
   status = null;
@@ -18,15 +18,12 @@ export default class AuthenticationStore {
 
   constructor() {
     makeAutoObservable(this);
-    makePersistable(
-        this,
-        {
-          name: 'AuthenticationStore',
-          properties: ['status', 'token', 'user'],
-          storage: localStorage,
-        },
-    ).catch(error =>
-        console.log('Unable to persist authentication store:', error),
+    makePersistable(this, {
+      name: "AuthenticationStore",
+      properties: ["status", "token", "user"],
+      storage: localStorage,
+    }).catch((error) =>
+        console.log("Unable to persist authentication store:", error)
     );
   }
 

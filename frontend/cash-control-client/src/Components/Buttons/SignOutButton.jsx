@@ -1,9 +1,9 @@
-import LogoutIcon    from '@mui/icons-material/Logout';
-import {IconButton}  from '@mui/material';
-import React         from 'react';
-import {useNavigate} from 'react-router-dom';
-import {ROUTE_URL}   from '../../Constants';
-import {signOut}     from '../../Services';
+import LogoutIcon    from "@mui/icons-material/Logout";
+import {IconButton}  from "@mui/material";
+import React         from "react";
+import {useNavigate} from "react-router-dom";
+import {ROUTE_URL}   from "../../Constants";
+import {signOut}     from "../../Services";
 
 export const SignOutButton = () => {
   const navigate = useNavigate();

@@ -1,19 +1,19 @@
-import ArrowUpwardIcon                                from '@mui/icons-material/ArrowUpward';
+import ArrowUpwardIcon                                from "@mui/icons-material/ArrowUpward";
 import SettingsIcon
-                                                      from '@mui/icons-material/Settings';
-import {Box, Container, Typography}                   from '@mui/material';
-import {DataGrid, GridToolbar}                        from '@mui/x-data-grid';
-import {observer}                                     from 'mobx-react-lite';
-import React, {useEffect, useState}                   from 'react';
-import {DeleteDialog, IncomeModal}                    from '../../Components';
-import {useStore}                                     from '../../Hooks';
-import {deleteIncome, getUserIncomes, getUserWallets} from '../../Services';
-import './Styles/Incomes.scss';
+                                                      from "@mui/icons-material/Settings";
+import {Box, Container, Typography}                   from "@mui/material";
+import {DataGrid, GridToolbar}                        from "@mui/x-data-grid";
+import {observer}                                     from "mobx-react-lite";
+import React, {useEffect, useState}                   from "react";
+import {DeleteDialog, IncomeModal}                    from "../../Components";
+import {useStore}                                     from "../../Hooks";
+import {deleteIncome, getUserIncomes, getUserWallets} from "../../Services";
+import "./Styles/Incomes.scss";
 
 export const Incomes = observer(() => {
   const [pageSize, setPageSize] = useState(5);
-  const incomeStore = useStore('incomeStore');
-  const walletStore = useStore('walletStore');
+  const incomeStore = useStore("incomeStore");
+  const walletStore = useStore("walletStore");
   const incomes = incomeStore.getIncomes() ? incomeStore.getIncomes() : [];
   const rows = incomes.map((income) => {
     const wallet = walletStore.getWalletById(income.walletTransportId);
@@ -25,18 +25,27 @@ export const Incomes = observer(() => {
     };
   });
   const columns = [
-    {field: 'id', headerName: 'ID', type: 'number', align: 'right', width: 50},
-    {field: 'amount', headerName: 'Amount', type: 'number', flex: 1},
-    {field: 'currency', headerName: 'Currency', type: 'string', flex: 1},
     {
-      field: 'timestampFormatted',
-      headerName: 'Timestamp',
-      type: 'date',
+      field: "id",
+      headerName: "ID",
+      type: "number",
+      align: "right",
+      width: 50,
+    },
+    {field: "amount", headerName: "Amount", type: "number", flex: 1},
+    {field: "currency", headerName: "Currency", type: "string", flex: 1},
+    {
+      field: "timestampFormatted",
+      headerName: "Timestamp",
+      type: "date",
       flex: 2,
     },
-    {field: 'wallet', headerName: 'Wallet', type: 'string', flex: 1},
+    {field: "wallet", headerName: "Wallet", type: "string", flex: 1},
     {
-      field: 'action', headerName: 'Action', flex: 1, renderCell: (data) => {
+      field: "action",
+      headerName: "Action",
+      flex: 1,
+      renderCell: (data) => {
         return (
             <Box className="income-actions">
               <IncomeModal
@@ -58,14 +67,11 @@ export const Incomes = observer(() => {
       await getUserWallets();
       await getUserIncomes();
     };
-    fetchData().catch(error => console.error(error));
+    fetchData().catch((error) => console.error(error));
   }, []);
   return (
       <Container className="incomes-box">
-        <Typography
-            className="incomes-title"
-            variant="h4"
-        >
+        <Typography className="incomes-title" variant="h4">
           INCOMES
         </Typography>
         <IncomeModal

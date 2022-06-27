@@ -1,4 +1,4 @@
-import SettingsIcon   from '@mui/icons-material/Settings';
+import SettingsIcon   from "@mui/icons-material/Settings";
 import {
   Box,
   Card,
@@ -6,21 +6,19 @@ import {
   CardMedia,
   Grid,
   Typography,
-}                     from '@mui/material';
+}                     from "@mui/material";
 import {
-  observer,
-}                     from 'mobx-react-lite';
-import React          from 'react';
-import walletImg      from '../../Assets/Images/wallet.jpg';
+  observer
+}                     from "mobx-react-lite";
+import React          from "react";
+import walletImg      from "../../Assets/Images/wallet.jpg";
 import {
   deleteWallet,
-  getCurrencySymbol,
-}                     from '../../Services';
-import {DeleteDialog} from '../Dialogs';
-import {
-  WalletModal,
-}                     from '../Modals';
-import './Styles/Wallet.scss';
+  getCurrencySymbol
+}                     from "../../Services";
+import {DeleteDialog} from "../Dialogs";
+import {WalletModal}  from "../Modals";
+import "./Styles/Wallet.scss";
 
 export const Wallet = observer((props) => {
   const {wallet} = props;
@@ -33,20 +31,17 @@ export const Wallet = observer((props) => {
               alt={wallet.name}
           />
           <CardContent>
-            <Typography
-                className="wallet-name"
-                variant="h4"
-            >
+            <Typography className="wallet-name" variant="h4">
               {wallet.name}
             </Typography>
-            <Typography
-                className="wallet-info"
-                variant="h6"
-            >
+            <Typography className="wallet-info" variant="h6">
               <strong>Balance:</strong>
-              <div className={wallet.balance >= 0 ?
-                  'positive-balance' :
-                  'negative-balance'}>
+              <div
+                  className={
+                    wallet.balance >= 0 ? "positive-balance"
+                        : "negative-balance"
+                  }
+              >
                 {`${wallet.balance} ${getCurrencySymbol(wallet.currency)}`}
               </div>
             </Typography>

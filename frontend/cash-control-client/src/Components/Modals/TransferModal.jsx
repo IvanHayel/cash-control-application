@@ -1,6 +1,6 @@
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import CheckIcon                from '@mui/icons-material/Check';
-import CompareArrowsIcon        from '@mui/icons-material/CompareArrows';
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import CheckIcon                from "@mui/icons-material/Check";
+import CompareArrowsIcon        from "@mui/icons-material/CompareArrows";
 import {
   Box,
   Button,
@@ -12,62 +12,57 @@ import {
   Select,
   TextField,
   Typography,
-}                               from '@mui/material';
+}                               from "@mui/material";
 import {
   AdapterDateFns
-}                               from '@mui/x-date-pickers/AdapterDateFns';
+}                               from "@mui/x-date-pickers/AdapterDateFns";
 import {
   DateTimePicker
-}                               from '@mui/x-date-pickers/DateTimePicker';
+}                               from "@mui/x-date-pickers/DateTimePicker";
 import {
   LocalizationProvider
-}                               from '@mui/x-date-pickers/LocalizationProvider';
-import {Form, Formik}           from 'formik';
+}                               from "@mui/x-date-pickers/LocalizationProvider";
+import {Form, Formik}           from "formik";
 import {
   observer
-}                               from 'mobx-react';
-import React, {useState}        from 'react';
-import * as Yup                 from 'yup';
+}                               from "mobx-react";
+import React, {useState}        from "react";
+import * as Yup                 from "yup";
 import {
   DATE_TIME_INPUT_FORMAT
-}                               from '../../Constants';
+}                               from "../../Constants";
 import {
   useStore
-}                               from '../../Hooks';
+}                               from "../../Hooks";
 import {
   createTransfer,
   editTransfer,
   transformWalletToMenuItem,
-}                               from '../../Services';
-import './Styles/Modal.scss';
+}                               from "../../Services";
+import "./Styles/Modal.scss";
 
 const validationSchema = Yup.object({
-  amount: Yup.number('Enter transfer amount').min(0.01,
-      'Value must be greater or equal to 0.01!').required(
-      'Amount is required!'),
-  timestamp: Yup.date('Enter transfer timestamp').required(
-      'Timestamp is required!'),
-  wallet: Yup.string('Select wallet').required('Wallet is required!'),
-  target: Yup.string('Select target wallet').notOneOf([Yup.ref('wallet'), null],
-      'Please select different wallets!').required(
-      'Target wallet is required!'),
+  amount: Yup.number("Enter transfer amount")
+  .min(0.01, "Value must be greater or equal to 0.01!")
+  .required("Amount is required!"),
+  timestamp: Yup.date("Enter transfer timestamp").required(
+      "Timestamp is required!"
+  ),
+  wallet: Yup.string("Select wallet").required("Wallet is required!"),
+  target: Yup.string("Select target wallet")
+  .notOneOf([Yup.ref("wallet"), null], "Please select different wallets!")
+  .required("Target wallet is required!"),
 });
 
 export const TransferModal = observer((props) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const wallets = useStore('walletStore').getWallets();
-  const {
-    data,
-    action,
-    buttonClassName,
-    buttonSize,
-    buttonIcon,
-  } = props;
+  const wallets = useStore("walletStore").getWallets();
+  const {data, action, buttonClassName, buttonSize, buttonIcon} = props;
   const initialValues = {
-    amount: data ? data.amount : 0.00,
+    amount: data ? data.amount : 0.0,
     timestamp: data ? new Date(data.timestamp) : new Date(),
-    wallet: data ? data.walletTransportId : '',
-    target: data ? data.targetTransportId : '',
+    wallet: data ? data.walletTransportId : "",
+    target: data ? data.targetTransportId : "",
   };
   const handleModalOpen = (event) => {
     event.stopPropagation();
@@ -77,10 +72,10 @@ export const TransferModal = observer((props) => {
   const handleCreate = async (values) => {
     values.timestamp = new Date(values.timestamp).toISOString();
     switch (action) {
-      case 'create':
+      case "create":
         await createTransfer(values);
         break;
-      case 'edit':
+      case "edit":
         await editTransfer(data.id, values);
         break;
       default:
@@ -92,7 +87,7 @@ export const TransferModal = observer((props) => {
       <>
         <IconButton
             className={buttonClassName}
-            size={buttonSize || 'small'}
+            size={buttonSize || "small"}
             onClick={handleModalOpen}
             variant="outlined"
         >
@@ -119,9 +114,13 @@ export const TransferModal = observer((props) => {
                 validationSchema={validationSchema}
             >
               {({
-                values, errors,
-                touched, handleChange,
-                handleBlur, handleSubmit, isSubmitting,
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
               }) => (
                   <Form className="modal-form">
                     <TextField
@@ -130,8 +129,8 @@ export const TransferModal = observer((props) => {
                         label="Transfer value"
                         variant="outlined"
                         required={true}
-                        onChange={handleChange('amount')}
-                        onBlur={handleBlur('amount')}
+                        onChange={handleChange("amount")}
+                        onBlur={handleBlur("amount")}
                         value={values.amount}
                         className="modal-input-field"
                         inputProps={{step: 0.01, min: 0}}
@@ -143,45 +142,36 @@ export const TransferModal = observer((props) => {
                           ),
                         }}
                     />
-                    {
-                        errors.amount &&
-                        touched.amount &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
+                    {errors.amount && touched.amount && (
+                        <Typography variant="caption"
+                                    className="modal-error-message">
                           {errors.amount.toString()}
                         </Typography>
-                    }
-                    <LocalizationProvider
-                        dateAdapter={AdapterDateFns}
-                    >
+                    )}
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
                       <DateTimePicker
                           value={values.timestamp}
-                          onBlur={handleBlur('timestamp')}
+                          onBlur={handleBlur("timestamp")}
                           inputFormat={DATE_TIME_INPUT_FORMAT}
                           onChange={(date) =>
-                              date &&
-                              handleChange('timestamp')(date.toString())
+                              date && handleChange("timestamp")(date.toString())
                           }
-                          renderInput={(params) =>
+                          renderInput={(params) => (
                               <TextField
                                   className="modal-input-field"
                                   name="timestamp"
-                                  label="Timestamp"{...params} />
-                          }
+                                  label="Timestamp"
+                                  {...params}
+                              />
+                          )}
                       />
                     </LocalizationProvider>
-                    {
-                        errors.timestamp &&
-                        touched.timestamp &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
+                    {errors.timestamp && touched.timestamp && (
+                        <Typography variant="caption"
+                                    className="modal-error-message">
                           {errors.timestamp.toString()}
                         </Typography>
-                    }
+                    )}
                     <FormControl className="modal-input-field">
                       <InputLabel id="wallet-label">Wallet</InputLabel>
                       <Select
@@ -189,22 +179,18 @@ export const TransferModal = observer((props) => {
                           label="Wallet"
                           required={true}
                           value={values.wallet}
-                          onBlur={handleBlur('wallet')}
-                          onChange={handleChange('wallet')}
+                          onBlur={handleBlur("wallet")}
+                          onChange={handleChange("wallet")}
                       >
                         {wallets.map(transformWalletToMenuItem)}
                       </Select>
                     </FormControl>
-                    {
-                        errors.wallet &&
-                        touched.wallet &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
+                    {errors.wallet && touched.wallet && (
+                        <Typography variant="caption"
+                                    className="modal-error-message">
                           {errors.wallet.toString()}
                         </Typography>
-                    }
+                    )}
                     <FormControl className="modal-input-field">
                       <InputLabel id="target-label">Target</InputLabel>
                       <Select
@@ -212,31 +198,28 @@ export const TransferModal = observer((props) => {
                           label="Wallet"
                           required={true}
                           value={values.target}
-                          onBlur={handleBlur('target')}
-                          onChange={handleChange('target')}
+                          onBlur={handleBlur("target")}
+                          onChange={handleChange("target")}
                       >
-                        {
-                          wallets.map(transformWalletToMenuItem)
-                        }
+                        {wallets.map(transformWalletToMenuItem)}
                       </Select>
                     </FormControl>
-                    {
-                        errors.target &&
-                        touched.target &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
+                    {errors.target && touched.target && (
+                        <Typography variant="caption"
+                                    className="modal-error-message">
                           {errors.target.toString()}
                         </Typography>
-                    }
+                    )}
                     <Button
                         type="submit"
                         variant="outlined"
                         color="success"
-                        endIcon={action === 'create' ?
-                            <CompareArrowsIcon color="primary" /> :
-                            <CheckIcon color="success" />
+                        endIcon={
+                          action === "create" ? (
+                              <CompareArrowsIcon color="primary" />
+                          ) : (
+                              <CheckIcon color="success" />
+                          )
                         }
                         disabled={isSubmitting}
                         onClick={handleSubmit}

@@ -4,4 +4,3 @@ export const BASIC_TOAST_OPTIONS = {
   closeOnClick: true,
   duration: 10000,
 };
-

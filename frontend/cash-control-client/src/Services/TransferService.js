@@ -1,8 +1,8 @@
-import {toast}                                             from 'react-toastify';
-import {api}                                               from '../Config';
-import {BASIC_TOAST_OPTIONS, TOAST_MESSAGES, TRANSFER_API} from '../Constants';
-import stores                                              from '../Stores';
-import {createErrorMessage}                                from '../Utils';
+import {toast}                                              from "react-toastify";
+import {api}                                                from "../Config";
+import {BASIC_TOAST_OPTIONS, TOAST_MESSAGES, TRANSFER_API,} from "../Constants";
+import stores                                               from "../Stores";
+import {createErrorMessage}                                 from "../Utils";
 
 const {transferStore, authenticationStore} = stores;
 
@@ -32,7 +32,7 @@ export const createTransfer = async (transfer) => {
             },
           },
         },
-        BASIC_TOAST_OPTIONS,
+        BASIC_TOAST_OPTIONS
     );
     await getUserTransfers();
     return response;
@@ -55,7 +55,7 @@ export const editTransfer = async (id, transfer) => {
             },
           },
         },
-        BASIC_TOAST_OPTIONS,
+        BASIC_TOAST_OPTIONS
     );
     await getUserTransfers();
     return response;
@@ -78,7 +78,7 @@ export const deleteTransfer = async (id) => {
             },
           },
         },
-        BASIC_TOAST_OPTIONS,
+        BASIC_TOAST_OPTIONS
     );
     await getUserTransfers();
     return response;

@@ -1,26 +1,32 @@
-import SecurityIcon                  from '@mui/icons-material/Security';
-import {Box, Typography}             from '@mui/material';
-import {DataGrid, GridToolbar}       from '@mui/x-data-grid';
-import {observer}                    from 'mobx-react-lite';
-import React, {useEffect, useState}  from 'react';
-import {DeleteDialog, EditUserModal} from '../../Components';
-import {useStore}                    from '../../Hooks';
-import {deleteUser, getAllUsers}     from '../../Services';
-import './Styles/AdminBoard.scss';
+import SecurityIcon                  from "@mui/icons-material/Security";
+import {Box, Typography}             from "@mui/material";
+import {DataGrid, GridToolbar}       from "@mui/x-data-grid";
+import {observer}                    from "mobx-react-lite";
+import React, {useEffect, useState}  from "react";
+import {DeleteDialog, EditUserModal} from "../../Components";
+import {useStore}                    from "../../Hooks";
+import {deleteUser, getAllUsers}     from "../../Services";
+import "./Styles/AdminBoard.scss";
 
 export const AdminBoard = observer(() => {
   const [pageSize, setPageSize] = useState(5);
-  const userStore = useStore('userStore');
+  const userStore = useStore("userStore");
 
   const rows = userStore.getUsers();
   const columns = [
-    {field: 'id', headerName: 'ID', type: 'number', align: 'right', width: 50},
-    {field: 'username', headerName: 'Username', flex: 1},
-    {field: 'email', headerName: 'Email', flex: 2},
-    {field: 'roles', headerName: 'Roles', flex: 2},
     {
-      field: 'actions',
-      headerName: 'Actions',
+      field: "id",
+      headerName: "ID",
+      type: "number",
+      align: "right",
+      width: 50,
+    },
+    {field: "username", headerName: "Username", flex: 1},
+    {field: "email", headerName: "Email", flex: 2},
+    {field: "roles", headerName: "Roles", flex: 2},
+    {
+      field: "actions",
+      headerName: "Actions",
       flex: 1,
       renderCell: (data) => {
         return (
@@ -30,8 +36,8 @@ export const AdminBoard = observer(() => {
                   itemToDelete="user"
                   onConfirmDelete={() => deleteUser(data.row.id)}
                   disableButton={
-                      data.row.roles.includes('ADMIN') ||
-                      data.row.roles.includes('ROOT')
+                      data.row.roles.includes("ADMIN") ||
+                      data.row.roles.includes("ROOT")
                   }
               />
             </Box>
@@ -48,14 +54,11 @@ export const AdminBoard = observer(() => {
   }, []);
   return (
       <Box className="board">
-        <Typography
-            className="board-title"
-            variant="h4"
-        >
+        <Typography className="board-title" variant="h4">
           ADMIN BOARD <SecurityIcon size="large" />
         </Typography>
         <DataGrid
-            className={'board-grid'}
+            className={"board-grid"}
             rows={rows}
             columns={columns}
             pageSize={pageSize}

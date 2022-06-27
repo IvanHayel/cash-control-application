@@ -1,8 +1,8 @@
-import {AccountCircle}   from '@mui/icons-material';
-import CheckIcon         from '@mui/icons-material/Check';
-import EmailIcon         from '@mui/icons-material/Email';
-import HowToRegIcon      from '@mui/icons-material/HowToReg';
-import KeyIcon           from '@mui/icons-material/Key';
+import {AccountCircle}   from "@mui/icons-material";
+import CheckIcon         from "@mui/icons-material/Check";
+import EmailIcon         from "@mui/icons-material/Email";
+import HowToRegIcon      from "@mui/icons-material/HowToReg";
+import KeyIcon           from "@mui/icons-material/Key";
 import {
   Box,
   Button,
@@ -11,27 +11,28 @@ import {
   Modal,
   TextField,
   Typography,
-}                        from '@mui/material';
-import {Form, Formik}    from 'formik';
-import {observer}        from 'mobx-react';
-import React, {useState} from 'react';
-import * as Yup          from 'yup';
-import {signUp}          from '../../Services';
-import {Copyright}       from '../index';
-import './Styles/Modal.scss';
+}                        from "@mui/material";
+import {Form, Formik}    from "formik";
+import {observer}        from "mobx-react";
+import React, {useState} from "react";
+import * as Yup          from "yup";
+import {signUp}          from "../../Services";
+import {Copyright}       from "../index";
+import "./Styles/Modal.scss";
 
 const validationSchema = Yup.object({
-  username: Yup.string('Enter your username').min(3,
-      'Username must be at least 3 characters!').required(
-      'Username is required!'),
-  email: Yup.string('Enter your email').email('Invalid email!').required(
-      'Email is required!'),
-  password: Yup.string('Enter your password').min(6,
-      'Password must be at least 6 characters!').required(
-      'Password is required!'),
-  confirmPassword: Yup.string('Confirm your password').oneOf(
-      [Yup.ref('password'), null], 'Passwords must match!').required(
-      'Password confirmation required!'),
+  username: Yup.string("Enter your username")
+  .min(3, "Username must be at least 3 characters!")
+  .required("Username is required!"),
+  email: Yup.string("Enter your email")
+  .email("Invalid email!")
+  .required("Email is required!"),
+  password: Yup.string("Enter your password")
+  .min(6, "Password must be at least 6 characters!")
+  .required("Password is required!"),
+  confirmPassword: Yup.string("Confirm your password")
+  .oneOf([Yup.ref("password"), null], "Passwords must match!")
+  .required("Password confirmation required!"),
 });
 
 export const SignUpModal = observer(() => {
@@ -44,11 +45,7 @@ export const SignUpModal = observer(() => {
   };
   return (
       <>
-        <IconButton
-            onClick={handleModalOpen}
-            size="medium"
-            color="inherit"
-        >
+        <IconButton onClick={handleModalOpen} size="medium" color="inherit">
           <HowToRegIcon fontSize="large" />
         </IconButton>
         <Modal
@@ -68,18 +65,22 @@ export const SignUpModal = observer(() => {
             </Typography>
             <Formik
                 initialValues={{
-                  username: '',
-                  password: '',
-                  email: '',
-                  confirmPassword: '',
+                  username: "",
+                  password: "",
+                  email: "",
+                  confirmPassword: "",
                 }}
                 onSubmit={handleSignUp}
                 validationSchema={validationSchema}
             >
               {({
-                values, errors,
-                touched, handleChange,
-                handleBlur, handleSubmit, isSubmitting,
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
               }) => (
                   <Form className="modal-form">
                     <TextField
@@ -88,8 +89,8 @@ export const SignUpModal = observer(() => {
                         label="Username"
                         variant="outlined"
                         required={true}
-                        onChange={handleChange('username')}
-                        onBlur={handleBlur('username')}
+                        onChange={handleChange("username")}
+                        onBlur={handleBlur("username")}
                         value={values.username}
                         className="modal-input-field"
                         InputProps={{
@@ -100,24 +101,20 @@ export const SignUpModal = observer(() => {
                           ),
                         }}
                     />
-                    {
-                        errors.username &&
-                        touched.username &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
+                    {errors.username && touched.username && (
+                        <Typography variant="caption"
+                                    className="modal-error-message">
                           {errors.username.toString()}
                         </Typography>
-                    }
+                    )}
                     <TextField
                         type="email"
                         name="email"
                         label="Email"
                         variant="outlined"
                         required={true}
-                        onChange={handleChange('email')}
-                        onBlur={handleBlur('email')}
+                        onChange={handleChange("email")}
+                        onBlur={handleBlur("email")}
                         value={values.email}
                         className="modal-input-field"
                         InputProps={{
@@ -128,24 +125,20 @@ export const SignUpModal = observer(() => {
                           ),
                         }}
                     />
-                    {
-                        errors.email &&
-                        touched.email &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
+                    {errors.email && touched.email && (
+                        <Typography variant="caption"
+                                    className="modal-error-message">
                           {errors.email.toString()}
                         </Typography>
-                    }
+                    )}
                     <TextField
                         type="password"
                         name="password"
                         label="Password"
                         variant="outlined"
                         required={true}
-                        onChange={handleChange('password')}
-                        onBlur={handleBlur('password')}
+                        onChange={handleChange("password")}
+                        onBlur={handleBlur("password")}
                         value={values.password}
                         className="modal-input-field"
                         InputProps={{
@@ -156,24 +149,20 @@ export const SignUpModal = observer(() => {
                           ),
                         }}
                     />
-                    {
-                        errors.password &&
-                        touched.password &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
+                    {errors.password && touched.password && (
+                        <Typography variant="caption"
+                                    className="modal-error-message">
                           {errors.password.toString()}
                         </Typography>
-                    }
+                    )}
                     <TextField
                         type="password"
                         name="confirmPassword"
                         label="Confirm password"
                         variant="outlined"
                         required={true}
-                        onChange={handleChange('confirmPassword')}
-                        onBlur={handleBlur('confirmPassword')}
+                        onChange={handleChange("confirmPassword")}
+                        onBlur={handleBlur("confirmPassword")}
                         value={values.confirmPassword}
                         className="modal-input-field"
                         InputProps={{
@@ -184,16 +173,12 @@ export const SignUpModal = observer(() => {
                           ),
                         }}
                     />
-                    {
-                        errors.confirmPassword &&
-                        touched.confirmPassword &&
-                        <Typography
-                            variant="caption"
-                            className="modal-error-message"
-                        >
+                    {errors.confirmPassword && touched.confirmPassword && (
+                        <Typography variant="caption"
+                                    className="modal-error-message">
                           {errors.confirmPassword.toString()}
                         </Typography>
-                    }
+                    )}
                     <Button
                         type="submit"
                         variant="outlined"

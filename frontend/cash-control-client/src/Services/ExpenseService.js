@@ -1,8 +1,8 @@
-import {toast}                                            from 'react-toastify';
-import {api}                                              from '../Config';
-import {BASIC_TOAST_OPTIONS, EXPENSE_API, TOAST_MESSAGES} from '../Constants';
-import stores                                             from '../Stores';
-import {createErrorMessage}                               from '../Utils';
+import {toast}                                            from "react-toastify";
+import {api}                                              from "../Config";
+import {BASIC_TOAST_OPTIONS, EXPENSE_API, TOAST_MESSAGES} from "../Constants";
+import stores                                             from "../Stores";
+import {createErrorMessage}                               from "../Utils";
 
 const {expenseStore, authenticationStore} = stores;
 
@@ -32,7 +32,7 @@ export const createExpense = async (income) => {
             },
           },
         },
-        BASIC_TOAST_OPTIONS,
+        BASIC_TOAST_OPTIONS
     );
     await getUserExpenses();
     return response;
@@ -55,7 +55,7 @@ export const editExpense = async (id, expense) => {
             },
           },
         },
-        BASIC_TOAST_OPTIONS,
+        BASIC_TOAST_OPTIONS
     );
     await getUserExpenses();
     return response;
@@ -78,7 +78,7 @@ export const deleteExpense = async (id) => {
             },
           },
         },
-        BASIC_TOAST_OPTIONS,
+        BASIC_TOAST_OPTIONS
     );
     await getUserExpenses();
     return response;

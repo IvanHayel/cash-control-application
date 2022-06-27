@@ -1,20 +1,20 @@
-import {Container, Grid, Typography} from '@mui/material';
+import {Container, Grid, Typography} from "@mui/material";
 import {
-  observer,
-}                                    from 'mobx-react-lite';
+  observer
+}                                    from "mobx-react-lite";
 import React, {
-  useEffect,
-}                                    from 'react';
+  useEffect
+}                                    from "react";
 import {
-  useStores,
-}                                    from '../../Hooks';
+  useStores
+}                                    from "../../Hooks";
 import {
   getUserExpenses,
   getUserIncomes,
   getUserTransfers,
   getUserWallets,
-}                                    from '../../Services';
-import './Styles/Profile.scss';
+}                                    from "../../Services";
+import "./Styles/Profile.scss";
 
 export const Profile = observer(() => {
   const {
@@ -55,12 +55,12 @@ export const Profile = observer(() => {
               Email: {currentUser.email}
             </Typography>
             <Typography variant="h6" className="profile-text">
-              Roles: {currentUser.roles.map(role => role.substring(5))
-            .join(', ')}
+              Roles:{" "}
+              {currentUser.roles.map((role) => role.substring(5)).join(", ")}
             </Typography>
             <Typography variant="h6" className="profile-text">
-              Refresh
-              token: {authenticationStore.getLocalRefreshToken().refreshToken}
+              Refresh token:{" "}
+              {authenticationStore.getLocalRefreshToken().refreshToken}
             </Typography>
           </Grid>
           <Grid item xs={12}>

@@ -1,9 +1,9 @@
-import {Container}                                     from '@mui/material';
-import {observer}                                      from 'mobx-react-lite';
-import {Route, Routes}                                 from 'react-router-dom';
-import {ToastContainer}                                from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
-import {ROUTE_URL}                                     from '../Constants';
+import {Container}                                     from "@mui/material";
+import {observer}                                      from "mobx-react-lite";
+import {Route, Routes}                                 from "react-router-dom";
+import {ToastContainer}                                from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
+import {ROUTE_URL}                                     from "../Constants";
 import {
   About,
   AdminBoard,
@@ -17,8 +17,8 @@ import {
   Transfers,
   Wallets,
   Whoops404,
-}                                                      from '../Modules';
-import {isAdmin, isAuthenticated, isModerator, isRoot} from '../Services';
+}                                                      from "../Modules";
+import {isAdmin, isAuthenticated, isModerator, isRoot} from "../Services";
 
 const App = observer(() => {
   const isCurrentUserAuthenticated = isAuthenticated();
@@ -31,8 +31,7 @@ const App = observer(() => {
         <Routes>
           <Route exact path={ROUTE_URL.HOME} element={<Home />} />
           <Route exact path={ROUTE_URL.ABOUT} element={<About />} />
-          {
-              isCurrentUserAuthenticated &&
+          {isCurrentUserAuthenticated && (
               <>
                 <Route exact path={ROUTE_URL.PROFILE} element={<Profile />} />
                 <Route exact path={ROUTE_URL.WALLETS} element={<Wallets />} />
@@ -42,20 +41,19 @@ const App = observer(() => {
                        element={<Transfers />} />
                 <Route exact path={ROUTE_URL.REPORTS} element={<Reports />} />
               </>
-          }
-          {
-              (isCurrentUserModerator || isCurrentUserRoot) &&
+          )}
+          {(isCurrentUserModerator || isCurrentUserRoot) && (
+              <>{/* todo: Moderator board */}</>
+          )}
+          {(isCurrentUserAdmin || isCurrentUserRoot) && (
               <>
-                {/* todo: Moderator board */}
+                <Route
+                    exact
+                    path={ROUTE_URL.ADMIN.BOARD}
+                    element={<AdminBoard />}
+                />
               </>
-          }
-          {
-              (isCurrentUserAdmin || isCurrentUserRoot) &&
-              <>
-                <Route exact path={ROUTE_URL.ADMIN.BOARD}
-                       element={<AdminBoard />} />
-              </>
-          }
+          )}
           <Route exact path="*" element={<Whoops404 />} />
         </Routes>
         <Footer />

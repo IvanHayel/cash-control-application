@@ -1,32 +1,32 @@
-import AccountCircleIcon      from '@mui/icons-material/AccountCircle';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import AccountCircleIcon      from "@mui/icons-material/AccountCircle";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import {
   AppBar,
   Box,
   IconButton,
   Toolbar,
-  Typography,
-}                             from '@mui/material';
-import {observer}             from 'mobx-react';
-import React                  from 'react';
+  Typography
+}                             from "@mui/material";
+import {observer}             from "mobx-react";
+import React                  from "react";
 import {
-  useNavigate,
-}                             from 'react-router-dom';
+  useNavigate
+}                             from "react-router-dom";
 import {
   SideMenu,
   SignInModal,
   SignOutButton,
   SignUpModal,
-}                             from '../../Components/';
+}                             from "../../Components/";
 import {
-  ROUTE_URL,
-}                             from '../../Constants';
+  ROUTE_URL
+}                             from "../../Constants";
 import {
   isAdmin,
   isAuthenticated,
-  isRoot,
-}                             from '../../Services';
-import './Styles/Header.scss';
+  isRoot
+}                             from "../../Services";
+import "./Styles/Header.scss";
 
 export const Header = observer(() => {
   const navigate = useNavigate();
@@ -41,22 +41,21 @@ export const Header = observer(() => {
   return (
       <AppBar position="sticky" className="header-bar">
         <Toolbar>
-          {
-              isCurrentUserAuthenticated &&
+          {isCurrentUserAuthenticated && (
               <>
                 <SideMenu />
               </>
-          }
-          <Typography variant="h5"
-                      noWrap
-                      onClick={handleBrandClick}
-                      className="brand"
+          )}
+          <Typography
+              variant="h5"
+              noWrap
+              onClick={handleBrandClick}
+              className="brand"
           >
             CASH CONTROL
           </Typography>
           <Box className="main-buttons">
-            {
-                (isCurrentUserAdmin || isCurrentUserRoot) &&
+            {(isCurrentUserAdmin || isCurrentUserRoot) && (
                 <IconButton
                     color="inherit"
                     size="medium"
@@ -64,27 +63,26 @@ export const Header = observer(() => {
                 >
                   <AdminPanelSettingsIcon fontSize="large" />
                 </IconButton>
-            }
+            )}
           </Box>
           <Box className="sign-group">
-            {
-              isCurrentUserAuthenticated ?
-                  <>
-                    <IconButton
-                        color="inherit"
-                        size="medium"
-                        onClick={handleProfileClick}
-                    >
-                      <AccountCircleIcon fontSize="large" />
-                    </IconButton>
-                    <SignOutButton />
-                  </>
-                  :
-                  <>
-                    <SignInModal />
-                    <SignUpModal />
-                  </>
-            }
+            {isCurrentUserAuthenticated ? (
+                <>
+                  <IconButton
+                      color="inherit"
+                      size="medium"
+                      onClick={handleProfileClick}
+                  >
+                    <AccountCircleIcon fontSize="large" />
+                  </IconButton>
+                  <SignOutButton />
+                </>
+            ) : (
+                <>
+                  <SignInModal />
+                  <SignUpModal />
+                </>
+            )}
           </Box>
         </Toolbar>
       </AppBar>
