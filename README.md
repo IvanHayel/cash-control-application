@@ -1,6 +1,7 @@
 <h1 align="center">TeachMeSkills Final Project</h1>
 <h2 align="center">💵 Cash Control Application</h2>
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8f05c395b31d4ba9885877144a67e051)](https://app.codacy.com/gh/IvanHayel/cash-control-application?utm_source=github.com&utm_medium=referral&utm_content=IvanHayel/cash-control-application&utm_campaign=Badge_Grade_Settings)
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![GitHub](https://img.shields.io/github/followers/IvanHayel?label=Follow&style=social)](https://github.com/IvanHayel)
 
