@@ -2,6 +2,7 @@
 <h2 align="center">💵 Cash Control Application</h2>
 
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/cac11bfd4b1a48cc96460ef58c7821ea)](https://www.codacy.com/gh/IvanHayel/cash-control-application/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=IvanHayel/cash-control-application&amp;utm_campaign=Badge_Grade)
 [![GitHub](https://img.shields.io/github/followers/IvanHayel?label=Follow&style=social)](https://github.com/IvanHayel)
 
 <!-- TABLE OF CONTENTS -->
