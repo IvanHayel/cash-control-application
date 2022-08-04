@@ -1,0 +1,3 @@
+build:
+  docker:
+    web: cash-control-server/Dockerfile
